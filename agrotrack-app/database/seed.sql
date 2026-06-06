@@ -1,0 +1,2 @@
+-- AgroTrack database seed placeholder.
+-- Demo admin, petani, and tanaman seed data will be added later.

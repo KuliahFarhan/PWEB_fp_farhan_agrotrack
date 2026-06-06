@@ -1,0 +1,2 @@
+-- AgroTrack database schema placeholder.
+-- Tables will be defined in a later task.
