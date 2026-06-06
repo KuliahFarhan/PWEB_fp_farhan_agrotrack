@@ -1,0 +1,55 @@
+:root {
+    --agro-green: #042f2e;
+    --agro-green-soft: #115e59;
+    --agro-yellow: #fef08a;
+    --agro-bg: #f7faf7;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--agro-bg);
+}
+
+.agro-shell {
+    min-height: 100vh;
+}
+
+.agro-sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 0.5rem;
+    padding: 0.75rem 0.875rem;
+    color: rgba(255, 255, 255, 0.82);
+    transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.agro-sidebar-link:hover,
+.agro-sidebar-link.is-active {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    transform: translateX(2px);
+}
+
+.agro-card {
+    border: 1px solid #e5e7eb;
+    background: rgba(255, 255, 255, 0.96);
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+}
+
+.agro-map-placeholder {
+    background:
+        linear-gradient(rgba(15, 118, 110, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(15, 118, 110, 0.12) 1px, transparent 1px),
+        linear-gradient(135deg, #dbeafe, #dcfce7);
+    background-size: 42px 42px, 42px 42px, cover;
+}
+
+.agro-chart-placeholder {
+    background:
+        linear-gradient(to top, rgba(20, 184, 166, 0.16), rgba(20, 184, 166, 0.02)),
+        repeating-linear-gradient(to right, transparent 0 48px, rgba(15, 23, 42, 0.08) 48px 49px);
+}
