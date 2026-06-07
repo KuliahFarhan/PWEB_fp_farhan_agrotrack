@@ -78,6 +78,55 @@ With XAMPP, place the project in the web server directory and open:
 http://localhost/PWEB_fp_farhan_agrotrack/public/index.html
 ```
 
+## Database Connection Test
+
+`app/config/database.php` provides a reusable native PHP PDO connection through:
+
+```php
+getDatabaseConnection()
+```
+
+Default local database settings:
+
+```text
+host: 127.0.0.1
+database: agrotrack
+username: root
+password: empty
+charset: utf8mb4
+```
+
+You can override these values with environment variables:
+
+```text
+DB_HOST
+DB_PORT
+DB_DATABASE
+DB_USERNAME
+DB_PASSWORD
+DB_CHARSET
+```
+
+To test the connection with XAMPP/Apache, make sure MySQL is running and open:
+
+```text
+http://localhost/PWEB_fp_farhan_agrotrack/app/api/db-test.php
+```
+
+If using PHP's built-in server from the project root:
+
+```bash
+C:\xampp\php\php.exe -S localhost:8000
+```
+
+Then open:
+
+```text
+http://localhost:8000/app/api/db-test.php
+```
+
+The endpoint returns JSON and does not expose database credentials.
+
 ## Current Scope
 
-This is a static UI skeleton only. Authentication, session logic, database connection, CRUD, Leaflet polygon saving, and Chart.js database data are intentionally not implemented yet.
+This project currently has a static UI skeleton and a PDO database connection foundation only. Authentication, session logic, CRUD, Leaflet polygon saving, and Chart.js database data are intentionally not implemented yet.
