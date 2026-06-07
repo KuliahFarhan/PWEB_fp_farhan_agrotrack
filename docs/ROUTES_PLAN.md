@@ -39,10 +39,13 @@ Future PHP backend endpoints:
 - `app/actions/lahan/update.php`
 - `app/actions/lahan/delete.php`
 - `app/actions/lahan/update-map.php`
+- `app/api/musim-tanam.php`
+- `app/actions/musim-tanam/create.php`
+- `app/actions/musim-tanam/update.php`
+- `app/actions/musim-tanam/delete.php`
 
 Planned PHP backend endpoints:
 
-- `app/actions/musim-tanam/*`
 - `app/actions/biaya/*`
 - `app/actions/panen/*`
 - `app/api/dashboard.php`

@@ -281,11 +281,47 @@ meters. If a valid polygon exists, the calculated hectares value is sent as
 `luas_lahan`. Refresh the page to confirm the saved marker, polygon, and
 calculated area reload from the database.
 
+Known note: Peta Lahan freehand drawing and polygon UX can still be polished
+later. P10 does not modify map files.
+
+## Petani Musim Tanam CRUD Test
+
+Login as petani:
+
+```text
+petani@agrotrack.test / password
+```
+
+Open the musim tanam page:
+
+```text
+http://127.0.0.1:8000/public/petani/musim-tanam.html
+```
+
+The page loads current petani seasons and dropdown options from:
+
+```text
+app/api/musim-tanam.php
+```
+
+Write actions use native PHP endpoints:
+
+```text
+app/actions/musim-tanam/create.php
+app/actions/musim-tanam/update.php
+app/actions/musim-tanam/delete.php
+```
+
+Harvest estimation is calculated server-side as
+`tanggal_tanam + tanaman.masa_panen`. Growth progress is calculated from days
+elapsed divided by `masa_panen`, capped between 0% and 100%.
+
 ## Current Scope
 
 This project currently has a static UI skeleton, PDO database connection
 foundation, native PHP authentication handlers, and admin CRUD for master data
 `tanaman`, petani CRUD for `lahan`, and petani Leaflet map saving for lahan
-marker/polygon with area and perimeter calculation. CRUD for musim tanam, biaya
-produksi, hasil panen, admin monitoring map, Chart.js database data, and full
-server-side protection for static pages are intentionally not implemented yet.
+marker/polygon with area and perimeter calculation, plus petani CRUD for
+`musim_tanam`. CRUD for biaya produksi, hasil panen, admin monitoring map,
+Chart.js database data, and full server-side protection for static pages are
+intentionally not implemented yet.
