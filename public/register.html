@@ -29,7 +29,12 @@
           alt="Jagung"
         />
       </section>
-      <form class="agro-card form-grid rounded-lg p-6" action="#" method="post">
+      <form
+        class="agro-card form-grid rounded-lg p-6"
+        action="../app/auth/register.php"
+        method="post"
+      >
+        <div data-auth-message></div>
         <p class="placeholder-note">
           Placeholder validasi: email unik, password minimal 8 karakter, dan
           konfirmasi cocok.
@@ -62,11 +67,11 @@
           Konfirmasi Password
           <input
             type="password"
-            name="password_confirmation"
+            name="confirm_password"
             placeholder="Ulangi password"
           />
         </label>
-        <button class="btn-primary" type="button">Daftar Akun Demo</button>
+        <button class="btn-primary" type="submit">Daftar Akun</button>
         <a class="text-center font-bold text-teal-700" href="login.html">
           Sudah punya akun? Login
         </a>

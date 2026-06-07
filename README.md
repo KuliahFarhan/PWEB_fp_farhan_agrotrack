@@ -127,6 +127,65 @@ http://localhost:8000/app/api/db-test.php
 
 The endpoint returns JSON and does not expose database credentials.
 
+## Authentication Test
+
+Native PHP auth handlers:
+
+```text
+app/auth/register.php
+app/auth/login.php
+app/auth/logout.php
+app/auth/guard.php
+app/api/session.php
+```
+
+Demo accounts:
+
+```text
+admin@agrotrack.test / password
+petani@agrotrack.test / password
+```
+
+If your local database was imported before P06, update demo password hashes:
+
+```bash
+/c/xampp/mysql/bin/mysql.exe -u root agrotrack -e "UPDATE users SET password = '\$2y\$10\$Bh6.HdO5VGg6MfJXrcx56ea5/HtmbkHrjrSgCEot2sw7Deg7GyAUy' WHERE email IN ('admin@agrotrack.test','petani@agrotrack.test');"
+```
+
+Run the local PHP server from the project root:
+
+```bash
+/c/xampp/php/php.exe -S 127.0.0.1:8000
+```
+
+Test register:
+
+```text
+http://127.0.0.1:8000/public/register.html
+```
+
+Test login:
+
+```text
+http://127.0.0.1:8000/public/login.html
+```
+
+Test current session:
+
+```text
+http://127.0.0.1:8000/app/api/session.php
+```
+
+Logout links in the petani/admin static pages point to:
+
+```text
+app/auth/logout.php
+```
+
+Current limitation: most protected pages are still static `.html`, so full
+server-side role protection will be completed gradually when pages become
+dynamic PHP/API-driven pages.
+
 ## Current Scope
 
-This project currently has a static UI skeleton and a PDO database connection foundation only. Authentication, session logic, CRUD, Leaflet polygon saving, and Chart.js database data are intentionally not implemented yet.
+This project currently has a static UI skeleton, PDO database connection foundation, and native PHP authentication handlers. CRUD, Leaflet polygon saving, Chart.js database data, and full server-side protection for static pages are intentionally not implemented yet.

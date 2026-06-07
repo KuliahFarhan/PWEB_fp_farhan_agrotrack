@@ -2,9 +2,8 @@
 -- Import after database/schema.sql.
 --
 -- Password note:
--- Authentication is not implemented yet. The password value below uses a
--- clear placeholder hash string. Replace it with password_hash('password',
--- PASSWORD_DEFAULT) output when native PHP auth is implemented.
+-- Demo password for admin and petani is: password
+-- The hash below was generated with password_hash('password', PASSWORD_DEFAULT).
 
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -20,8 +19,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 INSERT INTO users
     (id, nama, email, password, nomor_hp, role, status, foto_profil, created_at, updated_at)
 VALUES
-    (1, 'Admin AgroTrack', 'admin@agrotrack.test', 'PLACEHOLDER_HASH_FOR_password', '0812-2501-8708', 'admin', 'aktif', NULL, NOW(), NOW()),
-    (2, 'Petani Demo', 'petani@agrotrack.test', 'PLACEHOLDER_HASH_FOR_password', '0812-0000-0001', 'petani', 'aktif', 'farmer-profile.jpg', NOW(), NOW());
+    (1, 'Admin AgroTrack', 'admin@agrotrack.test', '$2y$10$Bh6.HdO5VGg6MfJXrcx56ea5/HtmbkHrjrSgCEot2sw7Deg7GyAUy', '0812-2501-8708', 'admin', 'aktif', NULL, NOW(), NOW()),
+    (2, 'Petani Demo', 'petani@agrotrack.test', '$2y$10$Bh6.HdO5VGg6MfJXrcx56ea5/HtmbkHrjrSgCEot2sw7Deg7GyAUy', '0812-0000-0001', 'petani', 'aktif', 'farmer-profile.jpg', NOW(), NOW());
 
 INSERT INTO tanaman
     (id, nama_tanaman, masa_panen, deskripsi, status, created_at, updated_at)

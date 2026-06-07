@@ -33,7 +33,12 @@
             UI login statis. Autentikasi, session, dan redirect role belum
             diimplementasikan.
           </p>
-          <form class="mt-6 grid gap-4" action="#" method="post">
+          <div data-auth-message class="mt-5"></div>
+          <form
+            class="mt-6 grid gap-4"
+            action="../app/auth/login.php"
+            method="post"
+          >
             <label class="grid gap-2">
               <span class="font-semibold">Alamat Email</span>
               <input
@@ -63,9 +68,9 @@
             </div>
             <button
               class="rounded-md bg-blue-600 px-5 py-3 font-bold text-white"
-              type="button"
+              type="submit"
             >
-              Masuk Demo
+              Masuk
             </button>
             <div class="grid gap-2 sm:grid-cols-2">
               <a class="btn-secondary" href="petani/dashboard.html">

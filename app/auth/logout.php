@@ -2,7 +2,26 @@
 
 declare(strict_types=1);
 
-// Placeholder for future native PHP logout processing.
-// No session logic is implemented in P03B.
-http_response_code(501);
-echo 'Logout processing is not implemented yet.';
+require_once __DIR__ . '/guard.php';
+
+startSessionIfNeeded();
+
+$_SESSION = [];
+
+if (ini_get('session.use_cookies')) {
+    $params = session_get_cookie_params();
+    setcookie(
+        session_name(),
+        '',
+        time() - 42000,
+        $params['path'],
+        $params['domain'],
+        $params['secure'],
+        $params['httponly']
+    );
+}
+
+session_destroy();
+
+header('Location: ../../public/login.html?success=logged_out');
+exit;

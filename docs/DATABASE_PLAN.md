@@ -36,8 +36,18 @@ Database AgroTrack menggunakan MySQL dengan 6 tabel utama sesuai PRD:
 - 6 biaya produksi demo
 - 1 hasil panen demo
 
-Password seed masih menggunakan placeholder `PLACEHOLDER_HASH_FOR_password`.
-Hash asli harus diganti dengan output `password_hash('password', PASSWORD_DEFAULT)` saat fitur auth native PHP dibuat.
+Password seed untuk akun demo sudah memakai hash dari `password_hash('password', PASSWORD_DEFAULT)`.
+
+Demo credentials:
+
+- `admin@agrotrack.test` / `password`
+- `petani@agrotrack.test` / `password`
+
+Jika database lokal sudah di-import sebelum hash ini diperbarui, jalankan:
+
+```bash
+/c/xampp/mysql/bin/mysql.exe -u root agrotrack -e "UPDATE users SET password = '\$2y\$10\$Bh6.HdO5VGg6MfJXrcx56ea5/HtmbkHrjrSgCEot2sw7Deg7GyAUy' WHERE email IN ('admin@agrotrack.test','petani@agrotrack.test');"
+```
 
 ## Import via phpMyAdmin
 
