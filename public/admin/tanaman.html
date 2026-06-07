@@ -28,6 +28,7 @@
           <a href="../../app/auth/logout.php">Logout</a>
         </nav>
       </aside>
+
       <main class="app-main">
         <header class="topbar">
           <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
@@ -35,13 +36,36 @@
           </p>
           <h1 class="text-2xl font-black">Data Tanaman</h1>
         </header>
+
         <section class="p-5 lg:p-8">
-          <div class="mb-5 flex justify-between">
-            <p class="text-slate-500">
-              CRUD master tanaman akan dibuat setelah backend siap.
-            </p>
-            <button class="btn-primary">+ Tambah Tanaman</button>
+          <div
+            class="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"
+          >
+            <div>
+              <p
+                class="text-sm font-bold uppercase tracking-[.18em] text-teal-700"
+              >
+                Master Data
+              </p>
+              <h2 class="mt-1 text-xl font-black text-slate-900">
+                Kelola referensi tanaman
+              </h2>
+              <p class="mt-2 max-w-2xl text-slate-500">
+                Masa panen dari data ini akan dipakai saat membuat musim tanam
+                dan menghitung estimasi panen.
+              </p>
+            </div>
+
+            <button class="btn-primary" type="button" data-tanaman-open-create>
+              + Tambah Tanaman
+            </button>
           </div>
+
+          <div
+            class="mb-5 hidden rounded-md border px-4 py-3 text-sm font-semibold"
+            data-tanaman-alert
+          ></div>
+
           <div class="table-card">
             <table>
               <thead>
@@ -53,52 +77,135 @@
                   <th>Aksi</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody data-tanaman-table>
                 <tr>
-                  <td>Jagung Manis</td>
-                  <td>90 hari</td>
-                  <td>aktif</td>
-                  <td>Tanaman jagung musim reguler</td>
-                  <td>Edit | Hapus</td>
-                </tr>
-                <tr>
-                  <td>Jagung Pipil</td>
-                  <td>100 hari</td>
-                  <td>aktif</td>
-                  <td>Varietas jagung kering</td>
-                  <td>Edit | Hapus</td>
+                  <td colspan="5" class="text-center text-slate-500">
+                    Memuat data tanaman...
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <div class="mt-6 grid gap-6 lg:grid-cols-2">
-            <form class="agro-card form-grid rounded-lg p-5">
-              <h2 class="font-black">Form Tanaman Placeholder</h2>
-              <label>
-                Nama Tanaman
-                <input placeholder="Jagung Manis" />
-              </label>
-              <label>
-                Masa Panen
-                <input type="number" placeholder="Hari" />
-              </label>
-              <label>
-                Status
-                <input placeholder="aktif / nonaktif" />
-              </label>
-            </form>
-            <div class="modal-box">
-              <p class="font-bold text-red-600">Modal Placeholder</p>
-              <h2 class="mt-2 font-black">Konfirmasi hapus tanaman</h2>
-              <p class="mt-2 text-sm text-slate-500">
-                Hapus tanaman akan dibatasi jika sudah dipakai musim tanam.
-              </p>
-              <button class="btn-danger mt-4">Hapus</button>
-            </div>
+
+          <div
+            class="mt-5 hidden rounded-md border border-slate-200 bg-white px-4 py-8 text-center text-slate-500"
+            data-tanaman-empty
+          >
+            Belum ada data tanaman. Tambahkan tanaman pertama untuk mulai
+            mengisi master data AgroTrack.
           </div>
         </section>
       </main>
     </div>
+
+    <div
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/50 p-4"
+      data-tanaman-modal
+    >
+      <div class="w-full max-w-xl rounded-lg bg-white p-5 shadow-2xl">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p
+              class="text-xs font-bold uppercase tracking-[.18em] text-teal-700"
+            >
+              Data Tanaman
+            </p>
+            <h2 class="mt-1 text-xl font-black" data-tanaman-modal-title>
+              Tambah Tanaman
+            </h2>
+          </div>
+          <button
+            class="rounded-md border border-slate-200 px-3 py-2 text-sm font-bold text-slate-600"
+            type="button"
+            data-tanaman-close-modal
+          >
+            Tutup
+          </button>
+        </div>
+
+        <form class="form-grid mt-5" data-tanaman-form>
+          <input type="hidden" name="id" data-tanaman-id />
+
+          <label>
+            Nama Tanaman
+            <input
+              name="nama_tanaman"
+              placeholder="Contoh: Padi"
+              required
+              data-tanaman-nama
+            />
+          </label>
+
+          <label>
+            Masa Panen (hari)
+            <input
+              name="masa_panen"
+              type="number"
+              min="1"
+              placeholder="Contoh: 110"
+              required
+              data-tanaman-masa
+            />
+          </label>
+
+          <label>
+            Status
+            <select name="status" data-tanaman-status>
+              <option value="aktif">Aktif</option>
+              <option value="nonaktif">Nonaktif</option>
+            </select>
+          </label>
+
+          <label>
+            Deskripsi
+            <textarea
+              name="deskripsi"
+              rows="4"
+              placeholder="Catatan singkat tentang tanaman"
+              data-tanaman-deskripsi
+            ></textarea>
+          </label>
+
+          <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-end">
+            <button
+              class="btn-secondary"
+              type="button"
+              data-tanaman-close-modal
+            >
+              Batal
+            </button>
+            <button class="btn-primary" type="submit" data-tanaman-submit>
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/50 p-4"
+      data-tanaman-delete-modal
+    >
+      <div class="w-full max-w-md rounded-lg bg-white p-5 shadow-2xl">
+        <p class="text-sm font-bold text-red-600">Konfirmasi Nonaktif</p>
+        <h2 class="mt-2 text-xl font-black">Nonaktifkan tanaman?</h2>
+        <p class="mt-2 text-sm text-slate-500">
+          Data tidak dihapus permanen agar relasi musim tanam tetap aman.
+          Tanaman nonaktif tidak disarankan dipakai untuk musim tanam baru.
+        </p>
+        <input type="hidden" data-tanaman-delete-id />
+        <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button class="btn-secondary" type="button" data-tanaman-close-delete>
+            Batal
+          </button>
+          <button class="btn-danger" type="button" data-tanaman-confirm-delete>
+            Nonaktifkan
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/admin-tanaman.js"></script>
   </body>
 </html>
