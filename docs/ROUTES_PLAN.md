@@ -38,6 +38,7 @@ Future PHP backend endpoints:
 - `app/actions/lahan/create.php`
 - `app/actions/lahan/update.php`
 - `app/actions/lahan/delete.php`
+- `app/actions/lahan/update-map.php`
 
 Planned PHP backend endpoints:
 
