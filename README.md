@@ -403,6 +403,29 @@ app/api/dashboard.php?scope=admin
 The dashboard API is protected by session role. Petani only receives their own
 summary, while admin receives global summary data.
 
+## Admin Monitoring Lahan Test
+
+Login as admin:
+
+```text
+admin@agrotrack.test / password
+```
+
+Open the monitoring page:
+
+```text
+http://127.0.0.1:8000/public/admin/monitoring-lahan.html
+```
+
+The page loads all petani land data from:
+
+```text
+app/api/admin-monitoring-lahan.php
+```
+
+The monitoring view is read-only. It renders table rows, Leaflet markers, and
+polygons when `latitude`, `longitude`, and `polygon_area` are available.
+
 ## Current Scope
 
 This project currently has a static UI skeleton, PDO database connection
@@ -410,6 +433,6 @@ foundation, native PHP authentication handlers, and admin CRUD for master data
 `tanaman`, petani CRUD for `lahan`, and petani Leaflet map saving for lahan
 marker/polygon with area and perimeter calculation, plus petani CRUD for
 `musim_tanam`, `biaya_produksi`, and `hasil_panen`. Petani/admin dashboards now
-read real summary data from MySQL. Admin monitoring map, Chart.js analytics,
-reports, and full server-side protection for static pages are intentionally not
-implemented yet.
+read real summary data from MySQL, and admin monitoring lahan is read-only with
+real table/map data. Chart.js analytics, reports, and full server-side
+protection for static pages are intentionally not implemented yet.
