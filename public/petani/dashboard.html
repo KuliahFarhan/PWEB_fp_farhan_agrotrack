@@ -34,6 +34,7 @@
           <a href="../../app/auth/logout.php">Logout</a>
         </nav>
       </aside>
+
       <main class="app-main">
         <header class="topbar">
           <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
@@ -41,29 +42,36 @@
           </p>
           <h1 class="text-2xl font-black">Dashboard Petani</h1>
         </header>
+
         <section class="p-5 lg:p-8">
-          <p class="placeholder-note mb-5">
-            Dummy data. Nanti card dan tabel diisi dari database milik petani
-            yang login.
-          </p>
+          <div
+            class="mb-5 hidden rounded-md border px-4 py-3 text-sm font-semibold"
+            data-dashboard-alert
+          ></div>
+
           <div class="stat-grid">
             <div class="stat-card">
-              <span>Total Lahan</span>
-              <strong>4</strong>
+              <span>Total Lahan Aktif</span>
+              <strong data-total-lahan>...</strong>
             </div>
             <div class="stat-card">
               <span>Musim Aktif</span>
-              <strong>3</strong>
+              <strong data-total-musim>...</strong>
             </div>
             <div class="stat-card">
               <span>Total Biaya</span>
-              <strong>Rp 8,7 jt</strong>
+              <strong data-total-biaya>...</strong>
             </div>
             <div class="stat-card">
-              <span>Profit Estimasi</span>
-              <strong>Rp 14,2 jt</strong>
+              <span>Total Pendapatan</span>
+              <strong data-total-pendapatan>...</strong>
+            </div>
+            <div class="stat-card">
+              <span>Total Keuntungan</span>
+              <strong data-total-keuntungan>...</strong>
             </div>
           </div>
+
           <div class="mt-6 grid gap-6 xl:grid-cols-[1fr_.8fr]">
             <div class="table-card">
               <table>
@@ -75,49 +83,33 @@
                     <th>Status</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody data-recent-season-table>
                   <tr>
-                    <td>Kebun Utara</td>
-                    <td>Jagung Manis</td>
-                    <td>30 Agu 2026</td>
-                    <td>Pertumbuhan</td>
-                  </tr>
-                  <tr>
-                    <td>Lahan Barat</td>
-                    <td>Jagung Pipil</td>
-                    <td>10 Sep 2026</td>
-                    <td>Persemaian</td>
+                    <td colspan="4" class="text-center text-slate-500">
+                      Memuat musim tanam...
+                    </td>
                   </tr>
                 </tbody>
               </table>
             </div>
+
             <div class="agro-card rounded-lg p-5">
               <h2 class="font-black">Progress Pertumbuhan</h2>
-              <div class="mt-4 space-y-4">
-                <div>
-                  <div class="flex justify-between text-sm">
-                    <b>Jagung Manis</b>
-                    <span>65%</span>
-                  </div>
-                  <div class="mt-2 h-3 rounded-full bg-slate-100">
-                    <div
-                      class="h-3 rounded-full bg-teal-600"
-                      style="width: 65%"
-                    ></div>
-                  </div>
-                </div>
-                <div>
-                  <div class="flex justify-between text-sm">
-                    <b>Jagung Pipil</b>
-                    <span>42%</span>
-                  </div>
-                  <div class="mt-2 h-3 rounded-full bg-slate-100">
-                    <div
-                      class="h-3 rounded-full bg-teal-600"
-                      style="width: 42%"
-                    ></div>
-                  </div>
-                </div>
+              <div class="mt-4 space-y-4" data-progress-list>
+                <p class="text-sm text-slate-500">Memuat progress...</p>
+              </div>
+              <div
+                class="mt-6 rounded-md border border-teal-100 bg-teal-50 p-4"
+              >
+                <p class="text-xs font-bold uppercase text-teal-700">
+                  Panen Terdekat
+                </p>
+                <p
+                  class="mt-2 text-sm font-semibold text-slate-700"
+                  data-nearest-harvest
+                >
+                  Memuat data...
+                </p>
               </div>
             </div>
           </div>
@@ -125,5 +117,6 @@
       </main>
     </div>
     <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/petani-dashboard.js"></script>
   </body>
 </html>

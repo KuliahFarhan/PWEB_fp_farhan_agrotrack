@@ -379,12 +379,37 @@ Revenue is calculated as `total_hasil * harga_jual`. Total cost is aggregated
 from `biaya_produksi.nominal` for the selected `musim_tanam`. Profit is
 calculated as `total_pendapatan - total_biaya`.
 
+## Real Dashboard Test
+
+Petani dashboard:
+
+```text
+http://127.0.0.1:8000/public/petani/dashboard.html
+```
+
+Admin dashboard:
+
+```text
+http://127.0.0.1:8000/public/admin/dashboard.html
+```
+
+Both dashboards load data from:
+
+```text
+app/api/dashboard.php?scope=petani
+app/api/dashboard.php?scope=admin
+```
+
+The dashboard API is protected by session role. Petani only receives their own
+summary, while admin receives global summary data.
+
 ## Current Scope
 
 This project currently has a static UI skeleton, PDO database connection
 foundation, native PHP authentication handlers, and admin CRUD for master data
 `tanaman`, petani CRUD for `lahan`, and petani Leaflet map saving for lahan
 marker/polygon with area and perimeter calculation, plus petani CRUD for
-`musim_tanam`, `biaya_produksi`, and `hasil_panen`. Admin monitoring map,
-Chart.js database data, reports, and full server-side protection for static
-pages are intentionally not implemented yet.
+`musim_tanam`, `biaya_produksi`, and `hasil_panen`. Petani/admin dashboards now
+read real summary data from MySQL. Admin monitoring map, Chart.js analytics,
+reports, and full server-side protection for static pages are intentionally not
+implemented yet.

@@ -31,6 +31,7 @@
           <a href="../../app/auth/logout.php">Logout</a>
         </nav>
       </aside>
+
       <main class="app-main">
         <header class="topbar">
           <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
@@ -38,28 +39,44 @@
           </p>
           <h1 class="text-2xl font-black">Dashboard Admin</h1>
         </header>
+
         <section class="p-5 lg:p-8">
-          <p class="placeholder-note mb-5">
-            Statistik global akan diambil dari database pada task backend.
-          </p>
+          <div
+            class="mb-5 hidden rounded-md border px-4 py-3 text-sm font-semibold"
+            data-dashboard-alert
+          ></div>
+
           <div class="stat-grid">
             <div class="stat-card">
-              <span>Total Petani</span>
-              <strong>128</strong>
+              <span>Total Petani Aktif</span>
+              <strong data-total-petani>...</strong>
             </div>
             <div class="stat-card">
               <span>Total Lahan</span>
-              <strong>342</strong>
+              <strong data-total-lahan>...</strong>
+            </div>
+            <div class="stat-card">
+              <span>Tanaman Aktif</span>
+              <strong data-total-tanaman>...</strong>
             </div>
             <div class="stat-card">
               <span>Musim Aktif</span>
-              <strong>87</strong>
+              <strong data-total-musim>...</strong>
             </div>
             <div class="stat-card">
-              <span>Total Panen</span>
-              <strong>42 ton</strong>
+              <span>Hasil Panen</span>
+              <strong data-total-panen>...</strong>
+            </div>
+            <div class="stat-card">
+              <span>Pendapatan Global</span>
+              <strong data-total-pendapatan>...</strong>
+            </div>
+            <div class="stat-card">
+              <span>Keuntungan Global</span>
+              <strong data-total-keuntungan>...</strong>
             </div>
           </div>
+
           <div class="mt-6 grid gap-6 xl:grid-cols-[.9fr_1.1fr]">
             <div class="agro-card rounded-lg p-5">
               <h2 class="font-black">Grafik Statistik Sistem</h2>
@@ -74,24 +91,16 @@
               <table>
                 <thead>
                   <tr>
-                    <th>Waktu</th>
-                    <th>Aktivitas</th>
-                    <th>User</th>
+                    <th>Jenis</th>
+                    <th>Data Terbaru</th>
                     <th>Status</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody data-admin-latest-table>
                   <tr>
-                    <td>Hari ini</td>
-                    <td>Tambah lahan</td>
-                    <td>Siti Petani</td>
-                    <td>Sukses</td>
-                  </tr>
-                  <tr>
-                    <td>Kemarin</td>
-                    <td>Update tanaman</td>
-                    <td>Admin</td>
-                    <td>Sukses</td>
+                    <td colspan="3" class="text-center text-slate-500">
+                      Memuat aktivitas terbaru...
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -102,5 +111,6 @@
     </div>
     <script src="../assets/js/app.js"></script>
     <script src="../assets/js/charts.js"></script>
+    <script src="../assets/js/admin-dashboard.js"></script>
   </body>
 </html>

@@ -51,8 +51,9 @@ Future PHP backend endpoints:
 - `app/actions/panen/create.php`
 - `app/actions/panen/update.php`
 - `app/actions/panen/delete.php`
+- `app/api/dashboard.php?scope=petani`
+- `app/api/dashboard.php?scope=admin`
 
 Planned PHP backend endpoints:
 
-- `app/api/dashboard.php`
 - `app/api/laporan.php`
