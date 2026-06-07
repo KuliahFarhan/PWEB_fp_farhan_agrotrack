@@ -316,12 +316,43 @@ Harvest estimation is calculated server-side as
 `tanggal_tanam + tanaman.masa_panen`. Growth progress is calculated from days
 elapsed divided by `masa_panen`, capped between 0% and 100%.
 
+## Petani Biaya Produksi CRUD Test
+
+Login as petani:
+
+```text
+petani@agrotrack.test / password
+```
+
+Open the biaya produksi page:
+
+```text
+http://127.0.0.1:8000/public/petani/biaya-produksi.html
+```
+
+The page loads production costs and musim tanam dropdown options from:
+
+```text
+app/api/biaya.php
+```
+
+Write actions use native PHP endpoints:
+
+```text
+app/actions/biaya/create.php
+app/actions/biaya/update.php
+app/actions/biaya/delete.php
+```
+
+Total biaya is calculated from `SUM(nominal)` for all biaya owned by the
+current petani's musim tanam.
+
 ## Current Scope
 
 This project currently has a static UI skeleton, PDO database connection
 foundation, native PHP authentication handlers, and admin CRUD for master data
 `tanaman`, petani CRUD for `lahan`, and petani Leaflet map saving for lahan
 marker/polygon with area and perimeter calculation, plus petani CRUD for
-`musim_tanam`. CRUD for biaya produksi, hasil panen, admin monitoring map,
+`musim_tanam` and `biaya_produksi`. CRUD for hasil panen, admin monitoring map,
 Chart.js database data, and full server-side protection for static pages are
 intentionally not implemented yet.

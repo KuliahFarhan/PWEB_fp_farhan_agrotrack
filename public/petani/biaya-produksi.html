@@ -31,6 +31,7 @@
           <a href="../../app/auth/logout.php">Logout</a>
         </nav>
       </aside>
+
       <main class="app-main">
         <header class="topbar">
           <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
@@ -38,21 +39,50 @@
           </p>
           <h1 class="text-2xl font-black">Biaya Produksi</h1>
         </header>
+
         <section class="p-5 lg:p-8">
+          <div
+            class="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"
+          >
+            <div>
+              <p
+                class="text-sm font-bold uppercase tracking-[.18em] text-teal-700"
+              >
+                Pengeluaran Budidaya
+              </p>
+              <h2 class="mt-1 text-xl font-black text-slate-900">
+                Catat biaya produksi
+              </h2>
+              <p class="mt-2 max-w-2xl text-slate-500">
+                Total biaya akan dipakai untuk menghitung keuntungan saat hasil
+                panen dibuat.
+              </p>
+            </div>
+            <button class="btn-primary" type="button" data-biaya-open-create>
+              + Tambah Biaya
+            </button>
+          </div>
+
           <div class="stat-grid">
             <div class="stat-card">
-              <span>Bibit</span>
-              <strong>Rp 1,2 jt</strong>
-            </div>
-            <div class="stat-card">
-              <span>Pupuk</span>
-              <strong>Rp 3,1 jt</strong>
-            </div>
-            <div class="stat-card">
               <span>Total Biaya</span>
-              <strong>Rp 8,7 jt</strong>
+              <strong data-biaya-total>Rp 0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Kategori Terbesar</span>
+              <strong data-biaya-top-category>-</strong>
+            </div>
+            <div class="stat-card">
+              <span>Jumlah Catatan</span>
+              <strong data-biaya-count>0</strong>
             </div>
           </div>
+
+          <div
+            class="my-5 hidden rounded-md border px-4 py-3 text-sm font-semibold"
+            data-biaya-alert
+          ></div>
+
           <div class="table-card mt-6">
             <table>
               <thead>
@@ -61,30 +91,147 @@
                   <th>Kategori</th>
                   <th>Nominal</th>
                   <th>Tanggal</th>
+                  <th>Keterangan</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody data-biaya-table>
                 <tr>
-                  <td>Jagung Manis 2026</td>
-                  <td>Bibit</td>
-                  <td>Rp 1.200.000</td>
-                  <td>03 Jun 2026</td>
-                  <td>Edit | Hapus</td>
-                </tr>
-                <tr>
-                  <td>Jagung Manis 2026</td>
-                  <td>Pupuk</td>
-                  <td>Rp 2.000.000</td>
-                  <td>10 Jun 2026</td>
-                  <td>Edit | Hapus</td>
+                  <td colspan="6" class="text-center text-slate-500">
+                    Memuat data biaya produksi...
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
+
+          <div
+            class="mt-5 hidden rounded-md border border-slate-200 bg-white px-4 py-8 text-center text-slate-500"
+            data-biaya-empty
+          >
+            Belum ada biaya produksi. Tambahkan biaya untuk mulai menghitung
+            modal musim tanam.
+          </div>
         </section>
       </main>
     </div>
+
+    <div
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/50 p-4"
+      data-biaya-modal
+    >
+      <div class="w-full max-w-2xl rounded-lg bg-white p-5 shadow-2xl">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p
+              class="text-xs font-bold uppercase tracking-[.18em] text-teal-700"
+            >
+              Biaya Produksi
+            </p>
+            <h2 class="mt-1 text-xl font-black" data-biaya-modal-title>
+              Tambah Biaya
+            </h2>
+          </div>
+          <button
+            class="rounded-md border border-slate-200 px-3 py-2 text-sm font-bold text-slate-600"
+            type="button"
+            data-biaya-close-modal
+          >
+            Tutup
+          </button>
+        </div>
+
+        <form class="form-grid mt-5" data-biaya-form>
+          <input type="hidden" name="id" data-biaya-id />
+
+          <label>
+            Musim Tanam
+            <select name="musim_tanam_id" required data-biaya-musim></select>
+          </label>
+
+          <div class="grid gap-4 md:grid-cols-3">
+            <label>
+              Kategori
+              <select name="kategori" required data-biaya-kategori>
+                <option value="bibit">Bibit</option>
+                <option value="pupuk">Pupuk</option>
+                <option value="pestisida">Pestisida</option>
+                <option value="tenaga_kerja">Tenaga Kerja</option>
+                <option value="transportasi">Transportasi</option>
+                <option value="sewa_alat">Sewa Alat</option>
+                <option value="lainnya">Lainnya</option>
+              </select>
+            </label>
+
+            <label>
+              Nominal
+              <input
+                name="nominal"
+                type="number"
+                min="1"
+                step="100"
+                placeholder="1200000"
+                required
+                data-biaya-nominal
+              />
+            </label>
+
+            <label>
+              Tanggal Biaya
+              <input
+                name="tanggal_biaya"
+                type="date"
+                required
+                data-biaya-tanggal
+              />
+            </label>
+          </div>
+
+          <label>
+            Keterangan
+            <textarea
+              name="keterangan"
+              rows="4"
+              placeholder="Catatan biaya"
+              data-biaya-keterangan
+            ></textarea>
+          </label>
+
+          <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-end">
+            <button class="btn-secondary" type="button" data-biaya-close-modal>
+              Batal
+            </button>
+            <button class="btn-primary" type="submit" data-biaya-submit>
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/50 p-4"
+      data-biaya-delete-modal
+    >
+      <div class="w-full max-w-md rounded-lg bg-white p-5 shadow-2xl">
+        <p class="text-sm font-bold text-red-600">Konfirmasi Hapus</p>
+        <h2 class="mt-2 text-xl font-black">Hapus biaya produksi?</h2>
+        <p class="mt-2 text-sm text-slate-500">
+          Data biaya akan dihapus permanen dari musim tanam ini.
+        </p>
+        <input type="hidden" data-biaya-delete-id />
+        <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button class="btn-secondary" type="button" data-biaya-close-delete>
+            Batal
+          </button>
+          <button class="btn-danger" type="button" data-biaya-confirm-delete>
+            Hapus
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/petani-biaya.js"></script>
   </body>
 </html>
