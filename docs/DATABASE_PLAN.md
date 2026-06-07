@@ -54,3 +54,31 @@ mysql -u root -p -e "CREATE DATABASE IF NOT EXISTS agrotrack CHARACTER SET utf8m
 mysql -u root -p agrotrack < database/schema.sql
 mysql -u root -p agrotrack < database/seed.sql
 ```
+
+## PDO Connection Foundation
+
+`app/config/database.php` provides a reusable native PHP PDO function:
+
+```php
+getDatabaseConnection()
+```
+
+Default local values are friendly for XAMPP:
+
+- host: `127.0.0.1`
+- database: `agrotrack`
+- username: `root`
+- password: empty string
+- charset: `utf8mb4`
+
+The config can also read environment variables such as `DB_HOST`,
+`DB_DATABASE`, `DB_USERNAME`, and `DB_PASSWORD`.
+
+Connection verification endpoint:
+
+```text
+app/api/db-test.php
+```
+
+This endpoint only verifies connectivity and row counts. It does not implement
+auth, CRUD, sessions, or business logic.
