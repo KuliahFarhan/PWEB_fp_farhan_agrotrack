@@ -31,16 +31,18 @@ Future PHP backend endpoints:
 - `app/auth/logout.php`
 - `app/api/session.php`
 - `app/api/tanaman.php`
+- `app/api/lahan.php`
 - `app/actions/tanaman/create.php`
 - `app/actions/tanaman/update.php`
 - `app/actions/tanaman/delete.php`
+- `app/actions/lahan/create.php`
+- `app/actions/lahan/update.php`
+- `app/actions/lahan/delete.php`
 
 Planned PHP backend endpoints:
 
-- `app/actions/lahan/*`
 - `app/actions/musim-tanam/*`
 - `app/actions/biaya/*`
 - `app/actions/panen/*`
 - `app/api/dashboard.php`
-- `app/api/lahan.php`
 - `app/api/laporan.php`

@@ -217,10 +217,41 @@ app/actions/tanaman/delete.php
 The delete action is a safe delete. It sets `status = nonaktif` so existing
 `musim_tanam` references are not broken.
 
+## Petani Lahan CRUD Test
+
+Login as petani:
+
+```text
+petani@agrotrack.test / password
+```
+
+Open the lahan management page:
+
+```text
+http://127.0.0.1:8000/public/petani/lahan.html
+```
+
+The page loads only the current petani's land data from:
+
+```text
+app/api/lahan.php
+```
+
+Write actions use native PHP endpoints:
+
+```text
+app/actions/lahan/create.php
+app/actions/lahan/update.php
+app/actions/lahan/delete.php
+```
+
+The lahan `user_id` always comes from the active session. It is never accepted
+from user input, so a petani can only view and update their own lahan.
+
 ## Current Scope
 
 This project currently has a static UI skeleton, PDO database connection
 foundation, native PHP authentication handlers, and admin CRUD for master data
-`tanaman`. CRUD for lahan, musim tanam, biaya produksi, hasil panen, Leaflet
-polygon saving, Chart.js database data, and full server-side protection for
-static pages are intentionally not implemented yet.
+`tanaman`, plus petani CRUD for `lahan`. CRUD for musim tanam, biaya produksi,
+hasil panen, Leaflet polygon drawing/saving, Chart.js database data, and full
+server-side protection for static pages are intentionally not implemented yet.
