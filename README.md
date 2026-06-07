@@ -347,12 +347,44 @@ app/actions/biaya/delete.php
 Total biaya is calculated from `SUM(nominal)` for all biaya owned by the
 current petani's musim tanam.
 
+## Petani Hasil Panen CRUD Test
+
+Login as petani:
+
+```text
+petani@agrotrack.test / password
+```
+
+Open the hasil panen page:
+
+```text
+http://127.0.0.1:8000/public/petani/hasil-panen.html
+```
+
+The page loads harvest records and musim tanam dropdown options from:
+
+```text
+app/api/panen.php
+```
+
+Write actions use native PHP endpoints:
+
+```text
+app/actions/panen/create.php
+app/actions/panen/update.php
+app/actions/panen/delete.php
+```
+
+Revenue is calculated as `total_hasil * harga_jual`. Total cost is aggregated
+from `biaya_produksi.nominal` for the selected `musim_tanam`. Profit is
+calculated as `total_pendapatan - total_biaya`.
+
 ## Current Scope
 
 This project currently has a static UI skeleton, PDO database connection
 foundation, native PHP authentication handlers, and admin CRUD for master data
 `tanaman`, petani CRUD for `lahan`, and petani Leaflet map saving for lahan
 marker/polygon with area and perimeter calculation, plus petani CRUD for
-`musim_tanam` and `biaya_produksi`. CRUD for hasil panen, admin monitoring map,
-Chart.js database data, and full server-side protection for static pages are
-intentionally not implemented yet.
+`musim_tanam`, `biaya_produksi`, and `hasil_panen`. Admin monitoring map,
+Chart.js database data, reports, and full server-side protection for static
+pages are intentionally not implemented yet.

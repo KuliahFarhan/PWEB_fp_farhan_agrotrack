@@ -47,9 +47,12 @@ Future PHP backend endpoints:
 - `app/actions/biaya/create.php`
 - `app/actions/biaya/update.php`
 - `app/actions/biaya/delete.php`
+- `app/api/panen.php`
+- `app/actions/panen/create.php`
+- `app/actions/panen/update.php`
+- `app/actions/panen/delete.php`
 
 Planned PHP backend endpoints:
 
-- `app/actions/panen/*`
 - `app/api/dashboard.php`
 - `app/api/laporan.php`

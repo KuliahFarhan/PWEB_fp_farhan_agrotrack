@@ -31,6 +31,7 @@
           <a href="../../app/auth/logout.php">Logout</a>
         </nav>
       </aside>
+
       <main class="app-main">
         <header class="topbar">
           <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
@@ -38,12 +39,55 @@
           </p>
           <h1 class="text-2xl font-black">Hasil Panen</h1>
         </header>
+
         <section class="p-5 lg:p-8">
-          <p class="placeholder-note mb-5">
-            Pendapatan dan profit akan dihitung otomatis dari hasil panen, harga
-            jual, dan total biaya.
-          </p>
-          <div class="table-card">
+          <div
+            class="mb-5 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between"
+          >
+            <div>
+              <p
+                class="text-sm font-bold uppercase tracking-[.18em] text-teal-700"
+              >
+                Panen dan Profit
+              </p>
+              <h2 class="mt-1 text-xl font-black text-slate-900">
+                Catat hasil panen
+              </h2>
+              <p class="mt-2 max-w-2xl text-slate-500">
+                Pendapatan, total biaya, dan keuntungan dihitung otomatis di
+                server.
+              </p>
+            </div>
+            <button class="btn-primary" type="button" data-panen-open-create>
+              + Tambah Hasil Panen
+            </button>
+          </div>
+
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span>Total Pendapatan</span>
+              <strong data-panen-revenue>Rp 0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Total Biaya</span>
+              <strong data-panen-cost>Rp 0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Total Keuntungan</span>
+              <strong data-panen-profit>Rp 0</strong>
+            </div>
+            <div class="stat-card">
+              <span>Jumlah Panen</span>
+              <strong data-panen-count>0</strong>
+            </div>
+          </div>
+
+          <div
+            class="my-5 hidden rounded-md border px-4 py-3 text-sm font-semibold"
+            data-panen-alert
+          ></div>
+
+          <div class="table-card mt-6">
             <table>
               <thead>
                 <tr>
@@ -51,48 +95,153 @@
                   <th>Total Hasil</th>
                   <th>Harga Jual</th>
                   <th>Pendapatan</th>
+                  <th>Biaya</th>
                   <th>Profit</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody data-panen-table>
                 <tr>
-                  <td>Jagung Manis 2026</td>
-                  <td>2.400 kg</td>
-                  <td>Rp 5.000</td>
-                  <td>Rp 12.000.000</td>
-                  <td>Rp 3.300.000</td>
-                </tr>
-                <tr>
-                  <td>Cabai 2026</td>
-                  <td>850 kg</td>
-                  <td>Rp 18.000</td>
-                  <td>Rp 15.300.000</td>
-                  <td>Rp 7.100.000</td>
+                  <td colspan="8" class="text-center text-slate-500">
+                    Memuat data hasil panen...
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
-          <form class="agro-card form-grid mt-6 rounded-lg p-5 md:grid-cols-2">
-            <label>
-              Musim Tanam
-              <input placeholder="Dropdown musim" />
-            </label>
-            <label>
-              Total Hasil
-              <input type="number" placeholder="Jumlah panen" />
-            </label>
-            <label>
-              Satuan
-              <input placeholder="kg / ton" />
-            </label>
-            <label>
-              Harga Jual
-              <input type="number" placeholder="Harga per satuan" />
-            </label>
-          </form>
+
+          <div
+            class="mt-5 hidden rounded-md border border-slate-200 bg-white px-4 py-8 text-center text-slate-500"
+            data-panen-empty
+          >
+            Belum ada hasil panen. Tambahkan hasil panen setelah musim tanam
+            selesai.
+          </div>
         </section>
       </main>
     </div>
+
+    <div
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/50 p-4"
+      data-panen-modal
+    >
+      <div class="w-full max-w-2xl rounded-lg bg-white p-5 shadow-2xl">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <p
+              class="text-xs font-bold uppercase tracking-[.18em] text-teal-700"
+            >
+              Hasil Panen
+            </p>
+            <h2 class="mt-1 text-xl font-black" data-panen-modal-title>
+              Tambah Hasil Panen
+            </h2>
+          </div>
+          <button
+            class="rounded-md border border-slate-200 px-3 py-2 text-sm font-bold text-slate-600"
+            type="button"
+            data-panen-close-modal
+          >
+            Tutup
+          </button>
+        </div>
+
+        <form class="form-grid mt-5" data-panen-form>
+          <input type="hidden" name="id" data-panen-id />
+
+          <label data-panen-musim-wrapper>
+            Musim Tanam
+            <select name="musim_tanam_id" required data-panen-musim></select>
+          </label>
+
+          <div class="grid gap-4 md:grid-cols-3">
+            <label>
+              Total Hasil
+              <input
+                name="total_hasil"
+                type="number"
+                min="0.01"
+                step="0.01"
+                placeholder="2400"
+                required
+                data-panen-total
+              />
+            </label>
+
+            <label>
+              Satuan
+              <select name="satuan" required data-panen-satuan>
+                <option value="kg">Kg</option>
+                <option value="kuintal">Kuintal</option>
+                <option value="ton">Ton</option>
+              </select>
+            </label>
+
+            <label>
+              Harga Jual / Satuan
+              <input
+                name="harga_jual"
+                type="number"
+                min="1"
+                step="100"
+                placeholder="5000"
+                required
+                data-panen-harga
+              />
+            </label>
+          </div>
+
+          <label>
+            Catatan
+            <textarea
+              name="catatan"
+              rows="4"
+              placeholder="Catatan panen"
+              data-panen-catatan
+            ></textarea>
+          </label>
+
+          <p class="placeholder-note">
+            Total pendapatan, biaya produksi, dan keuntungan dihitung ulang di
+            server. Nilai dari frontend tidak dipercaya.
+          </p>
+
+          <div class="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-end">
+            <button class="btn-secondary" type="button" data-panen-close-modal>
+              Batal
+            </button>
+            <button class="btn-primary" type="submit" data-panen-submit>
+              Simpan
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/50 p-4"
+      data-panen-delete-modal
+    >
+      <div class="w-full max-w-md rounded-lg bg-white p-5 shadow-2xl">
+        <p class="text-sm font-bold text-red-600">Konfirmasi Hapus</p>
+        <h2 class="mt-2 text-xl font-black">Hapus hasil panen?</h2>
+        <p class="mt-2 text-sm text-slate-500">
+          Data hasil panen akan dihapus permanen.
+        </p>
+        <input type="hidden" data-panen-delete-id />
+        <div class="mt-5 flex flex-col gap-3 sm:flex-row sm:justify-end">
+          <button class="btn-secondary" type="button" data-panen-close-delete>
+            Batal
+          </button>
+          <button class="btn-danger" type="button" data-panen-confirm-delete>
+            Hapus
+          </button>
+        </div>
+      </div>
+    </div>
+
     <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/petani-panen.js"></script>
   </body>
 </html>
