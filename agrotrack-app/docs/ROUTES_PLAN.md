@@ -1,18 +1,31 @@
 # Routes Plan
 
-Guest:
-- `GET /`
-- `GET /login`
-- `POST /login`
-- `GET /register`
-- `POST /register`
-- `GET /forgot-password`
-- `POST /forgot-password`
+P03B uses plain `.html` pages for static UI preview. There is no PHP page routing layer.
 
-Petani:
-- Dashboard, lahan CRUD, peta lahan, musim tanam CRUD, biaya produksi CRUD, hasil panen CRUD, analisis, laporan, profil.
+Static pages:
+- `public/index.html`
+- `public/login.html`
+- `public/register.html`
+- `public/forgot-password.html`
+- `public/petani/dashboard.html`
+- `public/petani/lahan.html`
+- `public/petani/peta-lahan.html`
+- `public/petani/musim-tanam.html`
+- `public/petani/biaya-produksi.html`
+- `public/petani/hasil-panen.html`
+- `public/petani/analisis.html`
+- `public/petani/laporan.html`
+- `public/petani/profil.html`
+- `public/admin/dashboard.html`
+- `public/admin/users.html`
+- `public/admin/tanaman.html`
+- `public/admin/monitoring-lahan.html`
+- `public/admin/laporan.html`
+- `public/admin/profil.html`
 
-Admin:
-- Dashboard, users, tanaman CRUD, monitoring lahan, laporan, profil.
-
-Routing implementation is intentionally not included in this structure task.
+Future PHP backend endpoints:
+- `app/auth/login.php`
+- `app/auth/register.php`
+- `app/auth/logout.php`
+- `app/actions/*`
+- `app/api/*`

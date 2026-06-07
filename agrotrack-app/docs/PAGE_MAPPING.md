@@ -12,4 +12,4 @@ Initial mapping:
 - `figma-export/02-petani/profile.html` -> Petani profile reference.
 - `figma-export/03-admin/monitoring-lahan*.html` -> Admin land monitoring reference.
 
-Marketplace, cart, dropshipper, payment, saldo, and forum references are outside the MVP.
+Legacy non-MVP references from the old design are excluded from the application UI.

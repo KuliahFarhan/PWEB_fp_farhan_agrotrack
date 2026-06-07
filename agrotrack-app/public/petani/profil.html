@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profil Petani | AgroTrack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <img
+            src="../assets/logo/logo-agrotrack.png"
+            class="h-11 w-11 rounded-full bg-white p-1"
+            alt="AgroTrack"
+          />
+          <b>AgroTrack</b>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="lahan.html">Lahan</a>
+          <a href="peta-lahan.html">Peta Lahan</a>
+          <a href="musim-tanam.html">Musim Tanam</a>
+          <a href="biaya-produksi.html">Biaya Produksi</a>
+          <a href="hasil-panen.html">Hasil Panen</a>
+          <a href="analisis.html">Analisis</a>
+          <a href="laporan.html">Laporan</a>
+          <a class="active" href="profil.html">Profil</a>
+          <a href="../login.html">Logout</a>
+        </nav>
+      </aside>
+      <main class="app-main">
+        <header class="topbar">
+          <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
+            Area Petani
+          </p>
+          <h1 class="text-2xl font-black">Profil</h1>
+        </header>
+        <section class="grid gap-6 p-5 lg:grid-cols-[320px_1fr] lg:p-8">
+          <aside class="agro-card rounded-lg p-5 text-center">
+            <img
+              src="../assets/images/farmer-profile.jpg"
+              class="mx-auto h-32 w-32 rounded-full object-cover"
+              alt="Profil"
+            />
+            <h2 class="mt-4 text-xl font-black">Farhan Petani</h2>
+            <p class="text-sm text-slate-500">petani@agrotrack.test</p>
+          </aside>
+          <form class="agro-card form-grid rounded-lg p-5 md:grid-cols-2">
+            <label>
+              Nama Lengkap
+              <input placeholder="Farhan Petani" />
+            </label>
+            <label>
+              Email
+              <input type="email" placeholder="petani@agrotrack.test" />
+            </label>
+            <label>
+              Nomor HP
+              <input placeholder="08xxxxxxxxxx" />
+            </label>
+            <label>
+              Foto Profil
+              <input type="file" />
+            </label>
+            <label>
+              Password Lama
+              <input type="password" />
+            </label>
+            <label>
+              Password Baru
+              <input type="password" />
+            </label>
+            <button class="btn-primary md:col-span-2" type="button">
+              Simpan Profil Demo
+            </button>
+          </form>
+        </section>
+      </main>
+    </div>
+    <script src="../assets/js/app.js"></script>
+  </body>
+</html>

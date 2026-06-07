@@ -1,97 +1,78 @@
 # AgroTrack
 
-AgroTrack is a Web Programming Final Project built as a native PHP application for agricultural land monitoring, planting season management, production cost tracking, harvest tracking, and profit analysis.
+AgroTrack is a Web Programming Final Project for agricultural land monitoring, planting season management, production cost tracking, harvest tracking, and profit analysis.
 
 ## Tech Stack
 
-- Native/plain PHP
-- MySQL
-- HTML, CSS, JavaScript
-- Tailwind CSS or Bootstrap
-- Leaflet and Leaflet Draw
-- Chart.js
+- HTML
+- CSS
+- JavaScript
+- Native/plain PHP for backend processing later
+- MySQL later
+- Tailwind CSS CDN for static UI skeleton
+- Leaflet and Chart.js later
 
 ## Framework Policy
 
-This project does not use Laravel or any PHP framework. The application will be implemented with native PHP only.
+This project does not use Laravel or any PHP framework. PHP is reserved for future backend processing such as authentication, CRUD actions, API endpoints, session helpers, and database configuration.
 
-## Folder Structure
+## Current Structure
 
 ```text
 agrotrack-app/
 |-- public/
-|   |-- index.php
+|   |-- index.html
+|   |-- login.html
+|   |-- register.html
+|   |-- forgot-password.html
+|   |-- petani/
+|   |-- admin/
 |   `-- assets/
-|       |-- css/
-|       |-- js/
+|       |-- css/app.css
+|       |-- js/app.js
+|       |-- js/map.js
+|       |-- js/charts.js
 |       |-- images/
 |       |-- icons/
 |       `-- logo/
 |-- app/
-|   |-- Controllers/
-|   |-- Models/
-|   |-- Middleware/
-|   |-- Helpers/
-|   `-- Services/
-|-- config/
+|   |-- auth/
+|   |-- actions/
+|   |-- api/
+|   |-- config/
+|   `-- helpers/
 |-- database/
-|-- resources/
-|   |-- views/
-|   |-- layouts/
-|   |-- partials/
-|   `-- components/
-|-- routes/
-|-- storage/
-`-- docs/
+|-- docs/
+`-- README.md
 ```
 
-## Static UI Routes
+## Preview Static UI
 
-The current skeleton uses simple query-string routing through `public/index.php`.
+The UI pages are plain `.html` files and can be opened directly in a browser:
 
-Guest:
-- `?page=landing`
-- `?page=login`
-- `?page=register`
-- `?page=forgot-password`
+```text
+public/index.html
+public/login.html
+public/petani/dashboard.html
+public/admin/dashboard.html
+```
 
-Petani:
-- `?page=petani-dashboard`
-- `?page=petani-lahan`
-- `?page=petani-peta-lahan`
-- `?page=petani-musim-tanam`
-- `?page=petani-biaya-produksi`
-- `?page=petani-hasil-panen`
-- `?page=petani-analisis`
-- `?page=petani-laporan`
-- `?page=petani-profil`
-
-Admin:
-- `?page=admin-dashboard`
-- `?page=admin-users`
-- `?page=admin-tanaman`
-- `?page=admin-monitoring-lahan`
-- `?page=admin-laporan`
-- `?page=admin-profil`
-
-## Preview
-
-From inside `agrotrack-app`, run:
+Or run a local server from inside `agrotrack-app/public`:
 
 ```bash
-php -S localhost:8000 -t public
+python -m http.server 8000
 ```
 
 Then open:
 
 ```text
-http://localhost:8000/index.php?page=landing
+http://localhost:8000/index.html
 ```
 
 With XAMPP, place the project in the web server directory and open:
 
 ```text
-http://localhost/agrotrack-app/public/index.php?page=landing
+http://localhost/agrotrack-app/public/index.html
 ```
 
 ## Current Scope

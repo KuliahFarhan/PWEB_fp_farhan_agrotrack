@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hasil Panen | AgroTrack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <img
+            src="../assets/logo/logo-agrotrack.png"
+            class="h-11 w-11 rounded-full bg-white p-1"
+            alt="AgroTrack"
+          />
+          <b>AgroTrack</b>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="lahan.html">Lahan</a>
+          <a href="peta-lahan.html">Peta Lahan</a>
+          <a href="musim-tanam.html">Musim Tanam</a>
+          <a href="biaya-produksi.html">Biaya Produksi</a>
+          <a class="active" href="hasil-panen.html">Hasil Panen</a>
+          <a href="analisis.html">Analisis</a>
+          <a href="laporan.html">Laporan</a>
+          <a href="profil.html">Profil</a>
+          <a href="../login.html">Logout</a>
+        </nav>
+      </aside>
+      <main class="app-main">
+        <header class="topbar">
+          <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
+            Area Petani
+          </p>
+          <h1 class="text-2xl font-black">Hasil Panen</h1>
+        </header>
+        <section class="p-5 lg:p-8">
+          <p class="placeholder-note mb-5">
+            Pendapatan dan profit akan dihitung otomatis dari hasil panen, harga
+            jual, dan total biaya.
+          </p>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Musim</th>
+                  <th>Total Hasil</th>
+                  <th>Harga Jual</th>
+                  <th>Pendapatan</th>
+                  <th>Profit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jagung Manis 2026</td>
+                  <td>2.400 kg</td>
+                  <td>Rp 5.000</td>
+                  <td>Rp 12.000.000</td>
+                  <td>Rp 3.300.000</td>
+                </tr>
+                <tr>
+                  <td>Cabai 2026</td>
+                  <td>850 kg</td>
+                  <td>Rp 18.000</td>
+                  <td>Rp 15.300.000</td>
+                  <td>Rp 7.100.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <form class="agro-card form-grid mt-6 rounded-lg p-5 md:grid-cols-2">
+            <label>
+              Musim Tanam
+              <input placeholder="Dropdown musim" />
+            </label>
+            <label>
+              Total Hasil
+              <input type="number" placeholder="Jumlah panen" />
+            </label>
+            <label>
+              Satuan
+              <input placeholder="kg / ton" />
+            </label>
+            <label>
+              Harga Jual
+              <input type="number" placeholder="Harga per satuan" />
+            </label>
+          </form>
+        </section>
+      </main>
+    </div>
+    <script src="../assets/js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laporan Admin | AgroTrack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <img
+            src="../assets/logo/logo-agrotrack.png"
+            class="h-11 w-11 rounded-full bg-white p-1"
+            alt="AgroTrack"
+          />
+          <b>AgroTrack</b>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="users.html">Data Pengguna</a>
+          <a href="tanaman.html">Data Tanaman</a>
+          <a href="monitoring-lahan.html">Monitoring Lahan</a>
+          <a class="active" href="laporan.html">Laporan</a>
+          <a href="profil.html">Profil Admin</a>
+          <a href="../login.html">Logout</a>
+        </nav>
+      </aside>
+      <main class="app-main">
+        <header class="topbar">
+          <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
+            Area Admin
+          </p>
+          <h1 class="text-2xl font-black">Laporan Global</h1>
+        </header>
+        <section class="p-5 lg:p-8">
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span>Total Biaya Global</span>
+              <strong>Rp 124 jt</strong>
+            </div>
+            <div class="stat-card">
+              <span>Pendapatan Global</span>
+              <strong>Rp 310 jt</strong>
+            </div>
+            <div class="stat-card">
+              <span>Profit Global</span>
+              <strong>Rp 186 jt</strong>
+            </div>
+          </div>
+          <div class="table-card mt-6">
+            <table>
+              <thead>
+                <tr>
+                  <th>Petani</th>
+                  <th>Musim</th>
+                  <th>Tanaman</th>
+                  <th>Biaya</th>
+                  <th>Pendapatan</th>
+                  <th>Profit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Siti Petani</td>
+                  <td>Jun - Agu 2026</td>
+                  <td>Jagung Manis</td>
+                  <td>Rp 8.700.000</td>
+                  <td>Rp 12.000.000</td>
+                  <td>Rp 3.300.000</td>
+                </tr>
+                <tr>
+                  <td>Budi Petani</td>
+                  <td>Jun - Sep 2026</td>
+                  <td>Jagung Pipil</td>
+                  <td>Rp 12.400.000</td>
+                  <td>Rp 20.000.000</td>
+                  <td>Rp 7.600.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../assets/js/app.js"></script>
+  </body>
+</html>

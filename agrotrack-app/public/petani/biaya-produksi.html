@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Biaya Produksi | AgroTrack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <img
+            src="../assets/logo/logo-agrotrack.png"
+            class="h-11 w-11 rounded-full bg-white p-1"
+            alt="AgroTrack"
+          />
+          <b>AgroTrack</b>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="lahan.html">Lahan</a>
+          <a href="peta-lahan.html">Peta Lahan</a>
+          <a href="musim-tanam.html">Musim Tanam</a>
+          <a class="active" href="biaya-produksi.html">Biaya Produksi</a>
+          <a href="hasil-panen.html">Hasil Panen</a>
+          <a href="analisis.html">Analisis</a>
+          <a href="laporan.html">Laporan</a>
+          <a href="profil.html">Profil</a>
+          <a href="../login.html">Logout</a>
+        </nav>
+      </aside>
+      <main class="app-main">
+        <header class="topbar">
+          <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
+            Area Petani
+          </p>
+          <h1 class="text-2xl font-black">Biaya Produksi</h1>
+        </header>
+        <section class="p-5 lg:p-8">
+          <div class="stat-grid">
+            <div class="stat-card">
+              <span>Bibit</span>
+              <strong>Rp 1,2 jt</strong>
+            </div>
+            <div class="stat-card">
+              <span>Pupuk</span>
+              <strong>Rp 3,1 jt</strong>
+            </div>
+            <div class="stat-card">
+              <span>Total Biaya</span>
+              <strong>Rp 8,7 jt</strong>
+            </div>
+          </div>
+          <div class="table-card mt-6">
+            <table>
+              <thead>
+                <tr>
+                  <th>Musim</th>
+                  <th>Kategori</th>
+                  <th>Nominal</th>
+                  <th>Tanggal</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Jagung Manis 2026</td>
+                  <td>Bibit</td>
+                  <td>Rp 1.200.000</td>
+                  <td>03 Jun 2026</td>
+                  <td>Edit | Hapus</td>
+                </tr>
+                <tr>
+                  <td>Jagung Manis 2026</td>
+                  <td>Pupuk</td>
+                  <td>Rp 2.000.000</td>
+                  <td>10 Jun 2026</td>
+                  <td>Edit | Hapus</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../assets/js/app.js"></script>
+  </body>
+</html>

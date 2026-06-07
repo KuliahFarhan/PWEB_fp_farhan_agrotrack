@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lahan | AgroTrack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <img
+            src="../assets/logo/logo-agrotrack.png"
+            class="h-11 w-11 rounded-full bg-white p-1"
+            alt="AgroTrack"
+          />
+          <b>AgroTrack</b>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a class="active" href="lahan.html">Lahan</a>
+          <a href="peta-lahan.html">Peta Lahan</a>
+          <a href="musim-tanam.html">Musim Tanam</a>
+          <a href="biaya-produksi.html">Biaya Produksi</a>
+          <a href="hasil-panen.html">Hasil Panen</a>
+          <a href="analisis.html">Analisis</a>
+          <a href="laporan.html">Laporan</a>
+          <a href="profil.html">Profil</a>
+          <a href="../login.html">Logout</a>
+        </nav>
+      </aside>
+      <main class="app-main">
+        <header class="topbar">
+          <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
+            Area Petani
+          </p>
+          <h1 class="text-2xl font-black">Lahan</h1>
+        </header>
+        <section class="p-5 lg:p-8">
+          <div class="mb-5 flex justify-between gap-3">
+            <p class="text-slate-500">
+              CRUD lahan akan dihubungkan ke database pada task berikutnya.
+            </p>
+            <button class="btn-primary">+ Tambah Lahan</button>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Nama</th>
+                  <th>Lokasi</th>
+                  <th>Luas</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Kebun Utara</td>
+                  <td>Mojokerto</td>
+                  <td>1.8 ha</td>
+                  <td>Aktif</td>
+                  <td>Detail | Edit | Hapus</td>
+                </tr>
+                <tr>
+                  <td>Lahan Barat</td>
+                  <td>Jombang</td>
+                  <td>2.1 ha</td>
+                  <td>Aktif</td>
+                  <td>Detail | Edit | Hapus</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-6 grid gap-6 lg:grid-cols-2">
+            <form class="agro-card form-grid rounded-lg p-5">
+              <h2 class="font-black">Form Lahan Placeholder</h2>
+              <label>
+                Nama Lahan
+                <input placeholder="Kebun Utara" />
+              </label>
+              <label>
+                Lokasi
+                <input placeholder="Desa / Kecamatan" />
+              </label>
+              <label>
+                Luas Lahan
+                <input type="number" placeholder="Hektar" />
+              </label>
+            </form>
+            <div class="modal-box">
+              <p class="font-bold text-red-600">Modal Placeholder</p>
+              <h2 class="mt-2 font-black">Konfirmasi hapus lahan</h2>
+              <p class="mt-2 text-sm text-slate-500">
+                Modal ini muncul sebelum data lahan dihapus.
+              </p>
+              <button class="btn-danger mt-4">Hapus</button>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../assets/js/app.js"></script>
+  </body>
+</html>

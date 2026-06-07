@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Monitoring Lahan | AgroTrack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <img
+            src="../assets/logo/logo-agrotrack.png"
+            class="h-11 w-11 rounded-full bg-white p-1"
+            alt="AgroTrack"
+          />
+          <b>AgroTrack</b>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="users.html">Data Pengguna</a>
+          <a href="tanaman.html">Data Tanaman</a>
+          <a class="active" href="monitoring-lahan.html">Monitoring Lahan</a>
+          <a href="laporan.html">Laporan</a>
+          <a href="profil.html">Profil Admin</a>
+          <a href="../login.html">Logout</a>
+        </nav>
+      </aside>
+      <main class="app-main">
+        <header class="topbar">
+          <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
+            Area Admin
+          </p>
+          <h1 class="text-2xl font-black">Monitoring Lahan</h1>
+        </header>
+        <section class="grid gap-6 p-5 lg:p-8 xl:grid-cols-[1fr_.9fr]">
+          <div>
+            <p class="mb-5 text-slate-500">
+              Admin melihat seluruh lahan melalui tabel dan peta. Tidak ada edit
+              transaksi petani di skeleton ini.
+            </p>
+            <div class="table-card">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Petani</th>
+                    <th>Nama Lahan</th>
+                    <th>Luas</th>
+                    <th>Tanaman Aktif</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Siti Petani</td>
+                    <td>Kebun Utara</td>
+                    <td>1.8 ha</td>
+                    <td>Jagung Manis</td>
+                    <td>Aktif</td>
+                  </tr>
+                  <tr>
+                    <td>Budi Petani</td>
+                    <td>Lahan Barat</td>
+                    <td>2.1 ha</td>
+                    <td>Jagung Pipil</td>
+                    <td>Aktif</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="agro-card overflow-hidden rounded-lg">
+            <div class="p-5">
+              <h3 class="font-black">Peta Global Lahan</h3>
+              <p class="text-sm text-slate-500">
+                Placeholder Leaflet untuk seluruh marker/polygon.
+              </p>
+            </div>
+            <div
+              data-map-placeholder
+              class="agro-map-placeholder grid min-h-[420px] place-items-center"
+            >
+              <b class="rounded-md bg-white/90 px-4 py-2 text-teal-800">
+                Admin Leaflet Placeholder
+              </b>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../assets/js/app.js"></script>
+    <script src="../assets/js/map.js"></script>
+  </body>
+</html>

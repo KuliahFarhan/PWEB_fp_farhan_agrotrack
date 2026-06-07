@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Musim Tanam | AgroTrack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <img
+            src="../assets/logo/logo-agrotrack.png"
+            class="h-11 w-11 rounded-full bg-white p-1"
+            alt="AgroTrack"
+          />
+          <b>AgroTrack</b>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="lahan.html">Lahan</a>
+          <a href="peta-lahan.html">Peta Lahan</a>
+          <a class="active" href="musim-tanam.html">Musim Tanam</a>
+          <a href="biaya-produksi.html">Biaya Produksi</a>
+          <a href="hasil-panen.html">Hasil Panen</a>
+          <a href="analisis.html">Analisis</a>
+          <a href="laporan.html">Laporan</a>
+          <a href="profil.html">Profil</a>
+          <a href="../login.html">Logout</a>
+        </nav>
+      </aside>
+      <main class="app-main">
+        <header class="topbar">
+          <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
+            Area Petani
+          </p>
+          <h1 class="text-2xl font-black">Musim Tanam</h1>
+        </header>
+        <section class="p-5 lg:p-8">
+          <div class="mb-5 flex justify-between">
+            <p class="text-slate-500">
+              Estimasi panen dihitung dari tanggal tanam + masa panen tanaman.
+            </p>
+            <button class="btn-primary">+ Tambah Musim</button>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Lahan</th>
+                  <th>Tanaman</th>
+                  <th>Tanggal Tanam</th>
+                  <th>Estimasi</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Kebun Utara</td>
+                  <td>Jagung Manis</td>
+                  <td>01 Jun 2026</td>
+                  <td>30 Agu 2026</td>
+                  <td>Pertumbuhan</td>
+                </tr>
+                <tr>
+                  <td>Lahan Barat</td>
+                  <td>Jagung Pipil</td>
+                  <td>12 Jun 2026</td>
+                  <td>10 Sep 2026</td>
+                  <td>Persemaian</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <form class="agro-card form-grid mt-6 rounded-lg p-5 md:grid-cols-2">
+            <label>
+              Lahan
+              <input placeholder="Dropdown lahan" />
+            </label>
+            <label>
+              Tanaman
+              <input placeholder="Dropdown tanaman" />
+            </label>
+            <label>
+              Tanggal Tanam
+              <input type="date" />
+            </label>
+            <label>
+              Status
+              <input placeholder="Persemaian / Pertumbuhan" />
+            </label>
+          </form>
+        </section>
+      </main>
+    </div>
+    <script src="../assets/js/app.js"></script>
+  </body>
+</html>

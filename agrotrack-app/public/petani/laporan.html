@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laporan | AgroTrack</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../assets/css/app.css" />
+  </head>
+  <body>
+    <div class="app-layout">
+      <aside class="sidebar">
+        <div class="sidebar-brand">
+          <img
+            src="../assets/logo/logo-agrotrack.png"
+            class="h-11 w-11 rounded-full bg-white p-1"
+            alt="AgroTrack"
+          />
+          <b>AgroTrack</b>
+        </div>
+        <nav class="sidebar-nav">
+          <a href="dashboard.html">Dashboard</a>
+          <a href="lahan.html">Lahan</a>
+          <a href="peta-lahan.html">Peta Lahan</a>
+          <a href="musim-tanam.html">Musim Tanam</a>
+          <a href="biaya-produksi.html">Biaya Produksi</a>
+          <a href="hasil-panen.html">Hasil Panen</a>
+          <a href="analisis.html">Analisis</a>
+          <a class="active" href="laporan.html">Laporan</a>
+          <a href="profil.html">Profil</a>
+          <a href="../login.html">Logout</a>
+        </nav>
+      </aside>
+      <main class="app-main">
+        <header class="topbar">
+          <p class="text-xs font-bold uppercase tracking-[.24em] text-teal-700">
+            Area Petani
+          </p>
+          <h1 class="text-2xl font-black">Laporan Petani</h1>
+        </header>
+        <section class="p-5 lg:p-8">
+          <div class="mb-5 flex gap-2">
+            <button class="btn-secondary">Filter</button>
+            <button class="btn-primary">Print</button>
+          </div>
+          <div class="table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Jenis</th>
+                  <th>Periode</th>
+                  <th>Total Biaya</th>
+                  <th>Pendapatan</th>
+                  <th>Profit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Musim Tanam</td>
+                  <td>Jun - Agu 2026</td>
+                  <td>Rp 8.700.000</td>
+                  <td>Rp 12.000.000</td>
+                  <td>Rp 3.300.000</td>
+                </tr>
+                <tr>
+                  <td>Hasil Panen</td>
+                  <td>Mei - Agu 2026</td>
+                  <td>Rp 8.200.000</td>
+                  <td>Rp 15.300.000</td>
+                  <td>Rp 7.100.000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="../assets/js/app.js"></script>
+  </body>
+</html>
