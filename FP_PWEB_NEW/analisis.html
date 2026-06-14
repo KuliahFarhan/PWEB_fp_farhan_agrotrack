@@ -1,0 +1,781 @@
+<!doctype html>
+
+<html class="light" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>AgroTrack - Analisis</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "error-container": "#ffdad6",
+              "on-surface": "#0b1c30",
+              "surface-bright": "#f8f9ff",
+              "tertiary-container": "#004f34",
+              "on-primary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "on-tertiary-fixed-variant": "#005236",
+              secondary: "#855300",
+              "secondary-fixed-dim": "#ffb95f",
+              primary: "#003527",
+              "surface-dim": "#cbdbf5",
+              "primary-fixed": "#b0f0d6",
+              "surface-container-lowest": "#ffffff",
+              "on-secondary-fixed": "#2a1700",
+              "on-surface-variant": "#404944",
+              "primary-container": "#064e3b",
+              "on-error": "#ffffff",
+              "on-primary-container": "#80bea6",
+              "secondary-container": "#fea619",
+              "on-tertiary-fixed": "#002113",
+              surface: "#f8f9ff",
+              "on-primary-fixed-variant": "#0b513d",
+              "surface-container-highest": "#d3e4fe",
+              "surface-tint": "#2b6954",
+              "on-tertiary": "#ffffff",
+              "primary-fixed-dim": "#95d3ba",
+              outline: "#707974",
+              "inverse-on-surface": "#eaf1ff",
+              "surface-container-high": "#dce9ff",
+              tertiary: "#003623",
+              "secondary-fixed": "#ffddb8",
+              error: "#ba1a1a",
+              "on-primary-fixed": "#002117",
+              "on-background": "#0b1c30",
+              background: "#f8f9ff",
+              "on-error-container": "#93000a",
+              "tertiary-fixed-dim": "#4edea3",
+              "inverse-surface": "#213145",
+              "on-secondary-container": "#684000",
+              "surface-variant": "#d3e4fe",
+              "on-tertiary-container": "#31c98f",
+              "on-secondary-fixed-variant": "#653e00",
+              "tertiary-fixed": "#6ffbbe",
+              "outline-variant": "#bfc9c3",
+              "inverse-primary": "#95d3ba",
+              "surface-container": "#e5eeff",
+              "surface-container-low": "#eff4ff",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              xs: "4px",
+              "margin-desktop": "32px",
+              sm: "8px",
+              xl: "32px",
+              md: "16px",
+              xxl: "48px",
+              "margin-mobile": "16px",
+              gutter: "24px",
+              base: "4px",
+              lg: "24px",
+            },
+            fontFamily: {
+              "headline-md": ["Inter"],
+              "label-md": ["Inter"],
+              "headline-lg": ["Inter"],
+              "headline-lg-mobile": ["Inter"],
+              "body-lg": ["Inter"],
+              "headline-sm": ["Inter"],
+              "data-lg": ["Inter"],
+              "body-md": ["Inter"],
+              "display-lg": ["Inter"],
+              "body-sm": ["Inter"],
+            },
+            fontSize: {
+              "headline-md": [
+                "24px",
+                { lineHeight: "32px", fontWeight: "600" },
+              ],
+              "label-md": [
+                "12px",
+                {
+                  lineHeight: "16px",
+                  letterSpacing: "0.05em",
+                  fontWeight: "600",
+                },
+              ],
+              "headline-lg": [
+                "32px",
+                {
+                  lineHeight: "40px",
+                  letterSpacing: "-0.01em",
+                  fontWeight: "700",
+                },
+              ],
+              "headline-lg-mobile": [
+                "28px",
+                { lineHeight: "36px", fontWeight: "700" },
+              ],
+              "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }],
+              "headline-sm": [
+                "20px",
+                { lineHeight: "28px", fontWeight: "600" },
+              ],
+              "data-lg": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+              "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }],
+              "display-lg": [
+                "48px",
+                {
+                  lineHeight: "56px",
+                  letterSpacing: "-0.02em",
+                  fontWeight: "700",
+                },
+              ],
+              "body-sm": ["14px", { lineHeight: "20px", fontWeight: "400" }],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+      body {
+        background-color: #f8fafc;
+      }
+      .chart-container {
+        position: relative;
+        background: linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 1) 0%,
+          rgba(248, 250, 252, 1) 100%
+        );
+      }
+      .tonal-card {
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body class="font-body-md text-on-surface">
+    <!-- SideNavBar Shell -->
+    <aside
+      class="fixed left-0 top-0 h-full w-[280px] bg-primary flex flex-col py-xl px-md z-50"
+    >
+      <div class="mb-xxl px-md">
+        <h1 class="font-headline-md text-headline-md font-bold text-on-primary">
+          AgroTrack
+        </h1>
+        <p
+          class="font-label-md text-label-md text-on-primary/60 uppercase tracking-widest mt-xs"
+        >
+          Farmer Portal
+        </p>
+      </div>
+      <nav class="flex flex-col gap-xs flex-grow">
+        <!-- Navigation Items Mapping from JSON -->
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-primary/70 hover:text-on-primary hover:bg-on-primary/10 transition-colors duration-200 rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">dashboard</span>
+          <span class="font-label-md text-label-md">Dashboard</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-primary/70 hover:text-on-primary hover:bg-on-primary/10 transition-colors duration-200 rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">agriculture</span>
+          <span class="font-label-md text-label-md">Lahan</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-primary/70 hover:text-on-primary hover:bg-on-primary/10 transition-colors duration-200 rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">map</span>
+          <span class="font-label-md text-label-md">Peta Lahan</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-primary/70 hover:text-on-primary hover:bg-on-primary/10 transition-colors duration-200 rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">calendar_today</span>
+          <span class="font-label-md text-label-md">Musim Tanam</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-primary/70 hover:text-on-primary hover:bg-on-primary/10 transition-colors duration-200 rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">payments</span>
+          <span class="font-label-md text-label-md">Biaya Produksi</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-primary/70 hover:text-on-primary hover:bg-on-primary/10 transition-colors duration-200 rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">receipt_long</span>
+          <span class="font-label-md text-label-md">Hasil Panen</span>
+        </a>
+        <!-- Active State Logic Applied: Analisis -->
+        <a
+          class="flex items-center gap-md px-md py-sm bg-primary-container text-on-primary-container rounded-lg opacity-90 transition-all duration-150"
+          href="#"
+        >
+          <span
+            class="material-symbols-outlined"
+            style="font-variation-settings: &quot;FILL&quot; 1"
+            >analytics</span
+          >
+          <span class="font-label-md text-label-md">Analisis</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-primary/70 hover:text-on-primary hover:bg-on-primary/10 transition-colors duration-200 rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">description</span>
+          <span class="font-label-md text-label-md">Laporan</span>
+        </a>
+        <a
+          class="flex items-center gap-md px-md py-sm text-on-primary/70 hover:text-on-primary hover:bg-on-primary/10 transition-colors duration-200 rounded-lg"
+          href="#"
+        >
+          <span class="material-symbols-outlined">person</span>
+          <span class="font-label-md text-label-md">Profil</span>
+        </a>
+      </nav>
+      <div
+        class="mt-auto px-md py-md border-t border-on-primary/10 flex items-center gap-md"
+      >
+        <div
+          class="w-10 h-10 rounded-full bg-primary-fixed overflow-hidden ring-2 ring-on-primary/20"
+        >
+          <img
+            alt="Farmer Profile Picture"
+            class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvF3KqMNoWmheb7xvHR9OAnT5QEgBGpZBYNwxpQP25eo2ILRIf6ItY8D_9uaBbHwt9wPepAN7t6sfcNYVcsZgEj2TX6B0h3QzKTOXUQ9d4CDdEpOd1Sa04jONCzw4Ws8Ng9m-En5A0idKOohhZvg8RYkrdgG5gMO42CRnjAJGTPoKBDt4d3NmPrMR3ycDEuL4lwTG0SNEmu5on9mDGSAfRyB25QYsP35v7XEeIxL5iKQI1_dPtUP4we8AO3NSwKcTVtyGlMZuCeuM"
+          />
+        </div>
+        <div>
+          <p class="font-label-md text-on-primary">Budi Santoso</p>
+          <p class="text-[10px] text-on-primary/50">Kelompok Tani Jaya</p>
+        </div>
+      </div>
+    </aside>
+    <!-- Main Canvas -->
+    <main class="ml-[280px] min-h-screen flex flex-col">
+      <!-- TopAppBar -->
+      <header
+        class="flex justify-between items-center h-16 px-lg bg-surface-bright border-b border-outline-variant shadow-sm sticky top-0 z-40"
+      >
+        <div class="flex items-center gap-lg flex-1">
+          <div class="relative w-full max-w-md">
+            <span
+              class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant"
+              >search</span
+            >
+            <input
+              class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-lg font-body-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all"
+              placeholder="Cari analisis atau data..."
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="flex items-center gap-md">
+          <button
+            class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors"
+          >
+            <span class="material-symbols-outlined text-on-surface-variant"
+              >notifications</span
+            >
+          </button>
+          <button
+            class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors"
+          >
+            <span class="material-symbols-outlined text-on-surface-variant"
+              >settings</span
+            >
+          </button>
+          <div class="h-8 w-[1px] bg-outline-variant mx-xs"></div>
+          <button
+            class="bg-primary text-on-primary px-lg py-sm rounded-lg font-label-md flex items-center gap-xs hover:opacity-90 transition-all active:scale-95"
+          >
+            <span class="material-symbols-outlined text-[18px]">download</span>
+            Export Data
+          </button>
+        </div>
+      </header>
+      <!-- Page Content -->
+      <div class="p-lg flex flex-col gap-lg">
+        <!-- Hero Header -->
+        <section class="flex flex-col gap-xs">
+          <h2 class="font-headline-lg text-headline-lg text-on-surface">
+            Analisis Kinerja Pertanian
+          </h2>
+          <p class="font-body-md text-on-surface-variant max-w-3xl">
+            Laporan mendalam tentang efisiensi operasional dan profitabilitas
+            lahan Anda untuk musim tanam 2023/2024.
+          </p>
+        </section>
+        <!-- Summary Cards Bento Grid -->
+        <div class="grid grid-cols-12 gap-lg">
+          <div
+            class="col-span-12 md:col-span-4 bg-white p-lg rounded-xl tonal-card border-l-4 border-error"
+          >
+            <div class="flex justify-between items-start mb-md">
+              <div>
+                <p class="font-label-md text-outline mb-xs">Total Biaya</p>
+                <h3 class="font-display-lg text-headline-lg text-on-surface">
+                  Rp 42.5M
+                </h3>
+              </div>
+              <div
+                class="w-12 h-12 bg-error-container text-on-error-container rounded-lg flex items-center justify-center"
+              >
+                <span class="material-symbols-outlined">payments</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-xs">
+              <span class="text-error font-label-md">+12%</span>
+              <span class="text-outline font-label-md">vs musim lalu</span>
+            </div>
+          </div>
+          <div
+            class="col-span-12 md:col-span-4 bg-white p-lg rounded-xl tonal-card border-l-4 border-primary"
+          >
+            <div class="flex justify-between items-start mb-md">
+              <div>
+                <p class="font-label-md text-outline mb-xs">Total Pendapatan</p>
+                <h3 class="font-display-lg text-headline-lg text-on-surface">
+                  Rp 128.2M
+                </h3>
+              </div>
+              <div
+                class="w-12 h-12 bg-primary-fixed text-on-primary-fixed rounded-lg flex items-center justify-center"
+              >
+                <span class="material-symbols-outlined">trending_up</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-xs">
+              <span
+                class="text-primary font-label-md text-on-tertiary-container"
+                >+24%</span
+              >
+              <span class="text-outline font-label-md">vs musim lalu</span>
+            </div>
+          </div>
+          <div
+            class="col-span-12 md:col-span-4 bg-white p-lg rounded-xl tonal-card border-l-4 border-secondary"
+          >
+            <div class="flex justify-between items-start mb-md">
+              <div>
+                <p class="font-label-md text-outline mb-xs">Total Profit</p>
+                <h3 class="font-display-lg text-headline-lg text-on-surface">
+                  Rp 85.7M
+                </h3>
+              </div>
+              <div
+                class="w-12 h-12 bg-secondary-fixed text-on-secondary-fixed rounded-lg flex items-center justify-center"
+              >
+                <span class="material-symbols-outlined">savings</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-xs">
+              <span class="text-secondary font-label-md text-secondary"
+                >+18%</span
+              >
+              <span class="text-outline font-label-md">Margin 66.8%</span>
+            </div>
+          </div>
+          <!-- Main Charts Section -->
+          <div
+            class="col-span-12 lg:col-span-8 bg-white p-lg rounded-xl tonal-card flex flex-col"
+          >
+            <div class="flex justify-between items-center mb-lg">
+              <h4 class="font-headline-sm text-headline-sm text-on-surface">
+                Tren Profit per Musim
+              </h4>
+              <div class="flex gap-sm">
+                <select
+                  class="bg-surface-container-low border-none rounded-lg font-label-md px-md py-sm"
+                >
+                  <option>2 Tahun Terakhir</option>
+                  <option>5 Tahun Terakhir</option>
+                </select>
+              </div>
+            </div>
+            <div
+              class="h-80 w-full flex items-end justify-between gap-md pb-md"
+            >
+              <!-- Bar Chart Simulation -->
+              <div class="flex-1 flex flex-col items-center gap-sm">
+                <div
+                  class="w-full bg-primary-fixed-dim rounded-t-lg transition-all duration-700"
+                  style="height: 40%"
+                ></div>
+                <span class="font-label-md text-outline">MT 2021</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-sm">
+                <div
+                  class="w-full bg-primary-fixed-dim rounded-t-lg transition-all duration-700"
+                  style="height: 55%"
+                ></div>
+                <span class="font-label-md text-outline">MT 2021/22</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-sm">
+                <div
+                  class="w-full bg-primary-fixed-dim rounded-t-lg transition-all duration-700"
+                  style="height: 35%"
+                ></div>
+                <span class="font-label-md text-outline">MT 2022</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-sm">
+                <div
+                  class="w-full bg-primary-fixed-dim rounded-t-lg transition-all duration-700"
+                  style="height: 75%"
+                ></div>
+                <span class="font-label-md text-outline">MT 2022/23</span>
+              </div>
+              <div class="flex-1 flex flex-col items-center gap-sm">
+                <div
+                  class="w-full bg-primary rounded-t-lg transition-all duration-700"
+                  style="height: 90%"
+                ></div>
+                <span class="font-label-md text-primary font-bold"
+                  >MT 2023/24</span
+                >
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-span-12 lg:col-span-4 bg-white p-lg rounded-xl tonal-card"
+          >
+            <h4 class="font-headline-sm text-headline-sm text-on-surface mb-lg">
+              Kategori Biaya
+            </h4>
+            <div class="relative h-64 flex items-center justify-center">
+              <!-- Donut Chart SVG -->
+              <svg
+                class="w-full h-full transform -rotate-90"
+                viewbox="0 0 100 100"
+              >
+                <circle
+                  cx="50"
+                  cy="50"
+                  fill="none"
+                  r="40"
+                  stroke="#E2E8F0"
+                  stroke-width="12"
+                ></circle>
+                <circle
+                  cx="50"
+                  cy="50"
+                  fill="none"
+                  r="40"
+                  stroke="#003527"
+                  stroke-dasharray="251.2"
+                  stroke-dashoffset="100.48"
+                  stroke-width="12"
+                ></circle>
+                <!-- Labor 60% -->
+                <circle
+                  cx="50"
+                  cy="50"
+                  fill="none"
+                  r="40"
+                  stroke="#fea619"
+                  stroke-dasharray="251.2"
+                  stroke-dashoffset="200.96"
+                  stroke-width="12"
+                ></circle>
+                <!-- Fertilizer 20% -->
+                <circle
+                  cx="50"
+                  cy="50"
+                  fill="none"
+                  r="40"
+                  stroke="#ba1a1a"
+                  stroke-dasharray="251.2"
+                  stroke-dashoffset="226.08"
+                  stroke-width="12"
+                ></circle>
+                <!-- Seeds 10% -->
+              </svg>
+              <div class="absolute flex flex-col items-center">
+                <span class="font-headline-md text-on-surface">100%</span>
+                <span class="font-label-md text-outline">Total</span>
+              </div>
+            </div>
+            <div class="mt-md flex flex-col gap-sm">
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-sm">
+                  <span class="w-3 h-3 rounded-full bg-primary"></span>
+                  <span class="font-body-sm text-on-surface">Tenaga Kerja</span>
+                </div>
+                <span class="font-label-md">60%</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-sm">
+                  <span
+                    class="w-3 h-3 rounded-full bg-secondary-container"
+                  ></span>
+                  <span class="font-body-sm text-on-surface"
+                    >Pupuk &amp; Nutrisi</span
+                  >
+                </div>
+                <span class="font-label-md">20%</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-sm">
+                  <span class="w-3 h-3 rounded-full bg-error"></span>
+                  <span class="font-body-sm text-on-surface"
+                    >Benih &amp; Bibit</span
+                  >
+                </div>
+                <span class="font-label-md">10%</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <div class="flex items-center gap-sm">
+                  <span class="w-3 h-3 rounded-full bg-outline-variant"></span>
+                  <span class="font-body-sm text-on-surface">Lainnya</span>
+                </div>
+                <span class="font-label-md">10%</span>
+              </div>
+            </div>
+          </div>
+          <!-- Comparison Chart -->
+          <div class="col-span-12 bg-white p-lg rounded-xl tonal-card">
+            <div
+              class="flex flex-col md:flex-row justify-between md:items-center gap-md mb-lg"
+            >
+              <div>
+                <h4 class="font-headline-sm text-headline-sm text-on-surface">
+                  Biaya vs Pendapatan
+                </h4>
+                <p class="font-body-sm text-outline">
+                  Perbandingan bulanan selama musim berjalan
+                </p>
+              </div>
+              <div class="flex gap-md">
+                <div class="flex items-center gap-xs">
+                  <span class="w-3 h-1 bg-primary rounded-full"></span>
+                  <span class="font-label-md text-on-surface">Pendapatan</span>
+                </div>
+                <div class="flex items-center gap-xs">
+                  <span class="w-3 h-1 bg-error rounded-full"></span>
+                  <span class="font-label-md text-on-surface">Biaya</span>
+                </div>
+              </div>
+            </div>
+            <div class="relative h-64 w-full">
+              <!-- Simplified Area Chart Representation -->
+              <div
+                class="absolute inset-0 flex items-end justify-between px-md pb-md"
+              >
+                <!-- Pendapatan Curve Simulation -->
+                <svg
+                  class="absolute bottom-0 left-0 w-full h-full overflow-visible"
+                  preserveaspectratio="none"
+                >
+                  <path
+                    d="M0 180 Q 200 40, 400 120 T 800 60 T 1200 20"
+                    fill="transparent"
+                    stroke="#003527"
+                    stroke-width="4"
+                  ></path>
+                  <path
+                    d="M0 180 Q 200 150, 400 170 T 800 160 T 1200 140"
+                    fill="transparent"
+                    stroke="#ba1a1a"
+                    stroke-dasharray="8 4"
+                    stroke-width="3"
+                  ></path>
+                </svg>
+                <!-- Grid Lines -->
+                <div
+                  class="absolute inset-0 flex flex-col justify-between border-l border-b border-outline-variant/30"
+                >
+                  <div
+                    class="w-full border-t border-outline-variant/20 h-0"
+                  ></div>
+                  <div
+                    class="w-full border-t border-outline-variant/20 h-0"
+                  ></div>
+                  <div
+                    class="w-full border-t border-outline-variant/20 h-0"
+                  ></div>
+                  <div
+                    class="w-full border-t border-outline-variant/20 h-0"
+                  ></div>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-between px-md mt-md">
+              <span class="font-label-md text-outline">Jan</span>
+              <span class="font-label-md text-outline">Feb</span>
+              <span class="font-label-md text-outline">Mar</span>
+              <span class="font-label-md text-outline">Apr</span>
+              <span class="font-label-md text-outline">Mei</span>
+              <span class="font-label-md text-outline">Jun</span>
+            </div>
+          </div>
+          <!-- Additional Insights Row -->
+          <div class="col-span-12 md:col-span-6 lg:col-span-4">
+            <div class="bg-white p-lg rounded-xl tonal-card h-full">
+              <div class="flex items-center gap-md mb-lg">
+                <div
+                  class="w-10 h-10 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center"
+                >
+                  <span class="material-symbols-outlined">psychology_alt</span>
+                </div>
+                <h5 class="font-headline-sm text-headline-sm text-on-surface">
+                  Rekomendasi AI
+                </h5>
+              </div>
+              <div
+                class="bg-surface-container-low p-md rounded-lg border border-primary/10"
+              >
+                <p class="font-body-md text-on-surface mb-md">
+                  "Biaya tenaga kerja meningkat 15% di Blok A. Disarankan untuk
+                  beralih ke penyemprotan otomatis untuk efisiensi."
+                </p>
+                <button
+                  class="text-primary font-label-md flex items-center gap-xs hover:underline"
+                >
+                  Lihat Rencana Efisiensi
+                  <span class="material-symbols-outlined text-[16px]"
+                    >arrow_forward</span
+                  >
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-6 lg:col-span-8">
+            <div class="bg-white rounded-xl tonal-card overflow-hidden">
+              <div
+                class="px-lg py-md bg-surface-container-low border-b border-outline-variant flex justify-between items-center"
+              >
+                <h5
+                  class="font-label-md text-on-surface uppercase tracking-wider"
+                >
+                  Log Analisis Terbaru
+                </h5>
+                <button class="text-primary font-label-md">Lihat Semua</button>
+              </div>
+              <table class="w-full text-left">
+                <thead
+                  class="bg-surface-bright border-b border-outline-variant"
+                >
+                  <tr>
+                    <th class="px-lg py-sm font-label-md text-outline">
+                      TANGGAL
+                    </th>
+                    <th class="px-lg py-sm font-label-md text-outline">
+                      AKTIVITAS
+                    </th>
+                    <th class="px-lg py-sm font-label-md text-outline">
+                      DAMPAK BIAYA
+                    </th>
+                    <th class="px-lg py-sm font-label-md text-outline">
+                      STATUS
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-outline-variant/10">
+                  <tr>
+                    <td class="px-lg py-md font-body-sm text-on-surface">
+                      12 Okt 2023
+                    </td>
+                    <td class="px-lg py-md font-body-sm text-on-surface">
+                      Panen Padi Blok B
+                    </td>
+                    <td class="px-lg py-md font-body-sm text-primary font-bold">
+                      +Rp 18.2M
+                    </td>
+                    <td class="px-lg py-md">
+                      <span
+                        class="px-sm py-xs bg-tertiary-fixed text-on-tertiary-fixed text-[10px] rounded-full font-bold uppercase"
+                        >Selesai</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-lg py-md font-body-sm text-on-surface">
+                      08 Okt 2023
+                    </td>
+                    <td class="px-lg py-md font-body-sm text-on-surface">
+                      Pembelian Pupuk Urea
+                    </td>
+                    <td class="px-lg py-md font-body-sm text-error font-bold">
+                      -Rp 4.5M
+                    </td>
+                    <td class="px-lg py-md">
+                      <span
+                        class="px-sm py-xs bg-secondary-fixed text-on-secondary-fixed text-[10px] rounded-full font-bold uppercase"
+                        >Proses</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer Background Asset -->
+      <div class="mt-auto p-lg opacity-40">
+        <div class="h-1 bg-outline-variant w-full rounded-full overflow-hidden">
+          <div class="h-full bg-primary w-1/3"></div>
+        </div>
+      </div>
+    </main>
+    <!-- FAB for quick action -->
+    <button
+      class="fixed bottom-lg right-lg w-14 h-14 bg-secondary-container text-on-secondary-container rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-50"
+    >
+      <span class="material-symbols-outlined text-[28px]">add</span>
+    </button>
+    <script>
+      // Simple Micro-interaction for sidebar hovering
+      document.querySelectorAll("aside nav a").forEach((link) => {
+        link.addEventListener("mouseenter", () => {
+          if (!link.classList.contains("bg-primary-container")) {
+            link.style.transform = "translateX(4px)";
+          }
+        });
+        link.addEventListener("mouseleave", () => {
+          link.style.transform = "translateX(0)";
+        });
+      });
+
+      // Add dummy animation delay for bars
+      window.onload = () => {
+        const bars = document.querySelectorAll(
+          ".bg-primary-fixed-dim, .bg-primary",
+        );
+        bars.forEach((bar, index) => {
+          const originalHeight = bar.style.height;
+          bar.style.height = "0";
+          setTimeout(() => {
+            bar.style.height = originalHeight;
+          }, 100 * index);
+        });
+      };
+    </script>
+  </body>
+</html>
