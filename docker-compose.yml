@@ -1,0 +1,64 @@
+services:
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-8080}:80"
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: ${DB_DATABASE:-agrotrack}
+      DB_USERNAME: ${DB_USERNAME:-agrotrack}
+      DB_PASSWORD: ${DB_PASSWORD:-agrotrack_password}
+      AGROTRACK_DB_HOST: mysql
+      AGROTRACK_DB_PORT: 3306
+      AGROTRACK_DB_NAME: ${DB_DATABASE:-agrotrack}
+      AGROTRACK_DB_USER: ${DB_USERNAME:-agrotrack}
+      AGROTRACK_DB_PASS: ${DB_PASSWORD:-agrotrack_password}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - .:/var/www/html
+    networks:
+      - agrotrack
+
+  mysql:
+    image: mysql:8.0
+    ports:
+      - "${DB_FORWARD_PORT:-3307}:3306"
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-agrotrack}
+      MYSQL_USER: ${DB_USERNAME:-agrotrack}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-agrotrack_password}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_password}
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./database/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DB_ROOT_PASSWORD:-root_password}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - agrotrack
+
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    ports:
+      - "${PHPMYADMIN_PORT:-8081}:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - agrotrack
+
+volumes:
+  mysql_data:
+
+networks:
+  agrotrack:
+    driver: bridge

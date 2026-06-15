@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AgroTrack - Kelola Pertanian Cerdas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;850&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="assets/css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="landing-nav">
+      <div class="container d-flex align-items-center justify-content-between py-3">
+        <a class="d-flex align-items-center gap-2 fw-bold" href="index.html">
+          <img class="brand-logo" src="assets/image/logo/logo_agrotrack.png" alt="Logo AgroTrack" />
+          <span>AgroTrack</span>
+        </a>
+        <div class="d-none d-md-flex align-items-center gap-4 small fw-semibold">
+          <a href="#fitur">Fitur</a>
+          <a href="#solusi">Solusi</a>
+          <a href="#tentang">Tentang</a>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <a class="btn btn-outline-primary btn-sm" href="auth/login.php">Masuk</a>
+          <a class="btn btn-primary btn-sm" href="auth/register.php">Daftar</a>
+        </div>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="container">
+        <p class="text-uppercase fw-bold mb-3" style="letter-spacing: 0.12em">Platform manajemen pertanian</p>
+        <h1>AgroTrack</h1>
+        <p class="lead mt-3 mb-4 col-lg-7">
+          Pantau lahan, musim tanam, biaya produksi, hasil panen, dan analisis profit dalam satu sistem yang rapi.
+        </p>
+        <div class="d-flex flex-wrap gap-2">
+          <a class="btn btn-light" href="auth/login.php">Mulai Kelola</a>
+          <a class="btn btn-outline-light" href="#fitur">Lihat Fitur</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="feature-band" id="fitur">
+        <div class="container">
+          <div class="row g-4 align-items-end mb-3">
+            <div class="col-lg-7">
+              <h2 class="fw-bold">Satu portal untuk kerja lapangan dan rekap usaha tani.</h2>
+              <p class="text-secondary mb-0">Refaktor ini mengambil modul dari halaman lama lalu menyusunnya sebagai alur produk yang lebih jelas.</p>
+            </div>
+            <div class="col-lg-5 text-lg-end">
+              <a class="btn btn-primary" href="pages/petani/dashboard.php">Buka Petani</a>
+            </div>
+          </div>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="panel h-100">
+                <span class="material-symbols-outlined text-primary fs-1">agriculture</span>
+                <h3 class="section-title mt-3">Lahan dan Musim</h3>
+                <p class="text-secondary mb-0">Data lahan, peta blok, fase tanam, dan progres musim dibuat konsisten antarhalaman.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="panel h-100">
+                <span class="material-symbols-outlined text-primary fs-1">payments</span>
+                <h3 class="section-title mt-3">Biaya dan Panen</h3>
+                <p class="text-secondary mb-0">Input biaya, hasil panen, dan ringkasan finansial tersambung ke dashboard dan analisis.</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="panel h-100">
+                <span class="material-symbols-outlined text-primary fs-1">admin_panel_settings</span>
+                <h3 class="section-title mt-3">Admin Monitoring</h3>
+                <p class="text-secondary mb-0">Admin punya dashboard, monitoring lahan, dan data pengguna dengan navigasi terpisah.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-band bg-white" id="solusi">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-lg-6">
+              <div class="panel h-100">
+                <h2 class="fw-bold mb-3">Ringkas, konsisten, siap dikembangkan.</h2>
+                <div class="mini-chart" aria-label="Ilustrasi grafik performa">
+                  <span style="height: 42%"></span>
+                  <span style="height: 55%"></span>
+                  <span style="height: 48%"></span>
+                  <span style="height: 70%"></span>
+                  <span style="height: 76%"></span>
+                  <span style="height: 88%"></span>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <div class="stat-card">
+                    <div class="stat-label">Total Lahan</div>
+                    <div class="stat-value">12.8 Ha</div>
+                    <div class="stat-note">Dari contoh data lama</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="stat-card">
+                    <div class="stat-label">Profit Musim</div>
+                    <div class="stat-value">Rp85.7M</div>
+                    <div class="stat-note">Ringkasan analisis</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="stat-card">
+                    <div class="stat-label">Panen Tercatat</div>
+                    <div class="stat-value">18.4 ton</div>
+                    <div class="stat-note">Gabah kering panen</div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="stat-card">
+                    <div class="stat-label">Pengguna Aktif</div>
+                    <div class="stat-value">128</div>
+                    <div class="stat-note">Dashboard admin</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="feature-band" id="tentang">
+        <div class="container">
+          <div class="row justify-content-between g-4">
+            <div class="col-lg-7">
+              <h2 class="fw-bold">Dibuat dari referensi kode lama, bukan mulai kosong.</h2>
+              <p class="text-secondary">
+                Nama modul, alur petani/admin, metrik biaya, hasil panen, musim tanam, monitoring lahan, dan data pengguna tetap dipakai. Bedanya, struktur baru mengurangi duplikasi dan membuat link antarhalaman benar-benar jalan.
+              </p>
+            </div>
+            <div class="col-lg-4">
+              <div class="panel">
+                <h3 class="section-title">Akses cepat</h3>
+                <div class="d-grid gap-2">
+                  <a class="btn btn-primary" href="pages/admin/dashboard.php">Demo Admin</a>
+                  <a class="btn btn-outline-primary" href="pages/petani/dashboard.php">Demo Petani</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="landing-footer">
+      <section class="footer-cta">
+        <div class="container text-center">
+          <h2>Mulai Transformasi Digital Lahan Anda</h2>
+          <p>Bergabunglah dengan ribuan petani modern lainnya dan kendalikan masa depan pertanian Anda dengan data yang akurat.</p>
+          <a class="btn btn-footer-cta" href="auth/register.php">
+            <span>Daftar Sekarang</span>
+            <span class="material-symbols-outlined">person_add</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="footer-main">
+        <div class="container">
+          <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+              <a class="footer-brand" href="index.html">
+                <img class="footer-brand-logo" src="assets/image/logo/logo_agrotrack.png" alt="Logo AgroTrack" />
+                <strong>AgroTrack</strong>
+              </a>
+              <p class="footer-copy">Membangun masa depan pertanian Indonesia yang berkelanjutan dan terukur melalui teknologi.</p>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <h3>Produk</h3>
+              <nav class="footer-links">
+                <a href="pages/admin/monitoring-lahan.php">Monitoring Lahan</a>
+                <a href="pages/petani/analisis.php">Prediksi Cuaca</a>
+                <a href="pages/petani/analisis.php">Analisis Tanah</a>
+              </nav>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <h3>Perusahaan</h3>
+              <nav class="footer-links">
+                <a href="#tentang">Tentang</a>
+                <a href="#fitur">Karir</a>
+                <a href="auth/login.php">Kontak</a>
+              </nav>
+            </div>
+            <div class="col-lg-3 col-md-6">
+              <h3>Sosial Media</h3>
+              <div class="footer-social" aria-label="Sosial media AgroTrack">
+                <a href="#" aria-label="Instagram"><span class="material-symbols-outlined">photo_camera</span></a>
+                <a href="#" aria-label="Website"><span class="material-symbols-outlined">language</span></a>
+                <a href="#" aria-label="Komunitas"><span class="material-symbols-outlined">groups</span></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <span>&copy; 2026 AgroTrack. Hak Cipta Dilindungi.</span>
+            <span class="d-flex gap-4">
+              <a href="#">Kebijakan Privasi</a>
+              <a href="#">Syarat & Ketentuan</a>
+            </span>
+          </div>
+        </div>
+      </section>
+    </footer>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

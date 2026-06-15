@@ -1,0 +1,73 @@
+<?php
+declare(strict_types=1);
+
+function render_sidebar(array $user, string $active, string $base = '../../'): void
+{
+    $isAdmin = $user['role'] === 'admin';
+    $nav = $isAdmin ? [
+        ['dashboard', 'Dashboard', 'dashboard.php', 'admin-dashboard'],
+        ['groups', 'Data Pengguna', 'data-pengguna.php', 'pengguna'],
+        ['psychiatry', 'Data Tanaman', 'tanaman.php', 'tanaman'],
+        ['monitoring', 'Monitoring Lahan', 'monitoring-lahan.php', 'monitoring'],
+        ['summarize', 'Laporan', 'laporan.php', 'laporan'],
+        ['manage_accounts', 'Profil Admin', 'profil.php', 'profil'],
+    ] : [
+        ['dashboard', 'Dashboard', 'dashboard.php', 'dashboard'],
+        ['agriculture', 'Lahan', 'lahan.php', 'lahan'],
+        ['map', 'Peta Lahan', 'peta-lahan.php', 'peta'],
+        ['calendar_today', 'Musim Tanam', 'musim-tanam.php', 'musim'],
+        ['payments', 'Biaya Produksi', 'biaya-produksi.php', 'biaya'],
+        ['receipt_long', 'Hasil Panen', 'hasil-panen.php', 'panen'],
+        ['analytics', 'Analisis', 'analisis.php', 'analisis'],
+        ['account_circle', 'Profil', 'profil.php', 'profil'],
+    ];
+    $portalLabel = $isAdmin ? 'Administrator' : 'Farmer Portal';
+    $photo = $user['profile_photo'] ?: ($isAdmin ? 'assets/image/profil/foto_profil_6.jpg' : 'assets/image/profil/farmer-profile.jpg');
+    ?>
+    <aside class="app-sidebar" aria-label="Navigasi <?= e($portalLabel) ?>">
+      <a class="d-flex align-items-center gap-2" href="<?= e($isAdmin ? 'dashboard.php' : 'dashboard.php') ?>">
+        <img class="brand-logo" src="<?= e($base) ?>assets/image/logo/logo_agrotrack.png" alt="Logo AgroTrack" />
+        <span><strong class="d-block fs-5">AgroTrack</strong><small class="text-white-50"><?= e($portalLabel) ?></small></span>
+      </a>
+      <nav class="sidebar-nav">
+        <?php foreach ($nav as [$icon, $label, $href, $key]): ?>
+          <a class="sidebar-link <?= $active === $key ? 'active' : '' ?>" href="<?= e($href) ?>">
+            <span class="material-symbols-outlined"><?= e($icon) ?></span><span><?= e($label) ?></span>
+          </a>
+        <?php endforeach; ?>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <img class="profile-avatar" src="<?= e($base . $photo) ?>" alt="Foto profil <?= e($user['name']) ?>" />
+          <span><strong class="d-block"><?= e($user['name']) ?></strong><small class="text-white-50"><?= e($isAdmin ? 'Super Admin' : 'Petani') ?></small></span>
+        </div>
+        <a class="sidebar-link" href="<?= e($base) ?>auth/logout.php" data-logout-link>
+          <span class="material-symbols-outlined">logout</span><span>Keluar</span>
+        </a>
+      </div>
+    </aside>
+    <button class="sidebar-backdrop border-0" type="button" aria-label="Tutup menu"></button>
+    <?php
+}
+
+function render_head(string $title, string $base = '../../', array $extraCss = []): void
+{
+    ?>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title><?= e($title) ?></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <?php foreach ($extraCss as $href): ?><link href="<?= e($href) ?>" rel="stylesheet" /><?php endforeach; ?>
+    <link href="<?= e($base) ?>assets/css/styles.css" rel="stylesheet" />
+    <?php
+}
+
+function render_flash(): void
+{
+    $success = flash('success');
+    $error = flash('error');
+    if ($success): ?><div class="alert alert-success"><?= e($success) ?></div><?php endif;
+    if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif;
+}
