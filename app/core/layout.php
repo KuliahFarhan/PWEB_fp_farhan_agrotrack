@@ -8,6 +8,7 @@ function render_sidebar(array $user, string $active, string $base = '../../'): v
         ['dashboard', 'Dashboard', 'dashboard.php', 'admin-dashboard'],
         ['groups', 'Data Pengguna', 'data-pengguna.php', 'pengguna'],
         ['psychiatry', 'Data Tanaman', 'tanaman.php', 'tanaman'],
+        ['inventory_2', 'Katalog Kebutuhan', 'katalog-kebutuhan.php', 'katalog'],
         ['monitoring', 'Monitoring Lahan', 'monitoring-lahan.php', 'monitoring'],
         ['summarize', 'Laporan', 'laporan.php', 'laporan'],
         ['manage_accounts', 'Profil Admin', 'profil.php', 'profil'],
@@ -16,6 +17,7 @@ function render_sidebar(array $user, string $active, string $base = '../../'): v
         ['agriculture', 'Lahan', 'lahan.php', 'lahan'],
         ['map', 'Peta Lahan', 'peta-lahan.php', 'peta'],
         ['calendar_today', 'Musim Tanam', 'musim-tanam.php', 'musim'],
+        ['inventory_2', 'Katalog Operasional', 'katalog-operasional.php', 'katalog'],
         ['payments', 'Biaya Produksi', 'biaya-produksi.php', 'biaya'],
         ['receipt_long', 'Hasil Panen', 'hasil-panen.php', 'panen'],
         ['analytics', 'Analisis', 'analisis.php', 'analisis'],
@@ -35,6 +37,9 @@ function render_sidebar(array $user, string $active, string $base = '../../'): v
             <span class="material-symbols-outlined"><?= e($icon) ?></span><span><?= e($label) ?></span>
           </a>
         <?php endforeach; ?>
+        <a class="sidebar-link" href="<?= e($base) ?>index.html">
+          <span class="material-symbols-outlined">home</span><span>Landing Page</span>
+        </a>
       </nav>
       <div class="sidebar-footer">
         <div class="d-flex align-items-center gap-2 mb-3">
@@ -52,6 +57,8 @@ function render_sidebar(array $user, string $active, string $base = '../../'): v
 
 function render_head(string $title, string $base = '../../', array $extraCss = []): void
 {
+    $cssFile = dirname(__DIR__, 2) . '/assets/css/styles.css';
+    $cssVersion = is_file($cssFile) ? (string) filemtime($cssFile) : '1';
     ?>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -60,7 +67,7 @@ function render_head(string $title, string $base = '../../', array $extraCss = [
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
     <?php foreach ($extraCss as $href): ?><link href="<?= e($href) ?>" rel="stylesheet" /><?php endforeach; ?>
-    <link href="<?= e($base) ?>assets/css/styles.css" rel="stylesheet" />
+    <link href="<?= e($base) ?>assets/css/styles.css?v=<?= e($cssVersion) ?>" rel="stylesheet" />
     <?php
 }
 
@@ -70,4 +77,25 @@ function render_flash(): void
     $error = flash('error');
     if ($success): ?><div class="alert alert-success"><?= e($success) ?></div><?php endif;
     if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif;
+}
+
+function render_page_help(string $title, array $steps, ?string $note = null, ?string $actionHref = null, ?string $actionLabel = null): void
+{
+    ?>
+    <section class="guide-panel" aria-label="Panduan halaman">
+      <div class="guide-heading">
+        <span class="material-symbols-outlined">tips_and_updates</span>
+        <div>
+          <strong><?= e($title) ?></strong>
+          <?php if ($note): ?><p><?= e($note) ?></p><?php endif; ?>
+        </div>
+      </div>
+      <ol class="guide-steps">
+        <?php foreach ($steps as $step): ?><li><?= e($step) ?></li><?php endforeach; ?>
+      </ol>
+      <?php if ($actionHref && $actionLabel): ?>
+        <a class="btn btn-sm btn-primary guide-action" href="<?= e($actionHref) ?>"><?= e($actionLabel) ?></a>
+      <?php endif; ?>
+    </section>
+    <?php
 }

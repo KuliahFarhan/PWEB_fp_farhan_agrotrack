@@ -17,6 +17,7 @@ $lahan = db()->query('SELECT l.*, u.name AS petani FROM lahan l JOIN users u ON 
       <div class="admin-topbar d-flex align-items-center justify-content-between gap-3"><div class="admin-search"><span class="material-symbols-outlined">search</span><input class="form-control" placeholder="Cari data, petani, atau lahan..." /></div></div>
       <div class="topbar"><div><h1 class="page-title">Dashboard Administrator</h1><p class="page-kicker">Ringkasan operasional sistem AgroTrack hari ini.</p></div><a class="btn btn-primary" href="laporan.php">Export Data</a></div>
       <?php render_flash(); ?>
+      <?php render_page_help('Tugas utama admin', ['Pantau jumlah pengguna, luas polygon, biaya, dan hasil panen.', 'Kelola master tanaman dan katalog kebutuhan agar pilihan petani lengkap.', 'Gunakan laporan untuk rekap seluruh data dan generate PDF.'], 'Dashboard ini adalah pintu masuk untuk mengecek kesehatan data AgroTrack.', 'laporan.php', 'Buka Laporan'); ?>
       <section class="row g-3 mb-3">
         <div class="col-md-6 col-xl-3"><div class="stat-card admin-stat"><div><div class="stat-label">Total Pengguna</div><div class="stat-value"><?= e($summary['total_users']) ?></div></div></div></div>
         <div class="col-md-6 col-xl-3"><div class="stat-card admin-stat"><div><div class="stat-label">Total Lahan</div><div class="stat-value"><?= number_id($summary['total_luas_ha'], 2) ?> Ha</div></div></div></div>

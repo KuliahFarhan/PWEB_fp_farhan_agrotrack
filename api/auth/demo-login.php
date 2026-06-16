@@ -8,7 +8,7 @@ agrotrack_start_session();
 $body = agrotrack_request_body();
 $role = ($body['role'] ?? 'petani') === 'admin' ? 'admin' : 'petani';
 $name = $role === 'admin' ? 'Admin Root' : 'Budi Santoso';
-$email = $role === 'admin' ? 'admin@agrotrack.test' : 'petani@agrotrack.test';
+$email = $role === 'admin' ? 'admin@agrotrack.com' : 'petani@agrotrack.test';
 
 try {
     $db = agrotrack_db();

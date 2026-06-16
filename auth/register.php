@@ -37,7 +37,7 @@ if (request_method() === 'POST') {
       <section class="auth-visual"><img src="../assets/image/tanaman/corn-hero.png" alt="Petani di lahan jagung" /></section>
       <section class="auth-panel">
         <a class="auth-brand" href="../index.html"><img src="../assets/image/logo/logo_agrotrack.png" alt="Logo AgroTrack" /><span>AgroTrack</span></a>
-        <div class="auth-copy"><h1>Register</h1><p>Register publik otomatis dibuat sebagai petani.</p></div>
+        <div class="auth-copy"><h1>Register Petani</h1><p>Pendaftaran publik khusus untuk akun petani. Akun admin disiapkan oleh sistem.</p></div>
         <?php if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?>
         <form method="post" class="vstack gap-3">
           <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>" />
@@ -47,7 +47,9 @@ if (request_method() === 'POST') {
           <div><label class="form-label" for="password">Kata Sandi</label><input class="form-control" id="password" name="password" type="password" required minlength="8" /></div>
           <button class="btn auth-submit w-100" type="submit">Daftar</button>
         </form>
-        <a class="auth-outline-link" href="login.php">Sudah punya akun? Login disini</a>
+        <div class="auth-link-group">
+          <a class="auth-outline-link" href="login.php">Sudah punya akun? Login disini</a>
+        </div>
       </section>
     </main>
     <script src="../assets/js/app.js"></script>

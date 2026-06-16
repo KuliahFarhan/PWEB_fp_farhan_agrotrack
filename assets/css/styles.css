@@ -813,15 +813,26 @@ a {
   text-align: center;
 }
 
-.calendar-head strong {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 34px;
+.calendar-picker {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(82px, 0.8fr);
+  gap: 8px;
+}
+
+.calendar-picker .form-select {
+  min-height: 38px;
   border-radius: 8px;
   background: var(--agro-amber);
   color: #ffffff;
+  border-color: var(--agro-amber);
   font-size: 13px;
+  font-weight: 850;
+  text-align: center;
+}
+
+.calendar-picker .form-select:focus {
+  border-color: #d88b08;
+  box-shadow: 0 0 0 0.2rem rgba(245, 169, 31, 0.2);
 }
 
 .calendar-week,
@@ -936,6 +947,342 @@ a {
 .product-card small {
   color: var(--agro-muted);
   line-height: 1.45;
+}
+
+.katalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.katalog-shell {
+  display: grid;
+  grid-template-columns: 304px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+
+.katalog-sidebar {
+  position: sticky;
+  top: 18px;
+  display: grid;
+  gap: 12px;
+  max-height: calc(100vh - 48px);
+  padding: 12px;
+  border: 1px solid var(--agro-line);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+  overflow: auto;
+}
+
+.katalog-sidebar-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: #eff7f2;
+  color: var(--agro-primary);
+}
+
+.katalog-sidebar-head .material-symbols-outlined {
+  font-size: 28px;
+}
+
+.katalog-sidebar-head strong,
+.katalog-sidebar-head small {
+  display: block;
+}
+
+.katalog-sidebar-head small {
+  color: var(--agro-muted);
+  font-size: 12px;
+}
+
+.katalog-category-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.katalog-category-link {
+  display: grid;
+  grid-template-columns: 28px 30px minmax(0, 1fr) auto;
+  min-height: 46px;
+  align-items: center;
+  gap: 9px;
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--agro-ink);
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+}
+
+.katalog-category-link:hover,
+.katalog-category-link.active {
+  border-color: rgba(245, 169, 31, 0.58);
+  background: #f5a91f;
+  color: #073c2e;
+}
+
+.katalog-category-link .material-symbols-outlined {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #eff7f2;
+  color: var(--agro-primary);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.katalog-category-link:hover .material-symbols-outlined,
+.katalog-category-link.active .material-symbols-outlined {
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.katalog-category-index {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #f4f7fb;
+  color: var(--agro-muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.katalog-category-link:hover .katalog-category-index,
+.katalog-category-link.active .katalog-category-index {
+  background: #073c2e;
+  color: #ffffff;
+}
+
+.katalog-category-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.katalog-category-link strong {
+  min-width: 30px;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  font-size: 12px;
+}
+
+.katalog-content {
+  min-width: 0;
+}
+
+.katalog-focus-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.katalog-card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--agro-line);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+}
+
+.katalog-card > img {
+  width: 100%;
+  height: 168px;
+  object-fit: cover;
+  background: #eef3f1;
+}
+
+.katalog-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+}
+
+.katalog-card h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.katalog-card p {
+  margin: 0;
+  color: var(--agro-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.katalog-price {
+  color: var(--agro-primary);
+  font-size: 18px;
+  font-weight: 850;
+}
+
+.katalog-price small {
+  color: var(--agro-muted);
+  font-size: 12px;
+}
+
+.katalog-card details {
+  padding: 10px;
+  border: 1px solid var(--agro-line);
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.katalog-card summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.katalog-admin-form {
+  padding: 16px;
+}
+
+.katalog-admin-thumb {
+  width: 92px;
+  height: 76px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #eef3f1;
+}
+
+.katalog-admin-list {
+  display: grid;
+  gap: 10px;
+  max-height: 760px;
+  overflow: auto;
+  padding-right: 4px;
+}
+
+.katalog-admin-row {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid var(--agro-line);
+  border-radius: 8px;
+  color: var(--agro-ink);
+  text-decoration: none;
+  background: #ffffff;
+}
+
+.katalog-admin-row:hover,
+.katalog-admin-row.active {
+  border-color: rgba(245, 169, 31, 0.62);
+  background: #fff8ea;
+  color: var(--agro-ink);
+}
+
+.katalog-admin-row img {
+  width: 64px;
+  height: 54px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #eef3f1;
+}
+
+.katalog-admin-row strong,
+.katalog-admin-row small {
+  display: block;
+}
+
+.katalog-admin-row strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 850;
+}
+
+.katalog-admin-row small {
+  color: var(--agro-muted);
+  font-size: 12px;
+}
+
+.katalog-admin-row em {
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: #e9f7ef;
+  color: var(--agro-primary);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 850;
+}
+
+.katalog-editor-form .form-label {
+  font-weight: 700;
+}
+
+@media (max-width: 991.98px) {
+  .guide-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .guide-action {
+    justify-self: stretch;
+  }
+
+  .landing-flow,
+  .landing-system-map {
+    grid-template-columns: 1fr;
+  }
+
+  .system-node.primary {
+    grid-column: auto;
+  }
+
+  .landing-visual-stack {
+    min-height: auto;
+  }
+
+  .landing-visual-stack > img {
+    min-height: 280px;
+  }
+
+  .landing-data-card {
+    position: static;
+    width: 100%;
+    margin-top: 12px;
+  }
+
+  .katalog-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .katalog-sidebar {
+    position: static;
+  }
+
+  .katalog-category-list {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .katalog-category-link {
+    grid-template-columns: 28px 30px minmax(0, 1fr) auto;
+  }
 }
 
 .confirm-overlay {
@@ -1179,6 +1526,70 @@ a {
   white-space: pre-wrap;
 }
 
+.guide-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.4fr) auto;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 14px;
+  border: 1px solid #cfe8dc;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #f7fbf8, #eef8f2);
+}
+
+.guide-heading {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.guide-heading .material-symbols-outlined {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 auto;
+  border-radius: 8px;
+  background: #dff5e8;
+  color: var(--agro-primary);
+}
+
+.guide-heading strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--agro-ink);
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.guide-heading p {
+  margin: 0;
+  color: var(--agro-muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.guide-steps {
+  display: grid;
+  gap: 6px;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--agro-ink);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.guide-steps li::marker {
+  color: var(--agro-primary);
+  font-weight: 900;
+}
+
+.guide-action {
+  justify-self: end;
+  white-space: nowrap;
+}
+
 .hero {
   min-height: 92vh;
   display: flex;
@@ -1207,6 +1618,161 @@ a {
 
 .feature-band {
   padding: 72px 0;
+}
+
+.landing-flow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.landing-flow > div {
+  min-height: 154px;
+  padding: 16px;
+  border: 1px solid var(--agro-line);
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.landing-flow .material-symbols-outlined,
+.landing-data-card .material-symbols-outlined,
+.landing-note .material-symbols-outlined,
+.system-node .material-symbols-outlined {
+  color: var(--agro-primary);
+}
+
+.landing-flow .material-symbols-outlined {
+  margin-bottom: 14px;
+  font-size: 32px;
+}
+
+.landing-flow strong,
+.landing-flow small {
+  display: block;
+}
+
+.landing-flow strong {
+  margin-bottom: 6px;
+  color: var(--agro-ink);
+  font-size: 16px;
+  font-weight: 850;
+}
+
+.landing-flow small {
+  color: var(--agro-muted);
+  line-height: 1.55;
+}
+
+.landing-visual-stack {
+  position: relative;
+  min-height: 440px;
+}
+
+.landing-visual-stack > img {
+  width: 100%;
+  min-height: 380px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 24px 70px rgba(16, 24, 40, 0.18);
+}
+
+.landing-data-card {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  width: min(88%, 360px);
+  padding: 16px;
+  border: 1px solid rgba(207, 232, 220, 0.9);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 46px rgba(16, 24, 40, 0.18);
+  backdrop-filter: blur(12px);
+}
+
+.landing-data-card h3 {
+  margin: 7px 0 0;
+  color: var(--agro-ink);
+  font-size: 20px;
+  font-weight: 850;
+}
+
+.landing-progress-list {
+  display: grid;
+  gap: 8px;
+}
+
+.landing-progress-list div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 9px 0;
+  border-top: 1px solid var(--agro-line);
+}
+
+.landing-progress-list span {
+  color: var(--agro-muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.landing-progress-list strong {
+  color: var(--agro-primary);
+  font-size: 13px;
+}
+
+.landing-system-map {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 18px;
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(16, 63, 49, 0.92), rgba(0, 87, 63, 0.78)),
+    url("../image/tanaman/farm-landscape.jpg") center / cover;
+}
+
+.system-node {
+  display: grid;
+  min-height: 118px;
+  place-items: center;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  text-align: center;
+}
+
+.system-node.primary {
+  grid-column: span 2;
+  background: #ffad2f;
+}
+
+.system-node.primary .material-symbols-outlined {
+  color: #073c2e;
+}
+
+.system-node strong {
+  color: var(--agro-ink);
+  font-weight: 850;
+}
+
+.landing-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin: 20px 0;
+  padding: 14px;
+  border: 1px solid #cfe8dc;
+  border-radius: 8px;
+  background: #f4fbf7;
+}
+
+.landing-note p {
+  margin: 0;
+  color: var(--agro-muted);
+  line-height: 1.6;
 }
 
 .landing-footer {
@@ -1380,7 +1946,7 @@ a {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 46px 48px;
   background: #103f31;
   color: #ffffff;
@@ -1519,9 +2085,15 @@ a {
   color: #ffffff;
 }
 
+.auth-link-group {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
 .auth-outline-link {
   width: 100%;
-  margin-top: 16px;
+  margin-top: 0;
   border: 1px solid rgba(255, 255, 255, 0.82);
 }
 
@@ -1531,7 +2103,6 @@ a {
 }
 
 .auth-muted-link {
-  margin-top: 14px;
   font-size: 12px;
   font-weight: 700;
 }

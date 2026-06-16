@@ -62,6 +62,7 @@ $rows = db()->query('SELECT * FROM tanaman ORDER BY status ASC, nama ASC')->fetc
     <main class="app-main">
       <div class="topbar"><div><h1 class="page-title">Data Tanaman</h1><p class="page-kicker">CRUD master tanaman untuk lahan dan musim tanam.</p></div></div>
       <?php render_flash(); if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?>
+      <?php render_page_help('Fungsi master tanaman', ['Tanaman aktif akan muncul di form Lahan dan Musim Tanam petani.', 'Masa panen dipakai untuk menghitung estimasi tanggal panen.', 'Nonaktifkan tanaman jika tidak ingin dipilih lagi tanpa menghapus riwayat lama.'], 'Pastikan nama, kategori, gambar, dan masa panen sesuai referensi katalog.', 'katalog-kebutuhan.php', 'Cek Katalog'); ?>
       <section class="row g-3">
         <div class="col-xl-4">
           <div class="panel h-100">

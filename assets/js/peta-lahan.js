@@ -11,6 +11,7 @@
     areaMeter: 0,
     center: null,
     selectedLahan: null,
+    hasLahan: false,
   };
 
   const el = {
@@ -52,7 +53,8 @@
     el.centerLat.textContent = state.center ? state.center.lat.toFixed(7) : "-";
     el.centerLng.textContent = state.center ? state.center.lng.toFixed(7) : "-";
     el.preview.textContent = state.polygonGeometry ? JSON.stringify(state.polygonGeometry.coordinates, null, 2) : "Belum ada polygon.";
-    el.save.disabled = !state.polygonGeometry || state.areaMeter <= 0;
+    el.save.disabled = !state.hasLahan || !state.polygonGeometry || state.areaMeter <= 0;
+    el.reset.disabled = !state.hasLahan;
   }
 
   function clearMapLayers() {
@@ -148,13 +150,23 @@
     try {
       const payload = await requestJson(apiUrl);
       const rows = payload.data || [];
-      el.select.innerHTML = rows
-        .map((row) => `<option value="${row.id}">${escapeHtml(row.nama_lahan)} - ${escapeHtml(row.komoditas || "Tanpa komoditas")}</option>`)
-        .join("");
+      state.hasLahan = rows.length > 0;
 
       if (rows.length > 0) {
+        const requestedLahan = new URLSearchParams(window.location.search).get("lahan_id");
+        el.select.disabled = false;
+        el.select.innerHTML = rows
+          .map((row) => `<option value="${row.id}">${escapeHtml(row.nama_lahan)} - ${escapeHtml(row.komoditas || "Tanpa komoditas")}</option>`)
+          .join("");
+        if (requestedLahan && rows.some((row) => String(row.id) === requestedLahan)) {
+          el.select.value = requestedLahan;
+        }
         await loadSelectedPolygon();
       } else {
+        el.select.disabled = true;
+        el.select.innerHTML = '<option value="">Belum ada lahan. Tambahkan di menu Data Lahan.</option>';
+        el.hint.textContent = "Buat data lahan terlebih dahulu, lalu kembali ke peta untuk menggambar dan menyimpan polygon.";
+        updateMetrics();
         toast("Belum ada data lahan untuk akun ini.", "error");
       }
     } catch (error) {
@@ -191,12 +203,17 @@
       toast("Gambar polygon lahan terlebih dahulu.", "error");
       return;
     }
+    const lahanId = Number(el.select.value);
+    if (!state.hasLahan || !lahanId) {
+      toast("Pilih atau tambahkan data lahan dulu sebelum menyimpan polygon.", "error");
+      return;
+    }
 
     try {
       const payload = await requestJson(apiUrl, {
         method: "POST",
         body: JSON.stringify({
-          lahan_id: Number(el.select.value),
+          lahan_id: lahanId,
           latitude: state.center.lat,
           longitude: state.center.lng,
           polygon_area: state.polygonGeometry,

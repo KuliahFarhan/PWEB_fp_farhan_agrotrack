@@ -1,0 +1,10 @@
+Options -Indexes
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+</IfModule>
+
+<FilesMatch "\.(env|md|sql|log|lock|yml|yaml|json)$">
+  Require all denied
+</FilesMatch>

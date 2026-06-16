@@ -43,16 +43,18 @@ if (request_method() === 'POST') {
     <main class="auth-split auth-split-login">
       <section class="auth-panel" aria-label="Form login AgroTrack">
         <a class="auth-brand" href="../index.html"><img src="../assets/image/logo/logo_agrotrack.png" alt="Logo AgroTrack" /><span>AgroTrack</span></a>
-        <div class="auth-copy"><h1>Login</h1><p>Masuk memakai akun database AgroTrack.</p></div>
+        <div class="auth-copy"><h1>Login</h1><p>Masuk sebagai petani atau admin AgroTrack.</p></div>
         <?php if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?>
         <form method="post" class="vstack gap-3">
           <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>" />
-          <div><label class="form-label" for="email">Alamat Email</label><input class="form-control" id="email" name="email" type="email" value="<?= e($_POST['email'] ?? 'petani@agrotrack.test') ?>" required /></div>
-          <div><label class="form-label" for="password">Kata Sandi</label><input class="form-control" id="password" name="password" type="password" value="password" required /></div>
+          <div><label class="form-label" for="email">Alamat Email</label><input class="form-control" id="email" name="email" type="email" value="<?= e($_POST['email'] ?? '') ?>" placeholder="petani@email.com atau admin@agrotrack.com" required /></div>
+          <div><label class="form-label" for="password">Kata Sandi</label><input class="form-control" id="password" name="password" type="password" required /></div>
           <button class="btn auth-submit w-100" type="submit">Masuk</button>
         </form>
-        <a class="auth-outline-link" href="register.php">Belum punya akun? Daftar disini</a>
-        <a class="auth-muted-link" href="forgot-password.html">Lupa Sandi?</a>
+        <div class="auth-link-group">
+          <a class="auth-outline-link" href="register.php">Belum punya akun? Daftar sebagai petani</a>
+          <a class="auth-muted-link" href="forgot-password.html">Lupa Sandi?</a>
+        </div>
       </section>
       <section class="auth-visual"><img src="../assets/image/tanaman/auth-illustration.png" alt="Petani di area tanaman" /></section>
     </main>

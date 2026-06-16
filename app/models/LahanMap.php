@@ -40,7 +40,8 @@ final class LahanMap
              SET latitude = :latitude,
                  longitude = :longitude,
                  polygon_area = :polygon_area,
-                 luas_lahan = :luas_lahan
+                 luas_lahan = :luas_lahan,
+                 luas = :luas
              WHERE id = :id AND user_id = :user_id'
         );
 
@@ -49,6 +50,7 @@ final class LahanMap
             'longitude' => $data['longitude'],
             'polygon_area' => $data['polygon_area'],
             'luas_lahan' => $data['luas_lahan'],
+            'luas' => round(((float) $data['luas_lahan']) / 10000, 4),
             'id' => $lahanId,
             'user_id' => $userId,
         ]);

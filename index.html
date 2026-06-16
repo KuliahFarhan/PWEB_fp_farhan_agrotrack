@@ -82,48 +82,33 @@
 
       <section class="feature-band bg-white" id="solusi">
         <div class="container">
-          <div class="row g-4">
+          <div class="row g-4 align-items-center">
             <div class="col-lg-6">
-              <div class="panel h-100">
-                <h2 class="fw-bold mb-3">Ringkas, konsisten, siap dikembangkan.</h2>
-                <div class="mini-chart" aria-label="Ilustrasi grafik performa">
-                  <span style="height: 42%"></span>
-                  <span style="height: 55%"></span>
-                  <span style="height: 48%"></span>
-                  <span style="height: 70%"></span>
-                  <span style="height: 76%"></span>
-                  <span style="height: 88%"></span>
-                </div>
+              <h2 class="fw-bold mb-3">Solusi yang mengikuti alur kerja petani, bukan sekadar tabel.</h2>
+              <p class="text-secondary mb-4">AgroTrack membantu pengguna awam bergerak dari data dasar sampai laporan akhir dengan urutan yang jelas. Petani cukup mengisi lahan, menggambar polygon, membuat musim tanam, mencatat biaya dari katalog 14 kategori, lalu memasukkan hasil panen.</p>
+              <div class="landing-flow">
+                <div><span class="material-symbols-outlined">person_add</span><strong>Register Petani</strong><small>Daftar publik selalu menjadi akun petani.</small></div>
+                <div><span class="material-symbols-outlined">map</span><strong>Polygon Lahan</strong><small>Leaflet menghitung luas otomatis dari batas lahan.</small></div>
+                <div><span class="material-symbols-outlined">inventory_2</span><strong>Katalog Biaya</strong><small>14 kategori kebutuhan dari benih sampai risiko.</small></div>
+                <div><span class="material-symbols-outlined">analytics</span><strong>Analisis Profit</strong><small>Biaya dan panen diringkas menjadi profit.</small></div>
               </div>
             </div>
             <div class="col-lg-6">
-              <div class="row g-3">
-                <div class="col-sm-6">
-                  <div class="stat-card">
-                    <div class="stat-label">Total Lahan</div>
-                    <div class="stat-value">12.8 Ha</div>
-                    <div class="stat-note">Dari contoh data lama</div>
+              <div class="landing-visual-stack">
+                <img src="assets/image/tanaman/digital-farming-preview.png" alt="Visual pertanian digital AgroTrack" />
+                <div class="landing-data-card">
+                  <div class="d-flex align-items-center justify-content-between gap-3 mb-3">
+                    <div>
+                      <span class="asset-tag">Alur Aktif</span>
+                      <h3>Musim Padi 2026</h3>
+                    </div>
+                    <span class="material-symbols-outlined">verified</span>
                   </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="stat-card">
-                    <div class="stat-label">Profit Musim</div>
-                    <div class="stat-value">Rp85.7M</div>
-                    <div class="stat-note">Ringkasan analisis</div>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="stat-card">
-                    <div class="stat-label">Panen Tercatat</div>
-                    <div class="stat-value">18.4 ton</div>
-                    <div class="stat-note">Gabah kering panen</div>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="stat-card">
-                    <div class="stat-label">Pengguna Aktif</div>
-                    <div class="stat-value">128</div>
-                    <div class="stat-note">Dashboard admin</div>
+                  <div class="landing-progress-list">
+                    <div><span>Data lahan</span><strong>Siap</strong></div>
+                    <div><span>Polygon</span><strong>3.0272 Ha</strong></div>
+                    <div><span>Biaya tercatat</span><strong>14 kategori</strong></div>
+                    <div><span>Laporan admin</span><strong>PDF</strong></div>
                   </div>
                 </div>
               </div>
@@ -134,20 +119,29 @@
 
       <section class="feature-band" id="tentang">
         <div class="container">
-          <div class="row justify-content-between g-4">
-            <div class="col-lg-7">
-              <h2 class="fw-bold">Dibuat dari referensi kode lama, bukan mulai kosong.</h2>
-              <p class="text-secondary">
-                Nama modul, alur petani/admin, metrik biaya, hasil panen, musim tanam, monitoring lahan, dan data pengguna tetap dipakai. Bedanya, struktur baru mengurangi duplikasi dan membuat link antarhalaman benar-benar jalan.
-              </p>
+          <div class="row justify-content-between g-4 align-items-center">
+            <div class="col-lg-6">
+              <div class="landing-system-map">
+                <div class="system-node primary"><span class="material-symbols-outlined">dashboard</span><strong>Dashboard</strong></div>
+                <div class="system-node"><span class="material-symbols-outlined">agriculture</span><strong>Lahan</strong></div>
+                <div class="system-node"><span class="material-symbols-outlined">calendar_today</span><strong>Musim</strong></div>
+                <div class="system-node"><span class="material-symbols-outlined">payments</span><strong>Biaya</strong></div>
+                <div class="system-node"><span class="material-symbols-outlined">receipt_long</span><strong>Panen</strong></div>
+                <div class="system-node"><span class="material-symbols-outlined">admin_panel_settings</span><strong>Admin</strong></div>
+              </div>
             </div>
-            <div class="col-lg-4">
-              <div class="panel">
-                <h3 class="section-title">Akses cepat</h3>
-                <div class="d-grid gap-2">
-                  <a class="btn btn-primary" href="pages/admin/dashboard.php">Demo Admin</a>
-                  <a class="btn btn-outline-primary" href="pages/petani/dashboard.php">Demo Petani</a>
-                </div>
+            <div class="col-lg-5">
+              <h2 class="fw-bold">Dibuat sesuai struktur AgroTrack yang berjalan.</h2>
+              <p class="text-secondary">
+                Landing ini mencerminkan fitur yang benar-benar ada di kode: login role admin/petani, register khusus petani, CRUD lahan dan tanaman, peta Leaflet, katalog operasional, biaya produksi, hasil panen, laporan PDF, dan profil pengguna.
+              </p>
+              <div class="landing-note">
+                <span class="material-symbols-outlined">info</span>
+                <p>Admin disiapkan oleh sistem. Pendaftaran publik hanya membuat akun petani agar hak akses tidak tercampur.</p>
+              </div>
+              <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-primary" href="auth/login.php">Masuk ke Sistem</a>
+                <a class="btn btn-outline-primary" href="auth/register.php">Daftar Petani</a>
               </div>
             </div>
           </div>
