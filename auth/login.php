@@ -54,6 +54,7 @@ if (request_method() === 'POST') {
         <div class="auth-link-group">
           <a class="auth-outline-link" href="register.php">Belum punya akun? Daftar sebagai petani</a>
           <a class="auth-muted-link" href="forgot-password.html">Lupa Sandi?</a>
+          <a class="auth-muted-link" href="../index.html"><span class="material-symbols-outlined">arrow_back</span><span>Kembali ke Landing Page</span></a>
         </div>
       </section>
       <section class="auth-visual"><img src="../assets/image/tanaman/auth-illustration.png" alt="Petani di area tanaman" /></section>

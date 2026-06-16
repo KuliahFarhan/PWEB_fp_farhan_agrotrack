@@ -155,3 +155,43 @@ function status_label(string $status): string
 {
     return ucwords(str_replace('_', ' ', $status));
 }
+
+function save_uploaded_profile_photo(string $field, string $fallback = 'assets/image/profil/farmer-profile.jpg'): string
+{
+    if (empty($_FILES[$field]) || !is_array($_FILES[$field]) || (int) ($_FILES[$field]['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+        return $fallback;
+    }
+
+    $file = $_FILES[$field];
+    if ((int) ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+        throw new RuntimeException('Upload foto profil gagal.');
+    }
+
+    $tmp = (string) ($file['tmp_name'] ?? '');
+    if ($tmp === '' || !is_uploaded_file($tmp)) {
+        throw new RuntimeException('File foto profil tidak valid.');
+    }
+
+    $mime = mime_content_type($tmp) ?: '';
+    $extByMime = [
+        'image/jpeg' => 'jpg',
+        'image/png' => 'png',
+        'image/webp' => 'webp',
+    ];
+    if (!isset($extByMime[$mime])) {
+        throw new RuntimeException('Foto profil harus berupa JPG, PNG, atau WEBP.');
+    }
+
+    $uploadDir = dirname(__DIR__, 2) . '/assets/uploads/profile';
+    if (!is_dir($uploadDir) && !mkdir($uploadDir, 0775, true) && !is_dir($uploadDir)) {
+        throw new RuntimeException('Folder upload foto profil tidak dapat dibuat.');
+    }
+
+    $filename = 'profile-' . date('Ymd-His') . '-' . bin2hex(random_bytes(4)) . '.' . $extByMime[$mime];
+    $target = $uploadDir . '/' . $filename;
+    if (!move_uploaded_file($tmp, $target)) {
+        throw new RuntimeException('Foto profil gagal disimpan.');
+    }
+
+    return 'assets/uploads/profile/' . $filename;
+}

@@ -5,19 +5,11 @@ require_once __DIR__ . '/../../app/core/layout.php';
 
 $user = require_login('admin');
 $error = null;
-$profilePhotos = array_map(
-    static fn(string $path) => 'assets/image/profil/' . basename($path),
-    glob(__DIR__ . '/../../assets/image/profil/*.{jpg,jpeg,png,webp}', GLOB_BRACE) ?: []
-);
-sort($profilePhotos);
 
 if (request_method() === 'POST') {
     try {
         verify_csrf();
-        $photo = post_string('profile_photo', 255);
-        if (!in_array($photo, $profilePhotos, true)) {
-            $photo = 'assets/image/profil/foto_profil_6.jpg';
-        }
+        $photo = save_uploaded_profile_photo('profile_photo_file', (string) ($user['profile_photo'] ?: 'assets/image/profil/foto_profil_6.jpg'));
         $stmt = db()->prepare('UPDATE users SET name=?, phone=?, address=?, division=?, bio=?, profile_photo=? WHERE id=? AND role="admin"');
         $stmt->execute([
             post_string('name', 120),
@@ -43,22 +35,18 @@ $user = current_user();
 <?php render_sidebar($user, 'profil'); ?>
 <main class="app-main">
   <div class="topbar"><div><h1 class="page-title">Profil Admin</h1><p class="page-kicker">Email tidak dapat diedit.</p></div></div>
-  <?php render_flash(); if($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?>
-  <?php render_page_help('Mengatur profil admin', ['Pilih foto profil dari aset yang tersedia.', 'Perbarui nama, nomor handphone, divisi, alamat kantor, dan bio.', 'Klik Update Profil untuk menyimpan perubahan.'], 'Email dikunci karena dipakai sebagai identitas login.', 'dashboard.php', 'Kembali Dashboard'); ?>
+  <?php render_flash(); if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?>
+  <?php render_page_help('Mengatur profil admin', ['Upload foto profil jika ingin mengganti gambar.', 'Perbarui nama, nomor handphone, divisi, alamat kantor, dan bio.', 'Klik Update Profil untuk menyimpan perubahan.'], 'Email dikunci karena dipakai sebagai identitas login.', 'dashboard.php', 'Kembali Dashboard'); ?>
   <section class="panel profile-panel">
-    <form method="post" class="vstack gap-3">
+    <form method="post" enctype="multipart/form-data" class="vstack gap-3">
       <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>" />
-      <div class="profile-photo-editor"><img src="../../<?= e($user['profile_photo'] ?: 'assets/image/profil/foto_profil_6.jpg') ?>" alt="Foto admin" /></div>
+      <div class="profile-photo-editor">
+        <img id="adminProfilePreview" src="../../<?= e($user['profile_photo'] ?: 'assets/image/profil/foto_profil_6.jpg') ?>" alt="Foto admin" />
+      </div>
       <div>
-        <label class="form-label fw-semibold">Pilih Foto Profil</label>
-        <div class="profile-photo-grid">
-          <?php foreach ($profilePhotos as $photo): ?>
-            <label class="profile-photo-option <?= ($user['profile_photo'] ?: 'assets/image/profil/foto_profil_6.jpg') === $photo ? 'active' : '' ?>">
-              <input type="radio" name="profile_photo" value="<?= e($photo) ?>" <?= option_selected($user['profile_photo'] ?: 'assets/image/profil/foto_profil_6.jpg', $photo) ?> />
-              <img src="../../<?= e($photo) ?>" alt="Pilihan foto profil" />
-            </label>
-          <?php endforeach; ?>
-        </div>
+        <label class="form-label fw-semibold">Upload Foto Profil</label>
+        <input class="form-control" id="adminProfilePhotoInput" name="profile_photo_file" type="file" accept=".jpg,.jpeg,.png,.webp" />
+        <small class="text-secondary">Format yang didukung: JPG, PNG, WEBP.</small>
       </div>
       <div class="row g-3">
         <div class="col-md-6"><label class="form-label fw-semibold">Nama</label><input class="form-control" name="name" value="<?= e($user['name']) ?>" /></div>

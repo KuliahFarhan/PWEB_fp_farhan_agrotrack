@@ -49,6 +49,7 @@ if (request_method() === 'POST') {
         </form>
         <div class="auth-link-group">
           <a class="auth-outline-link" href="login.php">Sudah punya akun? Login disini</a>
+          <a class="auth-muted-link" href="../index.html"><span class="material-symbols-outlined">arrow_back</span><span>Kembali ke Landing Page</span></a>
         </div>
       </section>
     </main>

@@ -84,13 +84,15 @@ if (request_method() === 'POST') {
 }
 
 $stmt = db()->prepare(
-    'SELECT tanggal, kode_musim, kategori, nama_item AS deskripsi, jumlah, satuan, harga_satuan, total_biaya, sumber
+    'SELECT tanggal, kode_musim, kategori, subkategori, nama_item AS deskripsi, jumlah, satuan, harga_satuan, total_biaya, sumber, katalog_kode, image_path
      FROM (
-       SELECT bo.tanggal, mt.kode_musim, bo.kategori, bo.nama_item, bo.jumlah, bo.satuan, bo.harga_satuan, bo.total_biaya, "Operasional" AS sumber
-       FROM biaya_operasional bo LEFT JOIN musim_tanam mt ON mt.id = bo.musim_tanam_id
+       SELECT bo.tanggal, mt.kode_musim, bo.kategori, bo.subkategori, bo.nama_item, bo.jumlah, bo.satuan, bo.harga_satuan, bo.total_biaya, "Operasional" AS sumber, ki.kode AS katalog_kode, ki.image_path
+       FROM biaya_operasional bo
+       LEFT JOIN musim_tanam mt ON mt.id = bo.musim_tanam_id
+       LEFT JOIN katalog_items ki ON ki.id = bo.katalog_item_id
        WHERE bo.user_id = ?
        UNION ALL
-       SELECT b.tanggal, mt.kode_musim, b.kategori, b.deskripsi AS nama_item, b.jumlah, b.satuan, b.harga_satuan, b.total_biaya, "Legacy" AS sumber
+       SELECT b.tanggal, mt.kode_musim, b.kategori, NULL AS subkategori, b.deskripsi AS nama_item, b.jumlah, b.satuan, b.harga_satuan, b.total_biaya, "Legacy" AS sumber, NULL AS katalog_kode, NULL AS image_path
        FROM biaya_produksi b LEFT JOIN musim_tanam mt ON mt.id = b.musim_tanam_id
        WHERE b.user_id = ?
      ) rows_all
@@ -170,11 +172,27 @@ $defaultSatuan = $selectedItem ? ($selectedItem['satuan_default'] ?: 'unit') : '
             <thead><tr><th>Tanggal</th><th>Musim</th><th>Kategori</th><th>Item</th><th>Qty</th><th>Total</th><th>Sumber</th></tr></thead>
             <tbody>
               <?php foreach ($rows as $r): ?>
+                <?php
+                  $thumb = katalog_asset_path([
+                      'kategori' => $r['kategori'],
+                      'kode' => $r['katalog_kode'] ?? '',
+                      'image_path' => $r['image_path'] ?? '',
+                  ]);
+                ?>
                 <tr>
                   <td><?= e($r['tanggal']) ?></td>
                   <td><?= e($r['kode_musim']) ?></td>
                   <td><?= e(status_label($r['kategori'])) ?></td>
-                  <td><?= e($r['deskripsi']) ?></td>
+                  <td>
+                    <div class="history-item">
+                      <img class="history-thumb" src="../../<?= e($thumb) ?>" alt="<?= e($r['deskripsi']) ?>" />
+                      <div class="history-copy">
+                        <strong><?= e($r['deskripsi']) ?></strong>
+                        <small><?= e($r['subkategori'] ?: 'Kebutuhan operasional lapangan') ?></small>
+                        <small>Harga acuan: <?= money_id((float) $r['harga_satuan']) ?> / <?= e($r['satuan']) ?></small>
+                      </div>
+                    </div>
+                  </td>
                   <td><?= number_id($r['jumlah'], 2) ?> <?= e($r['satuan']) ?></td>
                   <td><?= money_id($r['total_biaya']) ?></td>
                   <td><span class="asset-tag"><?= e($r['sumber']) ?></span></td>

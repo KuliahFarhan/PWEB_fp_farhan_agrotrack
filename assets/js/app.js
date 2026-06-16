@@ -92,8 +92,53 @@
   }
 
   function bindSidebarToggle() {
+    const updateSidebarToggleState = () => {
+      const collapsed = document.body.classList.contains("sidebar-collapsed");
+      const open = document.body.classList.contains("sidebar-open");
+      document.querySelectorAll("[data-sidebar-toggle]").forEach((node) => {
+        const icon = node.querySelector(".material-symbols-outlined");
+        if (!icon) return;
+        if (window.innerWidth <= 991) {
+          icon.textContent = open ? "close" : "menu";
+          node.setAttribute("aria-label", open ? "Tutup sidebar" : "Buka sidebar");
+          return;
+        }
+        icon.textContent = collapsed ? "left_panel_open" : "left_panel_close";
+        node.setAttribute("aria-label", collapsed ? "Buka sidebar" : "Tutup sidebar");
+      });
+    };
+
     document.querySelectorAll("[data-sidebar-toggle], .sidebar-backdrop").forEach((node) => {
-      node.addEventListener("click", () => document.body.classList.toggle("sidebar-open"));
+      node.addEventListener("click", () => {
+        if (window.innerWidth <= 991) {
+          document.body.classList.toggle("sidebar-open");
+          updateSidebarToggleState();
+          return;
+        }
+        document.body.classList.toggle("sidebar-collapsed");
+        updateSidebarToggleState();
+      });
+    });
+
+    window.addEventListener("resize", updateSidebarToggleState);
+    updateSidebarToggleState();
+  }
+
+  function bindAvatarPreview() {
+    const pairs = [
+      ["adminProfilePhotoInput", "adminProfilePreview"],
+      ["petaniProfilePhotoInput", "petaniProfilePreview"],
+    ];
+    pairs.forEach(([inputId, previewId]) => {
+      const input = byId(inputId);
+      const preview = byId(previewId);
+      if (!input || !preview) return;
+      input.addEventListener("change", () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+        preview.src = URL.createObjectURL(file);
+        toast("Preview foto profil diperbarui.");
+      });
     });
   }
 
@@ -320,5 +365,6 @@
   bindSelectableAssets();
   bindProductPicker();
   bindProfileForms();
+  bindAvatarPreview();
   stampDate();
 })();

@@ -91,6 +91,7 @@ a {
   display: flex;
   flex-direction: column;
   padding: 24px 16px;
+  transition: transform 0.2s ease;
 }
 
 .brand-mark {
@@ -118,6 +119,12 @@ a {
   gap: 6px;
   margin-top: 28px;
   overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 
 .sidebar-link {
@@ -173,6 +180,15 @@ a {
   min-height: 100vh;
   margin-left: 280px;
   padding: 24px;
+  transition: margin-left 0.2s ease;
+}
+
+body.sidebar-collapsed .app-sidebar {
+  transform: translateX(-100%);
+}
+
+body.sidebar-collapsed .app-main {
+  margin-left: 0;
 }
 
 .topbar {
@@ -734,6 +750,52 @@ a {
   border-radius: 8px;
   object-fit: cover;
   background: #eef3f1;
+}
+
+.input-with-preview strong,
+.input-with-preview p {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.history-item {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-width: 240px;
+}
+
+.history-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  object-fit: cover;
+  background: #eef3f1;
+  border: 1px solid var(--agro-line);
+}
+
+.history-copy {
+  min-width: 0;
+}
+
+.history-copy strong,
+.history-copy small {
+  display: block;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.history-copy strong {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.history-copy small {
+  margin-top: 4px;
+  color: var(--agro-muted);
+  font-size: 12px;
+  line-height: 1.45;
 }
 
 .crop-strip {
@@ -1392,6 +1454,52 @@ a {
   background: rgba(255, 255, 255, 0.9);
   font-size: 12px;
   font-weight: 800;
+}
+
+.harvest-hero-panel h2 {
+  font-size: 28px;
+  font-weight: 850;
+}
+
+.harvest-hero-panel p {
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.harvest-highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  width: 100%;
+}
+
+.harvest-highlight-card {
+  padding: 12px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(8px);
+}
+
+.harvest-highlight-card small,
+.harvest-highlight-card strong {
+  display: block;
+}
+
+.harvest-highlight-card small {
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 12px;
+}
+
+.harvest-highlight-card strong {
+  margin-top: 6px;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 850;
+}
+
+.auth-link-group .auth-muted-link {
+  gap: 8px;
 }
 
 .input-icon {
@@ -2209,6 +2317,16 @@ a {
     transition: transform 0.2s ease;
   }
 
+  .history-item {
+    min-width: 200px;
+    grid-template-columns: 48px minmax(0, 1fr);
+  }
+
+  .history-thumb {
+    width: 48px;
+    height: 48px;
+  }
+
   body.sidebar-open .app-sidebar {
     transform: translateX(0);
   }
@@ -2240,6 +2358,10 @@ a {
   }
 
   .map-action-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .harvest-highlight-grid {
     grid-template-columns: 1fr;
   }
 
