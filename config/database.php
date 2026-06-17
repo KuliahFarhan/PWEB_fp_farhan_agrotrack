@@ -21,13 +21,25 @@ function agrotrack_db(): PDO
     $name = getenv('AGROTRACK_DB_NAME') ?: getenv('DB_DATABASE') ?: 'agrotrack';
     $user = getenv('AGROTRACK_DB_USER') ?: getenv('DB_USERNAME') ?: 'root';
     $pass = getenv('AGROTRACK_DB_PASS') ?: getenv('DB_PASSWORD') ?: '';
+    $timeout = (int) (getenv('AGROTRACK_DB_TIMEOUT') ?: getenv('DB_TIMEOUT') ?: 3);
+    $timeout = max(1, min(30, $timeout));
 
     $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
-    $pdo = new PDO($dsn, $user, $pass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-        PDO::ATTR_EMULATE_PREPARES => false,
-    ]);
+    try {
+        $pdo = new PDO($dsn, $user, $pass, [
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES => false,
+            PDO::ATTR_TIMEOUT => $timeout,
+        ]);
+    } catch (PDOException $exception) {
+        throw new RuntimeException(
+            "Koneksi database gagal ke {$host}:{$port}/{$name} sebagai {$user}. " .
+            "Pastikan MySQL aktif dan konfigurasi .env sudah benar.",
+            0,
+            $exception
+        );
+    }
 
     return $pdo;
 }

@@ -57,15 +57,15 @@ function render_sidebar(array $user, string $active, string $base = '../../'): v
 
 function render_head(string $title, string $base = '../../', array $extraCss = []): void
 {
+    $bootstrapFile = dirname(__DIR__, 2) . '/assets/Bootstrap/css/bootstrap.min.css';
+    $bootstrapVersion = is_file($bootstrapFile) ? (string) filemtime($bootstrapFile) : '1';
     $cssFile = dirname(__DIR__, 2) . '/assets/css/styles.css';
     $cssVersion = is_file($cssFile) ? (string) filemtime($cssFile) : '1';
     ?>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title><?= e($title) ?></title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link href="<?= e($base) ?>assets/Bootstrap/css/bootstrap.min.css?v=<?= e($bootstrapVersion) ?>" rel="stylesheet" />
     <?php foreach ($extraCss as $href): ?><link href="<?= e($href) ?>" rel="stylesheet" /><?php endforeach; ?>
     <link href="<?= e($base) ?>assets/css/styles.css?v=<?= e($cssVersion) ?>" rel="stylesheet" />
     <?php
