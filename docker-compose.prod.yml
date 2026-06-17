@@ -1,19 +1,22 @@
 services:
   app:
     build: .
+    restart: unless-stopped
     ports:
-      - "${APP_PORT:-8090}:80"
+      - "127.0.0.1:${APP_PORT:-8090}:80"
+    env_file:
+      - .env.production
     environment:
-      DB_HOST: mysql
-      DB_PORT: 3306
+      DB_HOST: ${DB_HOST:-mysql}
+      DB_PORT: ${DB_PORT:-3306}
       DB_DATABASE: ${DB_DATABASE:-agrotrack}
-      DB_USERNAME: ${DB_USERNAME:-agrotrack}
-      DB_PASSWORD: ${DB_PASSWORD:-agrotrack_password}
-      AGROTRACK_DB_HOST: mysql
-      AGROTRACK_DB_PORT: 3306
+      DB_USERNAME: ${DB_USERNAME:-agrotrack_user}
+      DB_PASSWORD: ${DB_PASSWORD:-CHANGE_ME_STRONG_PASSWORD}
+      AGROTRACK_DB_HOST: ${DB_HOST:-mysql}
+      AGROTRACK_DB_PORT: ${DB_PORT:-3306}
       AGROTRACK_DB_NAME: ${DB_DATABASE:-agrotrack}
-      AGROTRACK_DB_USER: ${DB_USERNAME:-agrotrack}
-      AGROTRACK_DB_PASS: ${DB_PASSWORD:-agrotrack_password}
+      AGROTRACK_DB_USER: ${DB_USERNAME:-agrotrack_user}
+      AGROTRACK_DB_PASS: ${DB_PASSWORD:-CHANGE_ME_STRONG_PASSWORD}
     depends_on:
       mysql:
         condition: service_healthy
@@ -24,20 +27,23 @@ services:
 
   mysql:
     image: mysql:8.0
-    ports:
-      - "${DB_FORWARD_PORT:-3307}:3306"
+    restart: unless-stopped
+    env_file:
+      - .env.production
     environment:
       MYSQL_DATABASE: ${DB_DATABASE:-agrotrack}
-      MYSQL_USER: ${DB_USERNAME:-agrotrack}
-      MYSQL_PASSWORD: ${DB_PASSWORD:-agrotrack_password}
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_password}
+      MYSQL_USER: ${DB_USERNAME:-agrotrack_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-CHANGE_ME_STRONG_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-CHANGE_ME_STRONG_ROOT_PASSWORD}
+    expose:
+      - "3306"
     volumes:
       - mysql_data:/var/lib/mysql
       - ./database/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
       - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
       - ./database/seeds/030_farhan_dummy_clean.sql:/docker-entrypoint-initdb.d/30_farhan_dummy_clean.sql:ro
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DB_ROOT_PASSWORD:-root_password}"]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DB_ROOT_PASSWORD:-CHANGE_ME_STRONG_ROOT_PASSWORD}"]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -46,8 +52,11 @@ services:
 
   phpmyadmin:
     image: phpmyadmin:5.2
+    restart: unless-stopped
+    env_file:
+      - .env.production
     ports:
-      - "${PHPMYADMIN_PORT:-8081}:80"
+      - "127.0.0.1:${PHPMYADMIN_PORT:-8081}:80"
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306

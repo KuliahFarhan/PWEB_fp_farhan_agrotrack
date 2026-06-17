@@ -1,5 +1,3 @@
-USE agrotrack;
-
 INSERT INTO users (name, email, phone, profile_photo, address, division, main_crop, total_area, bio, role, status, password_hash)
 VALUES (
   'Muhammad Farhan',

@@ -1,5 +1,3 @@
-USE agrotrack;
-
 INSERT INTO users (name, email, phone, profile_photo, address, division, main_crop, total_area, role, status, password_hash)
 VALUES
 ('Admin Root', 'admin@agrotrack.com', '081298765432', 'assets/image/profil/foto_profil_6.jpg', 'Surabaya, Jawa Timur', 'Operasional Platform', NULL, NULL, 'admin', 'aktif', '$2y$10$uK9.ecR/LaItdL1tducqQuShNJISZ4zpIOBnoUQYOrUpXWtsNZdiu'),
