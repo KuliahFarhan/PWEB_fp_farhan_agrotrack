@@ -109,3 +109,25 @@ ON DUPLICATE KEY UPDATE
   risiko=VALUES(risiko),
   admin_note=VALUES(admin_note),
   is_active=1;
+
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-moluskisida.jpg' WHERE kode = 'LIN-MOLUSKISIDA';
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-rodentisida.jpg' WHERE kode = 'LIN-RODENTISIDA';
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-nematisida.jpg' WHERE kode = 'LIN-NEMATISIDA';
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-akarisida.jpg' WHERE kode = 'LIN-AKARISIDA';
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-perekat-perata.jpg' WHERE kode = 'LIN-PEREKAT';
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-beauveria.jpg' WHERE kode = 'LIN-BEAUVERIA';
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-metarhizium.jpg' WHERE kode = 'LIN-METARHIZIUM';
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-perangkap-feromon.jpg' WHERE kode = 'LIN-PERANGKAP-FEROMON';
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-yellow-sticky-trap.jpg' WHERE kode = 'LIN-YELLOW-STICKY-TRAP';
+UPDATE katalog_items SET image_path = 'assets/image/perlindungan_tanaman/perlintan-perangkap-tikus.jpg' WHERE kode = 'LIN-PERANGKAP-TIKUS';
+UPDATE katalog_items SET image_path = 'assets/image/tenaga_kerja/tenaga-angkut-hasil.jpg' WHERE kode = 'PAN-ANGKUT';
+UPDATE katalog_items SET image_path = 'assets/image/bahan_pendukung/bahan-jaring-padi.jpg' WHERE kode = 'PAN-JARING';
+UPDATE katalog_items SET image_path = 'assets/image/bahan_pendukung/bahan-karung-panen.jpg' WHERE kode = 'PAN-KARUNG';
+UPDATE katalog_items SET image_path = 'assets/image/tenaga_kerja/tenaga-panen-kedelai.jpg' WHERE kode = 'PAN-KEDELAI';
+UPDATE katalog_items SET image_path = 'assets/image/bahan_pendukung/bahan-tali-rafia.jpg' WHERE kode = 'PAN-TALI';
+UPDATE katalog_items SET image_path = 'assets/image/alat_mesin/alat-timbangan-digital.jpg' WHERE kode = 'PAN-TIMBANG';
+UPDATE katalog_items SET image_path = 'assets/image/bahan_pendukung/bahan-karung-panen.jpg' WHERE kode = 'PAS-KARUNG';
+UPDATE katalog_items SET image_path = 'assets/image/alat_mesin/alat-power-thresher.jpg' WHERE kode = 'PAS-RONTOK';
+UPDATE katalog_items SET image_path = 'assets/image/transportasi/transport-gudang-penyimpanan.jpg' WHERE kode = 'PAS-SIMPAN';
+UPDATE katalog_items SET image_path = 'assets/image/tenaga_kerja/tenaga-jemur-pengeringan.jpg' WHERE kode = 'PAS-SORTASI';
+UPDATE katalog_items SET image_path = 'assets/image/alat_mesin/alat-timbangan-digital.jpg' WHERE kode = 'PAS-TIMBANG';
