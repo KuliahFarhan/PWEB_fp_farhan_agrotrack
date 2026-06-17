@@ -17,7 +17,7 @@ if (request_method() === 'POST') {
         $tanggal = post_string('tanggal_tanam', 20);
         $kode = post_string('kode_musim', 30) ?: 'MT-' . date('Ymd-His');
         $catatan = post_string('catatan', 1000);
-        $stmt = db()->prepare('SELECT id FROM lahan WHERE id = ? AND user_id = ?');
+        $stmt = db()->prepare('SELECT id FROM lahan WHERE id = ? AND user_id = ? AND deleted_at IS NULL');
         $stmt->execute([$lahanId, $userId]);
         if (!$stmt->fetch()) throw new RuntimeException('Lahan tidak valid.');
         $stmt = db()->prepare('SELECT masa_panen_hari FROM tanaman WHERE id = ? AND status = "aktif"');

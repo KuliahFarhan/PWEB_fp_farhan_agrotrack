@@ -8,7 +8,7 @@ final class LahanMap
         $stmt = $db->prepare(
             'SELECT id, nama_lahan, luas, komoditas, status, latitude, longitude, polygon_area, luas_lahan
              FROM lahan
-             WHERE user_id = :user_id
+             WHERE user_id = :user_id AND deleted_at IS NULL
              ORDER BY nama_lahan ASC'
         );
         $stmt->execute(['user_id' => $userId]);
@@ -21,7 +21,7 @@ final class LahanMap
         $stmt = $db->prepare(
             'SELECT id, nama_lahan, luas, komoditas, status, latitude, longitude, polygon_area, luas_lahan
              FROM lahan
-             WHERE id = :id AND user_id = :user_id
+             WHERE id = :id AND user_id = :user_id AND deleted_at IS NULL
              LIMIT 1'
         );
         $stmt->execute([
@@ -42,7 +42,7 @@ final class LahanMap
                  polygon_area = :polygon_area,
                  luas_lahan = :luas_lahan,
                  luas = :luas
-             WHERE id = :id AND user_id = :user_id'
+             WHERE id = :id AND user_id = :user_id AND deleted_at IS NULL'
         );
 
         $stmt->execute([
@@ -66,7 +66,7 @@ final class LahanMap
                  longitude = NULL,
                  polygon_area = NULL,
                  luas_lahan = NULL
-             WHERE id = :id AND user_id = :user_id'
+             WHERE id = :id AND user_id = :user_id AND deleted_at IS NULL'
         );
 
         $stmt->execute([

@@ -159,9 +159,16 @@ $categoryIcons = [
                 <p><?= e($item['keterangan'] ?: '-') ?></p>
                 <p class="text-secondary mb-0"><?= e($item['risiko'] ?: '') ?></p>
               </details>
-              <a class="btn btn-primary w-100 mt-auto" href="biaya-produksi.php?katalog_item_id=<?= e($item['id']) ?>">
-                <span class="material-symbols-outlined">add_shopping_cart</span> Catat Biaya
-              </a>
+              <?php if (in_array($item['kategori'], ['Modal & Administrasi', 'Risiko / Kerugian'], true)): ?>
+                <div class="mt-auto">
+                  <span class="asset-tag">Dicatat di modul Modal/Risiko</span>
+                  <p class="small text-secondary mt-2 mb-0">Item ini tidak dimasukkan otomatis ke biaya produksi agar profit tidak salah hitung.</p>
+                </div>
+              <?php else: ?>
+                <a class="btn btn-primary w-100 mt-auto" href="biaya-produksi.php?katalog_item_id=<?= e($item['id']) ?>">
+                  <span class="material-symbols-outlined">add_shopping_cart</span> Catat Biaya
+                </a>
+              <?php endif; ?>
             </div>
           </article>
         <?php endforeach; ?>

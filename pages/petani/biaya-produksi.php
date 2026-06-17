@@ -44,6 +44,9 @@ if (request_method() === 'POST') {
         if (!in_array($kategori, $categories, true)) {
             throw new RuntimeException('Kategori tidak valid.');
         }
+        if (in_array($kategori, ['Modal & Administrasi', 'Risiko / Kerugian'], true)) {
+            throw new RuntimeException('Item Modal/Risiko tidak dicatat ke biaya produksi biasa. Gunakan modul modal atau risk register.');
+        }
 
         $qty = post_float('jumlah');
         $harga = post_float('harga_satuan');

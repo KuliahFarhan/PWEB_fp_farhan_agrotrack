@@ -6,7 +6,7 @@ require_once __DIR__ . '/../../app/core/queries.php';
 $user = require_login('admin');
 $summary = admin_summary();
 $users = db()->query('SELECT * FROM users ORDER BY created_at DESC LIMIT 5')->fetchAll();
-$lahan = db()->query('SELECT l.*, u.name AS petani FROM lahan l JOIN users u ON u.id = l.user_id ORDER BY l.created_at DESC LIMIT 5')->fetchAll();
+$lahan = db()->query('SELECT l.*, u.name AS petani FROM lahan l JOIN users u ON u.id = l.user_id WHERE l.deleted_at IS NULL ORDER BY l.created_at DESC LIMIT 5')->fetchAll();
 ?>
 <!doctype html>
 <html lang="id">

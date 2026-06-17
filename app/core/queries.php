@@ -5,8 +5,8 @@ function petani_summary(int $userId): array
 {
     $stmt = db()->prepare(
         'SELECT
-          (SELECT COUNT(*) FROM lahan WHERE user_id = ?) AS total_lahan,
-          (SELECT COALESCE(SUM(COALESCE(luas_lahan / 10000, 0)), 0) FROM lahan WHERE user_id = ?) AS total_luas_ha,
+          (SELECT COUNT(*) FROM lahan WHERE user_id = ? AND deleted_at IS NULL) AS total_lahan,
+          (SELECT COALESCE(SUM(COALESCE(luas_lahan / 10000, 0)), 0) FROM lahan WHERE user_id = ? AND deleted_at IS NULL) AS total_luas_ha,
           (SELECT COUNT(*) FROM musim_tanam WHERE user_id = ? AND status = "aktif") AS musim_aktif,
           (
             (SELECT COALESCE(SUM(total_biaya), 0) FROM biaya_produksi WHERE user_id = ?) +
@@ -26,7 +26,7 @@ function admin_summary(): array
         'SELECT
           (SELECT COUNT(*) FROM users WHERE status = "aktif") AS total_users,
           (SELECT COUNT(*) FROM users WHERE role = "petani") AS total_petani,
-          (SELECT COALESCE(SUM(COALESCE(luas_lahan / 10000, 0)), 0) FROM lahan) AS total_luas_ha,
+          (SELECT COALESCE(SUM(COALESCE(luas_lahan / 10000, 0)), 0) FROM lahan WHERE deleted_at IS NULL) AS total_luas_ha,
           (SELECT COUNT(*) FROM musim_tanam WHERE status = "aktif") AS musim_aktif,
           (SELECT COALESCE(SUM(berat_kg), 0) FROM hasil_panen) AS total_panen_kg,
           (
@@ -42,7 +42,7 @@ function admin_summary(): array
 
 function user_lahan(int $userId): array
 {
-    $stmt = db()->prepare('SELECT l.*, t.nama AS tanaman_nama FROM lahan l LEFT JOIN tanaman t ON t.id = l.tanaman_id WHERE l.user_id = ? ORDER BY l.created_at DESC');
+    $stmt = db()->prepare('SELECT l.*, t.nama AS tanaman_nama FROM lahan l LEFT JOIN tanaman t ON t.id = l.tanaman_id WHERE l.user_id = ? AND l.deleted_at IS NULL ORDER BY l.created_at DESC');
     $stmt->execute([$userId]);
     return $stmt->fetchAll();
 }

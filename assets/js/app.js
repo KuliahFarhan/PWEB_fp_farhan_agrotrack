@@ -145,37 +145,10 @@
   function bindAuthForms() {
     const loginForm = byId("loginForm");
     if (loginForm) {
-      loginForm.addEventListener("submit", async (event) => {
+      loginForm.addEventListener("submit", (event) => {
         event.preventDefault();
-        const role = new FormData(loginForm).get("role");
-        const redirectTo = role === "admin" ? "pages/admin/dashboard.php" : "pages/petani/dashboard.php";
-
-        if (window.location.protocol === "file:") {
-          toast("Mode file statis aktif. Untuk simpan database, jalankan lewat PHP server.");
-          setTimeout(() => (window.location.href = redirectTo), 700);
-          return;
-        }
-
-        try {
-          const response = await fetch("api/auth/demo-login.php", {
-            method: "POST",
-            credentials: "same-origin",
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-            body: JSON.stringify({ role }),
-          });
-          const payload = await response.json().catch(() => ({}));
-
-          if (!response.ok || payload.ok === false) {
-            throw new Error(payload.message || "Login gagal.");
-          }
-
-          window.location.href = redirectTo;
-        } catch (error) {
-          toast(error.message || "Login gagal. Cek koneksi database.");
-        }
+        toast("Login demo dinonaktifkan. Gunakan halaman login PHP AgroTrack.");
+        setTimeout(() => (window.location.href = "auth/login.php"), 700);
       });
     }
 

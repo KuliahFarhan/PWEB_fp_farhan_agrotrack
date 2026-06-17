@@ -41,7 +41,7 @@ if (request_method() === 'POST') {
     }
 }
 
-$rows = db()->query('SELECT u.*, (SELECT COUNT(*) FROM lahan l WHERE l.user_id=u.id) total_lahan FROM users u ORDER BY created_at DESC')->fetchAll();
+$rows = db()->query('SELECT u.*, (SELECT COUNT(*) FROM lahan l WHERE l.user_id=u.id AND l.deleted_at IS NULL) total_lahan FROM users u ORDER BY created_at DESC')->fetchAll();
 ?>
 <!doctype html>
 <html lang="id">

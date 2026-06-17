@@ -10,7 +10,7 @@ $editing = null;
 $error = null;
 
 if (isset($_GET['edit'])) {
-    $stmt = db()->prepare('SELECT * FROM lahan WHERE id = ? AND user_id = ?');
+    $stmt = db()->prepare('SELECT * FROM lahan WHERE id = ? AND user_id = ? AND deleted_at IS NULL');
     $stmt->execute([(int) $_GET['edit'], $userId]);
     $editing = $stmt->fetch() ?: null;
 }
@@ -21,8 +21,8 @@ if (request_method() === 'POST') {
         $action = $_POST['action'] ?? 'save';
         $id = (int) ($_POST['id'] ?? 0);
         if ($action === 'delete') {
-            db()->prepare('DELETE FROM lahan WHERE id = ? AND user_id = ?')->execute([$id, $userId]);
-            flash('success', 'Lahan berhasil dihapus.');
+            db()->prepare('UPDATE lahan SET deleted_at = NOW() WHERE id = ? AND user_id = ? AND deleted_at IS NULL')->execute([$id, $userId]);
+            flash('success', 'Lahan berhasil diarsipkan.');
             redirect_to('lahan.php');
         }
 
@@ -41,7 +41,7 @@ if (request_method() === 'POST') {
         if (!$crop) throw new RuntimeException('Tanaman tidak valid.');
 
         if ($id > 0) {
-            $stmt = db()->prepare('UPDATE lahan SET nama_lahan=?, kode_lahan=?, tanaman_id=?, komoditas=?, lokasi=?, status=?, catatan=? WHERE id=? AND user_id=?');
+            $stmt = db()->prepare('UPDATE lahan SET nama_lahan=?, kode_lahan=?, tanaman_id=?, komoditas=?, lokasi=?, status=?, catatan=? WHERE id=? AND user_id=? AND deleted_at IS NULL');
             $stmt->execute([$nama, $kode, $tanamanId, $crop['nama'], $lokasi, $status, $catatan, $id, $userId]);
             flash('success', 'Lahan berhasil diperbarui.');
         } else {
@@ -97,7 +97,7 @@ $rows = user_lahan($userId);
                       <td><span class="status-dot"><?= e(status_label($row['status'])) ?></span></td>
                       <td class="text-nowrap"><a class="btn btn-sm btn-outline-primary" href="?edit=<?= e($row['id']) ?>">Edit</a>
                         <a class="btn btn-sm btn-outline-success" href="peta-lahan.php?lahan_id=<?= e($row['id']) ?>">Gambar Polygon</a>
-                        <form method="post" class="d-inline" onsubmit="return confirm('Hapus lahan ini?')"><input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>" /><input type="hidden" name="action" value="delete" /><input type="hidden" name="id" value="<?= e($row['id']) ?>" /><button class="btn btn-sm btn-outline-danger">Hapus</button></form>
+                        <form method="post" class="d-inline" onsubmit="return confirm('Arsipkan lahan ini? Data musim, biaya, dan panen akan tetap tersimpan.')"><input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>" /><input type="hidden" name="action" value="delete" /><input type="hidden" name="id" value="<?= e($row['id']) ?>" /><button class="btn btn-sm btn-outline-danger">Arsipkan</button></form>
                       </td>
                     </tr>
                   <?php endforeach; ?>

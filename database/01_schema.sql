@@ -49,6 +49,7 @@ CREATE TABLE IF NOT EXISTS lahan (
   longitude DECIMAL(11,8) NULL,
   polygon_area JSON NULL,
   luas_lahan DECIMAL(14,2) NULL COMMENT 'Luas hasil hitung polygon dalam meter persegi',
+  deleted_at DATETIME NULL,
   catatan TEXT NULL,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -56,6 +57,7 @@ CREATE TABLE IF NOT EXISTS lahan (
   CONSTRAINT fk_lahan_tanaman FOREIGN KEY (tanaman_id) REFERENCES tanaman(id) ON DELETE SET NULL,
   UNIQUE KEY uq_lahan_user_nama (user_id, nama_lahan),
   INDEX idx_lahan_user_status (user_id, status),
+  INDEX idx_lahan_deleted_at (deleted_at),
   INDEX idx_lahan_komoditas (komoditas)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
