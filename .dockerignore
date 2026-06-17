@@ -1,5 +1,12 @@
 .git
+.github
 .env
+.env.*
+!.env.example
+!.env.production.example
 node_modules
 vendor
 *.log
+backup
+backups
+mysql_data
