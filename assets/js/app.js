@@ -337,7 +337,7 @@
     const run = () => {
       fetch(url, {
         method: "GET",
-        credentials: "same-origin",
+        credentials: "omit",
         cache: "no-store",
         keepalive: true,
         headers: { Accept: "application/json" },
@@ -363,8 +363,8 @@
       urls.forEach((url) => {
         fetch(url, {
           method: "GET",
-          credentials: "same-origin",
-          cache: "force-cache",
+          credentials: "omit",
+          cache: "no-store",
           priority: "low",
         }).catch(() => {});
       });

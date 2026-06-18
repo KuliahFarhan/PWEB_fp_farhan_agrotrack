@@ -50,6 +50,11 @@ if (request_method() === 'POST') {
         $error = $exception->getMessage();
     }
 }
+
+$csrfToken = csrf_token();
+if (session_status() === PHP_SESSION_ACTIVE) {
+    session_write_close();
+}
 ?>
 <!doctype html>
 <html lang="id">
@@ -63,7 +68,7 @@ if (request_method() === 'POST') {
         <div class="auth-copy"><h1><?= e($roleTitle) ?></h1><p><?= e($roleDescription) ?></p></div>
         <?php if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?>
         <form method="post" class="vstack gap-3">
-          <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>" />
+          <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>" />
           <div><label class="form-label" for="email">Alamat Email</label><input class="form-control" id="email" name="email" type="email" value="<?= e($_POST['email'] ?? '') ?>" placeholder="petani@email.com atau admin@agrotrack.com" required /></div>
           <div><label class="form-label" for="password">Kata Sandi</label><input class="form-control" id="password" name="password" type="password" required /></div>
           <button class="btn auth-submit w-100" type="submit">Masuk</button>

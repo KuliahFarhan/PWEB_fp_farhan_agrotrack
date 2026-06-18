@@ -27,6 +27,11 @@ if (request_method() === 'POST') {
         $error = $exception->getMessage();
     }
 }
+
+$csrfToken = csrf_token();
+if (session_status() === PHP_SESSION_ACTIVE) {
+    session_write_close();
+}
 ?>
 <!doctype html>
 <html lang="id">
@@ -41,7 +46,7 @@ if (request_method() === 'POST') {
         <div class="auth-copy"><h1>Register Petani</h1><p>Pendaftaran publik khusus untuk akun petani. Akun admin disiapkan oleh sistem.</p></div>
         <?php if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?>
         <form method="post" class="vstack gap-3">
-          <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>" />
+          <input type="hidden" name="csrf_token" value="<?= e($csrfToken) ?>" />
           <div><label class="form-label" for="name">Nama Lengkap</label><input class="form-control" id="name" name="name" value="<?= e($_POST['name'] ?? '') ?>" required /></div>
           <div><label class="form-label" for="phone">Nomor Handphone</label><input class="form-control" id="phone" name="phone" value="<?= e($_POST['phone'] ?? '') ?>" /></div>
           <div><label class="form-label" for="email">Alamat Email</label><input class="form-control" id="email" name="email" type="email" value="<?= e($_POST['email'] ?? '') ?>" required /></div>

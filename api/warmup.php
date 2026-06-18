@@ -6,7 +6,6 @@ require_once __DIR__ . '/../app/core/bootstrap.php';
 $startedAt = microtime(true);
 
 try {
-    start_app_session();
     db()->query('SELECT 1')->fetchColumn();
 
     agrotrack_json([
