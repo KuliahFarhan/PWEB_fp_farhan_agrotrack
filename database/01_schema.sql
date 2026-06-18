@@ -15,7 +15,8 @@ CREATE TABLE IF NOT EXISTS users (
   last_login_at DATETIME NULL,
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  INDEX idx_users_role_status (role, status)
+  INDEX idx_users_role_status (role, status),
+  INDEX idx_users_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS tanaman (
@@ -56,6 +57,7 @@ CREATE TABLE IF NOT EXISTS lahan (
   UNIQUE KEY uq_lahan_user_nama (user_id, nama_lahan),
   INDEX idx_lahan_user_status (user_id, status),
   INDEX idx_lahan_deleted_at (deleted_at),
+  INDEX idx_lahan_deleted_updated (deleted_at, updated_at),
   INDEX idx_lahan_komoditas (komoditas)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -80,7 +82,9 @@ CREATE TABLE IF NOT EXISTS musim_tanam (
   CONSTRAINT fk_musim_tanaman FOREIGN KEY (tanaman_id) REFERENCES tanaman(id) ON DELETE SET NULL,
   UNIQUE KEY uq_musim_lahan_kode (lahan_id, kode_musim),
   INDEX idx_musim_user_status (user_id, status),
-  INDEX idx_musim_lahan (lahan_id)
+  INDEX idx_musim_lahan (lahan_id),
+  INDEX idx_musim_user_tanggal (user_id, tanggal_tanam),
+  INDEX idx_musim_tanggal (tanggal_tanam)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS biaya_produksi (
@@ -103,7 +107,8 @@ CREATE TABLE IF NOT EXISTS biaya_produksi (
   CONSTRAINT fk_biaya_lahan FOREIGN KEY (lahan_id) REFERENCES lahan(id) ON DELETE CASCADE,
   CONSTRAINT fk_biaya_musim FOREIGN KEY (musim_tanam_id) REFERENCES musim_tanam(id) ON DELETE SET NULL,
   INDEX idx_biaya_user_tanggal (user_id, tanggal),
-  INDEX idx_biaya_musim_kategori (musim_tanam_id, kategori)
+  INDEX idx_biaya_musim_kategori (musim_tanam_id, kategori),
+  INDEX idx_biaya_user_kategori (user_id, kategori)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS katalog_items (
@@ -134,7 +139,8 @@ CREATE TABLE IF NOT EXISTS katalog_items (
   created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   INDEX idx_katalog_filter (kategori, fase, is_active),
-  INDEX idx_katalog_komoditas (komoditas)
+  INDEX idx_katalog_komoditas (komoditas),
+  INDEX idx_katalog_active_nama (is_active, nama)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS biaya_operasional (
@@ -160,7 +166,9 @@ CREATE TABLE IF NOT EXISTS biaya_operasional (
   CONSTRAINT fk_biaya_ops_katalog FOREIGN KEY (katalog_item_id) REFERENCES katalog_items(id) ON DELETE SET NULL,
   INDEX idx_biaya_ops_user_tanggal (user_id, tanggal),
   INDEX idx_biaya_ops_musim (musim_tanam_id),
-  INDEX idx_biaya_ops_kategori (kategori)
+  INDEX idx_biaya_ops_kategori (kategori),
+  INDEX idx_biaya_ops_user_kategori (user_id, kategori),
+  INDEX idx_biaya_ops_tanggal (tanggal)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS modal_sumber (

@@ -34,7 +34,7 @@ if (request_method() === 'POST') {
   </head>
   <body class="auth-body">
     <main class="auth-split auth-split-register">
-      <section class="auth-visual"><img src="../assets/image/tanaman/corn-hero.png" alt="Petani di lahan jagung" /></section>
+      <section class="auth-visual"><img src="../assets/image/tanaman/corn-hero.png" alt="Petani di lahan jagung" loading="eager" decoding="async" /></section>
       <section class="auth-panel">
         <a class="auth-brand" href="../index.html"><img src="../assets/image/logo/logo_agrotrack.png" alt="Logo AgroTrack" /><span>AgroTrack</span></a>
         <div class="auth-copy"><h1>Register Petani</h1><p>Pendaftaran publik khusus untuk akun petani. Akun admin disiapkan oleh sistem.</p></div>

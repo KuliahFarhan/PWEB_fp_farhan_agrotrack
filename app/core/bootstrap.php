@@ -116,7 +116,12 @@ function current_user(): ?array
         return $user;
     }
 
-    $stmt = db()->prepare('SELECT * FROM users WHERE id = ? AND status = "aktif" LIMIT 1');
+    $stmt = db()->prepare(
+        'SELECT id, name, email, phone, profile_photo, address, division, main_crop, total_area, bio, role, status
+         FROM users
+         WHERE id = ? AND status = "aktif"
+         LIMIT 1'
+    );
     $stmt->execute([(int) $_SESSION['user_id']]);
     $row = $stmt->fetch();
     $user = $row ?: null;

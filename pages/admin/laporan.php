@@ -2,9 +2,9 @@
 declare(strict_types=1);
 require_once __DIR__ . '/../../app/core/bootstrap.php'; require_once __DIR__ . '/../../app/core/layout.php'; require_once __DIR__ . '/../../app/core/queries.php';
 $user=require_login('admin'); $summary=admin_summary();
-$users=db()->query('SELECT id,name,email,role,status,created_at FROM users ORDER BY id')->fetchAll();
-$lahan=db()->query('SELECT l.*, u.name petani FROM lahan l JOIN users u ON u.id=l.user_id WHERE l.deleted_at IS NULL ORDER BY l.id')->fetchAll();
-$musim=db()->query('SELECT mt.*, u.name petani, l.nama_lahan, t.nama tanaman FROM musim_tanam mt JOIN users u ON u.id=mt.user_id JOIN lahan l ON l.id=mt.lahan_id LEFT JOIN tanaman t ON t.id=mt.tanaman_id ORDER BY mt.tanggal_tanam DESC')->fetchAll();
+$users=db()->query('SELECT id,name,email,role,status,created_at FROM users ORDER BY id LIMIT 500')->fetchAll();
+$lahan=db()->query('SELECT l.id,l.nama_lahan,l.komoditas,l.luas_lahan,l.status,u.name petani FROM lahan l JOIN users u ON u.id=l.user_id WHERE l.deleted_at IS NULL ORDER BY l.id LIMIT 500')->fetchAll();
+$musim=db()->query('SELECT mt.id,mt.kode_musim,mt.tanggal_tanam,mt.estimasi_panen,u.name petani,l.nama_lahan,t.nama tanaman FROM musim_tanam mt JOIN users u ON u.id=mt.user_id JOIN lahan l ON l.id=mt.lahan_id LEFT JOIN tanaman t ON t.id=mt.tanaman_id ORDER BY mt.tanggal_tanam DESC LIMIT 500')->fetchAll();
 $biaya=db()->query('SELECT bo.*, u.name petani, mt.kode_musim FROM biaya_operasional bo JOIN users u ON u.id=bo.user_id LEFT JOIN musim_tanam mt ON mt.id=bo.musim_tanam_id ORDER BY bo.tanggal DESC LIMIT 250')->fetchAll();
 $katalog=db()->query('SELECT kategori, COUNT(*) total_item, SUM(is_active=1) aktif FROM katalog_items GROUP BY kategori ORDER BY kategori')->fetchAll();
 ?>

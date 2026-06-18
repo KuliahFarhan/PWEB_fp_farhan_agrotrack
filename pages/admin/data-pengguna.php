@@ -8,7 +8,7 @@ $error = null;
 $editing = null;
 
 if (isset($_GET['edit'])) {
-    $stmt = db()->prepare('SELECT * FROM users WHERE id = ?');
+    $stmt = db()->prepare('SELECT id, name, email, role, status, profile_photo FROM users WHERE id = ? LIMIT 1');
     $stmt->execute([(int) $_GET['edit']]);
     $editing = $stmt->fetch() ?: null;
 }
@@ -41,7 +41,13 @@ if (request_method() === 'POST') {
     }
 }
 
-$rows = db()->query('SELECT u.*, (SELECT COUNT(*) FROM lahan l WHERE l.user_id=u.id AND l.deleted_at IS NULL) total_lahan FROM users u ORDER BY created_at DESC')->fetchAll();
+$rows = db()->query(
+    'SELECT u.id, u.name, u.email, u.role, u.status, u.profile_photo,
+            (SELECT COUNT(*) FROM lahan l WHERE l.user_id = u.id AND l.deleted_at IS NULL) AS total_lahan
+     FROM users u
+     ORDER BY u.created_at DESC
+     LIMIT 100'
+)->fetchAll();
 ?>
 <!doctype html>
 <html lang="id">
