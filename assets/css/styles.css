@@ -32,35 +32,20 @@ a {
 }
 
 .material-symbols-outlined {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.1rem;
-  min-width: 1.1rem;
-  overflow: hidden;
-  font-size: 0;
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.25em;
   font-variation-settings: "FILL" 0, "wght" 450, "GRAD" 0, "opsz" 24;
   line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
   vertical-align: middle;
-}
-
-.material-symbols-outlined::before {
-  content: "";
-  width: .42rem;
-  height: .42rem;
-  border-radius: 999px;
-  background: currentColor;
-  opacity: .85;
-}
-
-.material-symbols-outlined.local-icon {
-  font-family: inherit;
-  font-size: 1.05rem;
-  font-weight: 800;
-}
-
-.material-symbols-outlined.local-icon::before {
-  display: none;
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
 }
 
 .btn,

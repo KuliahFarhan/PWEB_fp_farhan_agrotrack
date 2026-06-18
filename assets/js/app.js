@@ -23,50 +23,6 @@
     return document.getElementById(id);
   }
 
-  const localIcons = {
-    account_circle: "○",
-    agriculture: "⌂",
-    analytics: "∿",
-    arrow_back: "←",
-    calendar_today: "◷",
-    chevron_left: "‹",
-    chevron_right: "›",
-    close: "×",
-    dashboard: "▦",
-    download: "↓",
-    groups: "◎",
-    home: "⌂",
-    inventory_2: "□",
-    left_panel_close: "‹",
-    left_panel_open: "›",
-    location_on: "•",
-    logout: "↪",
-    manage_accounts: "◉",
-    map: "⌖",
-    menu: "☰",
-    monitoring: "⌁",
-    payments: "$",
-    picture_as_pdf: "PDF",
-    priority_high: "!",
-    psychiatry: "✣",
-    receipt_long: "≡",
-    search: "⌕",
-    summarize: "≣",
-    tips_and_updates: "?",
-  };
-
-  function applyLocalIcon(node, key) {
-    node.textContent = localIcons[key] || "•";
-    node.classList.add("local-icon");
-    node.setAttribute("aria-hidden", "true");
-  }
-
-  function renderLocalIcons(root = document) {
-    root.querySelectorAll(".material-symbols-outlined").forEach((node) => {
-      const key = node.textContent.trim();
-      applyLocalIcon(node, key);
-    });
-  }
 
   function toast(message) {
     const existing = document.querySelector(".toast-lite");
@@ -144,11 +100,11 @@
         const icon = node.querySelector(".material-symbols-outlined");
         if (!icon) return;
         if (window.innerWidth <= 991) {
-          applyLocalIcon(icon, open ? "close" : "menu");
+          icon.textContent = open ? "close" : "menu";
           node.setAttribute("aria-label", open ? "Tutup sidebar" : "Buka sidebar");
           return;
         }
-        applyLocalIcon(icon, collapsed ? "left_panel_open" : "left_panel_close");
+        icon.textContent = collapsed ? "left_panel_open" : "left_panel_close";
         node.setAttribute("aria-label", collapsed ? "Buka sidebar" : "Tutup sidebar");
       });
     };
@@ -265,7 +221,6 @@
         `;
 
         document.body.appendChild(overlay);
-        renderLocalIcons(overlay);
         overlay.querySelector("[data-confirm-no]").addEventListener("click", () => overlay.remove());
         overlay.querySelector("[data-confirm-yes]").addEventListener("click", () => {
           window.location.href = target;
@@ -376,7 +331,6 @@
   }
 
   renderSidebar();
-  renderLocalIcons();
   bindSidebarToggle();
   bindAuthForms();
   bindTableFilter();

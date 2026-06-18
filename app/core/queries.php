@@ -40,9 +40,13 @@ function admin_summary(): array
     return $row;
 }
 
-function user_lahan(int $userId): array
+function user_lahan(int $userId, ?int $limit = null): array
 {
-    $stmt = db()->prepare('SELECT l.*, t.nama AS tanaman_nama FROM lahan l LEFT JOIN tanaman t ON t.id = l.tanaman_id WHERE l.user_id = ? AND l.deleted_at IS NULL ORDER BY l.created_at DESC');
+    $sql = 'SELECT l.*, t.nama AS tanaman_nama FROM lahan l LEFT JOIN tanaman t ON t.id = l.tanaman_id WHERE l.user_id = ? AND l.deleted_at IS NULL ORDER BY l.created_at DESC';
+    if ($limit !== null) {
+        $sql .= ' LIMIT ' . max(1, $limit);
+    }
+    $stmt = db()->prepare($sql);
     $stmt->execute([$userId]);
     return $stmt->fetchAll();
 }
@@ -52,9 +56,9 @@ function active_tanaman(): array
     return db()->query('SELECT * FROM tanaman WHERE status = "aktif" ORDER BY nama ASC')->fetchAll();
 }
 
-function user_musim(int $userId): array
+function user_musim(int $userId, ?int $limit = null): array
 {
-    $stmt = db()->prepare(
+    $sql =
         'SELECT mt.*, l.nama_lahan, t.nama AS tanaman_nama, t.masa_panen_hari,
           (
             COALESCE((SELECT SUM(total_biaya) FROM biaya_produksi b WHERE b.musim_tanam_id = mt.id), 0) +
@@ -65,8 +69,11 @@ function user_musim(int $userId): array
          JOIN lahan l ON l.id = mt.lahan_id
          LEFT JOIN tanaman t ON t.id = mt.tanaman_id
          WHERE mt.user_id = ?
-         ORDER BY mt.tanggal_tanam DESC'
-    );
+         ORDER BY mt.tanggal_tanam DESC';
+    if ($limit !== null) {
+        $sql .= ' LIMIT ' . max(1, $limit);
+    }
+    $stmt = db()->prepare($sql);
     $stmt->execute([$userId]);
     return $stmt->fetchAll();
 }

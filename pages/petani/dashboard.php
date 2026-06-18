@@ -5,8 +5,8 @@ require_once __DIR__ . '/../../app/core/layout.php';
 require_once __DIR__ . '/../../app/core/queries.php';
 $user = require_login('petani');
 $summary = petani_summary((int) $user['id']);
-$lahan = array_slice(user_lahan((int) $user['id']), 0, 5);
-$musim = array_slice(user_musim((int) $user['id']), 0, 5);
+$lahan = user_lahan((int) $user['id'], 5);
+$musim = user_musim((int) $user['id'], 5);
 ?>
 <!doctype html>
 <html lang="id">
@@ -32,7 +32,7 @@ $musim = array_slice(user_musim((int) $user['id']), 0, 5);
           <?php foreach ($musim as $row): $progress = calculate_progress($row['tanggal_tanam'], (int) ($row['masa_panen_hari'] ?: 100)); ?><div><strong><?= e($row['kode_musim']) ?> - <?= e($row['tanaman_nama']) ?></strong><br><span class="text-secondary small"><?= e($row['nama_lahan']) ?>, progress <?= e($progress) ?>%</span><div class="progress mt-1"><div class="progress-bar" style="width: <?= e($progress) ?>%"></div></div></div><?php endforeach; ?>
           <?php if (!$musim): ?><p class="text-secondary mb-0">Belum ada musim tanam.</p><?php endif; ?>
         </div></div></div>
-        <div class="col-12"><div class="admin-panel image-panel"><img src="../../assets/image/tanaman/corn-hero.png" alt="Lahan jagung AgroTrack" /><div class="image-panel-content"><h2 class="section-title text-white">Pantau kondisi tanaman lebih cepat</h2><p class="mb-3 col-lg-7">Data lahan, biaya, panen, dan polygon kini tersambung ke database.</p><a class="btn btn-light align-self-start" href="peta-lahan.php">Buka Peta Lahan</a></div></div></div>
+        <div class="col-12"><div class="admin-panel image-panel"><img src="../../assets/image/tanaman/corn-hero.png" alt="Lahan jagung AgroTrack" loading="lazy" decoding="async" /><div class="image-panel-content"><h2 class="section-title text-white">Pantau kondisi tanaman lebih cepat</h2><p class="mb-3 col-lg-7">Data lahan, biaya, panen, dan polygon kini tersambung ke database.</p><a class="btn btn-light align-self-start" href="peta-lahan.php">Buka Peta Lahan</a></div></div></div>
       </section>
     </main>
     <script src="../../assets/js/app.js"></script>

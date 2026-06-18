@@ -16,7 +16,7 @@ if (request_method() === 'POST') {
         $email = strtolower(post_string('email', 190));
         $password = (string) ($_POST['password'] ?? '');
 
-        $stmt = db()->prepare('SELECT * FROM users WHERE email = ? AND status = "aktif" LIMIT 1');
+        $stmt = db()->prepare('SELECT id, email, role, password_hash FROM users WHERE email = ? AND status = "aktif" LIMIT 1');
         $stmt->execute([$email]);
         $user = $stmt->fetch();
 

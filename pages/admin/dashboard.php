@@ -5,8 +5,8 @@ require_once __DIR__ . '/../../app/core/layout.php';
 require_once __DIR__ . '/../../app/core/queries.php';
 $user = require_login('admin');
 $summary = admin_summary();
-$users = db()->query('SELECT * FROM users ORDER BY created_at DESC LIMIT 5')->fetchAll();
-$lahan = db()->query('SELECT l.*, u.name AS petani FROM lahan l JOIN users u ON u.id = l.user_id WHERE l.deleted_at IS NULL ORDER BY l.created_at DESC LIMIT 5')->fetchAll();
+$users = db()->query('SELECT name, email, role, status FROM users ORDER BY created_at DESC LIMIT 5')->fetchAll();
+$lahan = db()->query('SELECT l.nama_lahan, l.komoditas, u.name AS petani FROM lahan l JOIN users u ON u.id = l.user_id WHERE l.deleted_at IS NULL ORDER BY l.created_at DESC LIMIT 5')->fetchAll();
 ?>
 <!doctype html>
 <html lang="id">
@@ -27,7 +27,7 @@ $lahan = db()->query('SELECT l.*, u.name AS petani FROM lahan l JOIN users u ON 
       <section class="row g-3">
         <div class="col-xl-7"><div class="panel admin-panel"><h2 class="section-title">Manajemen Pengguna Terbaru</h2><div class="table-responsive"><table class="table admin-table"><thead><tr><th>Nama</th><th>Role</th><th>Status</th><th>Email</th></tr></thead><tbody><?php foreach ($users as $row): ?><tr><td><?= e($row['name']) ?></td><td><?= e($row['role']) ?></td><td><span class="status-dot"><?= e($row['status']) ?></span></td><td><?= e($row['email']) ?></td></tr><?php endforeach; ?></tbody></table></div></div></div>
         <div class="col-xl-5"><div class="panel admin-panel"><h2 class="section-title">Lahan Terbaru</h2><div class="vstack gap-3 small"><?php foreach ($lahan as $row): ?><div><strong><?= e($row['nama_lahan']) ?></strong><br><span class="text-secondary"><?= e($row['petani']) ?> - <?= e($row['komoditas']) ?></span></div><?php endforeach; ?><?php if (!$lahan): ?><p class="text-secondary">Belum ada lahan.</p><?php endif; ?></div></div></div>
-        <div class="col-12"><div class="admin-panel image-panel"><img src="../../assets/image/tanaman/digital-farming-preview.png" alt="Pertanian digital" /><div class="image-panel-content"><h2 class="section-title text-white">Data Tanaman Prioritas</h2><p class="mb-3">Kelola master tanaman agar musim tanam dan estimasi panen lebih akurat.</p><a class="btn btn-light" href="tanaman.php">Kelola Tanaman</a></div></div></div>
+        <div class="col-12"><div class="admin-panel image-panel"><img src="../../assets/image/tanaman/digital-farming-preview.png" alt="Pertanian digital" loading="lazy" decoding="async" /><div class="image-panel-content"><h2 class="section-title text-white">Data Tanaman Prioritas</h2><p class="mb-3">Kelola master tanaman agar musim tanam dan estimasi panen lebih akurat.</p><a class="btn btn-light" href="tanaman.php">Kelola Tanaman</a></div></div></div>
       </section>
     </main>
     <script src="../../assets/js/app.js"></script>
