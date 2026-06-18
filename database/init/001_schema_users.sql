@@ -1,0 +1,20 @@
+﻿CREATE TABLE IF NOT EXISTS users (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(120) NOT NULL,
+  email VARCHAR(190) NOT NULL UNIQUE,
+  phone VARCHAR(30) NULL,
+  profile_photo VARCHAR(255) NULL,
+  address VARCHAR(190) NULL,
+  division VARCHAR(120) NULL,
+  main_crop VARCHAR(80) NULL,
+  total_area DECIMAL(12,2) NULL,
+  bio TEXT NULL,
+  role ENUM('petani', 'admin') NOT NULL DEFAULT 'petani',
+  status ENUM('aktif', 'validasi', 'nonaktif') NOT NULL DEFAULT 'aktif',
+  password_hash VARCHAR(255) NOT NULL,
+  last_login_at DATETIME NULL,
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX idx_users_role_status (role, status),
+  INDEX idx_users_created_at (created_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -10,3 +10,8 @@ vendor
 backup
 backups
 mysql_data
+docs
+database
+README.md
+docker-compose*.yml
+.gitignore

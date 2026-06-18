@@ -1,0 +1,23 @@
+﻿CREATE TABLE IF NOT EXISTS biaya_produksi (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  lahan_id INT UNSIGNED NOT NULL,
+  musim_tanam_id INT UNSIGNED NULL,
+  tanggal DATE NOT NULL,
+  kategori ENUM('benih', 'pupuk', 'pestisida', 'tenaga_kerja', 'irigasi', 'alat', 'transportasi', 'lainnya') NOT NULL,
+  deskripsi VARCHAR(190) NOT NULL,
+  jumlah DECIMAL(14,2) NOT NULL DEFAULT 0,
+  satuan VARCHAR(30) NULL,
+  harga_satuan DECIMAL(14,2) NULL,
+  total_biaya DECIMAL(14,2) NOT NULL,
+  bukti_url VARCHAR(255) NULL,
+  catatan TEXT NULL,
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_biaya_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT fk_biaya_lahan FOREIGN KEY (lahan_id) REFERENCES lahan(id) ON DELETE CASCADE,
+  CONSTRAINT fk_biaya_musim FOREIGN KEY (musim_tanam_id) REFERENCES musim_tanam(id) ON DELETE SET NULL,
+  INDEX idx_biaya_user_tanggal (user_id, tanggal),
+  INDEX idx_biaya_musim_kategori (musim_tanam_id, kategori),
+  INDEX idx_biaya_user_kategori (user_id, kategori)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

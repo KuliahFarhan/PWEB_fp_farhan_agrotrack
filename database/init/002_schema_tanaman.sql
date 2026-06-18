@@ -1,0 +1,14 @@
+﻿CREATE TABLE IF NOT EXISTS tanaman (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  nama VARCHAR(120) NOT NULL,
+  slug VARCHAR(140) NOT NULL UNIQUE,
+  kategori VARCHAR(80) NULL,
+  masa_panen_hari INT UNSIGNED NOT NULL,
+  deskripsi TEXT NULL,
+  gambar_url VARCHAR(255) NULL,
+  status ENUM('aktif', 'nonaktif') NOT NULL DEFAULT 'aktif',
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  UNIQUE KEY uq_tanaman_nama (nama),
+  INDEX idx_tanaman_status (status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -37,9 +37,7 @@ services:
       - "3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./database/01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
-      - ./database/seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
-      - ./database/seeds/030_farhan_dummy_clean.sql:/docker-entrypoint-initdb.d/30_farhan_dummy_clean.sql:ro
+      - ./database/init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${DB_ROOT_PASSWORD:-CHANGE_ME_STRONG_ROOT_PASSWORD}"]
       interval: 10s

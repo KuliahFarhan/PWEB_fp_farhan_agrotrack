@@ -1,0 +1,23 @@
+﻿CREATE TABLE IF NOT EXISTS hasil_panen (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  user_id INT UNSIGNED NOT NULL,
+  lahan_id INT UNSIGNED NOT NULL,
+  musim_tanam_id INT UNSIGNED NULL,
+  tanggal_panen DATE NOT NULL,
+  komoditas VARCHAR(120) NOT NULL,
+  berat_kg DECIMAL(14,2) NOT NULL,
+  harga_per_kg DECIMAL(14,2) NOT NULL,
+  total_pendapatan DECIMAL(14,2) NOT NULL,
+  kualitas ENUM('premium', 'baik', 'sedang', 'rendah') NOT NULL DEFAULT 'baik',
+  status ENUM('draft', 'menunggu_cek', 'terverifikasi') NOT NULL DEFAULT 'draft',
+  pembeli VARCHAR(120) NULL,
+  catatan TEXT NULL,
+  created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  CONSTRAINT fk_panen_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+  CONSTRAINT fk_panen_lahan FOREIGN KEY (lahan_id) REFERENCES lahan(id) ON DELETE CASCADE,
+  CONSTRAINT fk_panen_musim FOREIGN KEY (musim_tanam_id) REFERENCES musim_tanam(id) ON DELETE SET NULL,
+  UNIQUE KEY uq_hasil_panen_musim (musim_tanam_id),
+  INDEX idx_panen_user_tanggal (user_id, tanggal_panen),
+  INDEX idx_panen_musim (musim_tanam_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
