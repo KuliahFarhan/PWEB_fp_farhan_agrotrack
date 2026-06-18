@@ -10,6 +10,15 @@ if (current_user()) {
 }
 
 $error = null;
+$roleHint = $_GET['role'] ?? '';
+$roleHint = in_array($roleHint, ['admin', 'petani'], true) ? $roleHint : '';
+$roleTitle = $roleHint === 'admin' ? 'Login Admin' : ($roleHint === 'petani' ? 'Login Petani' : 'Login');
+$roleDescription = $roleHint === 'admin'
+    ? 'Masuk untuk mengelola pengguna, katalog, monitoring lahan, dan laporan global.'
+    : ($roleHint === 'petani'
+        ? 'Masuk untuk mengelola lahan, musim tanam, biaya produksi, panen, dan analisis profit.'
+        : 'Masuk sebagai petani atau admin AgroTrack.');
+
 if (request_method() === 'POST') {
     try {
         verify_csrf();
@@ -43,7 +52,7 @@ if (request_method() === 'POST') {
     <main class="auth-split auth-split-login">
       <section class="auth-panel" aria-label="Form login AgroTrack">
         <a class="auth-brand" href="../index.html"><img src="../assets/image/logo/logo_agrotrack.png" alt="Logo AgroTrack" /><span>AgroTrack</span></a>
-        <div class="auth-copy"><h1>Login</h1><p>Masuk sebagai petani atau admin AgroTrack.</p></div>
+        <div class="auth-copy"><h1><?= e($roleTitle) ?></h1><p><?= e($roleDescription) ?></p></div>
         <?php if ($error): ?><div class="alert alert-danger"><?= e($error) ?></div><?php endif; ?>
         <form method="post" class="vstack gap-3">
           <input type="hidden" name="csrf_token" value="<?= e(csrf_token()) ?>" />
@@ -57,7 +66,7 @@ if (request_method() === 'POST') {
           <a class="auth-muted-link" href="../index.html"><span class="material-symbols-outlined">arrow_back</span><span>Kembali ke Landing Page</span></a>
         </div>
       </section>
-      <section class="auth-visual"><img src="../assets/image/tanaman/auth-illustration.png" alt="Petani di area tanaman" /></section>
+      <section class="auth-visual auth-visual-login" aria-hidden="true"></section>
     </main>
     <script src="../assets/js/app.js"></script>
   </body>

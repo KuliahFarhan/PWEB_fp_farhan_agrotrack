@@ -1726,6 +1726,52 @@ body.sidebar-collapsed .app-main {
   font-weight: 850;
 }
 
+.hero-role-picker {
+  width: min(100%, 420px);
+  margin-top: 18px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(8, 32, 25, 0.38);
+  backdrop-filter: blur(8px);
+}
+
+.hero-role-picker p {
+  margin: 0 0 10px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hero-role-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.hero-role-actions a {
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.hero-role-actions a:hover {
+  border-color: #ffffff;
+  background: #ffffff;
+  color: var(--agro-primary);
+}
+
+.hero-role-actions .material-symbols-outlined {
+  font-size: 22px;
+}
+
 .landing-nav {
   position: fixed;
   inset: 0 0 auto 0;
@@ -2256,6 +2302,24 @@ body.sidebar-collapsed .app-main {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.auth-visual-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(227, 255, 117, 0.16), transparent 32%),
+    linear-gradient(135deg, #0a3528 0%, #0f4a37 52%, #08241d 100%);
+}
+
+.auth-visual-login::before {
+  content: "AgroTrack";
+  position: relative;
+  z-index: 1;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: clamp(34px, 4vw, 62px);
+  font-weight: 900;
 }
 
 .toast-lite {

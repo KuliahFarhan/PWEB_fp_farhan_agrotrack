@@ -37,8 +37,21 @@
           Pantau lahan, musim tanam, biaya produksi, hasil panen, dan analisis profit dalam satu sistem yang rapi.
         </p>
         <div class="d-flex flex-wrap gap-2">
-          <a class="btn btn-light" href="auth/login.php">Mulai Kelola</a>
+          <a class="btn btn-light" href="#pilihan-masuk">Mulai Kelola</a>
           <a class="btn btn-outline-light" href="#fitur">Lihat Fitur</a>
+        </div>
+        <div class="hero-role-picker" id="pilihan-masuk" aria-label="Pilihan masuk AgroTrack">
+          <p>Masuk sebagai</p>
+          <div class="hero-role-actions">
+            <a href="auth/login.php?role=admin">
+              <span class="material-symbols-outlined">admin_panel_settings</span>
+              <span>Admin</span>
+            </a>
+            <a href="auth/login.php?role=petani">
+              <span class="material-symbols-outlined">agriculture</span>
+              <span>Petani</span>
+            </a>
+          </div>
         </div>
       </div>
     </header>
@@ -141,7 +154,8 @@
                 <p>Admin disiapkan oleh sistem. Pendaftaran publik hanya membuat akun petani agar hak akses tidak tercampur.</p>
               </div>
               <div class="d-flex flex-wrap gap-2">
-                <a class="btn btn-primary" href="auth/login.php">Masuk ke Sistem</a>
+                <a class="btn btn-primary" href="auth/login.php?role=admin">Masuk Admin</a>
+                <a class="btn btn-outline-primary" href="auth/login.php?role=petani">Masuk Petani</a>
                 <a class="btn btn-outline-primary" href="auth/register.php">Daftar Petani</a>
               </div>
             </div>

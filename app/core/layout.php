@@ -67,7 +67,10 @@ function render_head(string $title, string $base = '../../', array $extraCss = [
     <title><?= e($title) ?></title>
     <link rel="icon" type="image/png" href="<?= e($base) ?>assets/image/logo/logo_agrotrack.png" />
     <link rel="apple-touch-icon" href="<?= e($base) ?>assets/image/logo/logo_agrotrack.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" /></noscript>
     <link href="<?= e($base) ?>assets/Bootstrap/css/bootstrap.min.css?v=<?= e($bootstrapVersion) ?>" rel="stylesheet" />
     <?php foreach ($extraCss as $href): ?><link href="<?= e($href) ?>" rel="stylesheet" /><?php endforeach; ?>
     <link href="<?= e($base) ?>assets/css/styles.css?v=<?= e($cssVersion) ?>" rel="stylesheet" />
