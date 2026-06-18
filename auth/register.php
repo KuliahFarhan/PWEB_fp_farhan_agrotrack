@@ -19,6 +19,7 @@ if (request_method() === 'POST') {
         $stmt = db()->prepare('INSERT INTO users (name, email, phone, role, status, password_hash, profile_photo) VALUES (?, ?, ?, "petani", "aktif", ?, ?)');
         $stmt->execute([$name, $email, $phone, password_hash($password, PASSWORD_DEFAULT), 'assets/image/profil/farmer-profile.jpg']);
         flash('success', 'Akun petani berhasil dibuat. Silakan login.');
+        session_write_close();
         redirect_to('login.php');
     } catch (PDOException $exception) {
         $error = $exception->getCode() === '23000' ? 'Email sudah terdaftar.' : 'Register gagal.';

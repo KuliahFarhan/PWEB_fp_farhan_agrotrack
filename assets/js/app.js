@@ -352,6 +352,32 @@
     window.setTimeout(run, 900);
   }
 
+  function prefetchLikelyPages() {
+    const urls = (document.body.dataset.prefetchUrls || "")
+      .split(",")
+      .map((url) => url.trim())
+      .filter(Boolean);
+    if (!urls.length || !window.fetch) return;
+
+    const run = () => {
+      urls.forEach((url) => {
+        fetch(url, {
+          method: "GET",
+          credentials: "same-origin",
+          cache: "force-cache",
+          priority: "low",
+        }).catch(() => {});
+      });
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(run, { timeout: 2400 });
+      return;
+    }
+
+    window.setTimeout(run, 1400);
+  }
+
   renderSidebar();
   bindSidebarToggle();
   bindAuthForms();
@@ -364,4 +390,5 @@
   bindAvatarPreview();
   stampDate();
   warmupServer();
+  prefetchLikelyPages();
 })();

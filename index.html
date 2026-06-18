@@ -6,11 +6,14 @@
     <title>AgroTrack - Kelola Pertanian Cerdas</title>
     <link rel="icon" type="image/png" href="assets/image/logo/logo_agrotrack.png" />
     <link rel="apple-touch-icon" href="assets/image/logo/logo_agrotrack.png" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" /></noscript>
     <link href="assets/Bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/styles.css" rel="stylesheet" />
   </head>
-  <body data-warmup-url="api/warmup.php">
+  <body data-warmup-url="api/warmup.php" data-prefetch-urls="auth/login.php,auth/register.php,auth/forgot-password.html">
     <nav class="landing-nav">
       <div class="container d-flex align-items-center justify-content-between py-3">
         <a class="d-flex align-items-center gap-2 fw-bold" href="index.html">

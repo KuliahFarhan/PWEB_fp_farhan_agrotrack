@@ -42,6 +42,7 @@ if (request_method() === 'POST') {
         $_SESSION['user_id'] = (int) $user['id'];
         $_SESSION['role'] = $user['role'];
         perf_mark('session_regenerate');
+        session_write_close();
         db()->prepare('UPDATE users SET last_login_at = NOW() WHERE id = ?')->execute([(int) $user['id']]);
         perf_mark('last_login_update');
         redirect_to($user['role'] === 'admin' ? '../pages/admin/dashboard.php' : '../pages/petani/dashboard.php');
