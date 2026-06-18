@@ -4,9 +4,12 @@ require_once __DIR__ . '/../../app/core/bootstrap.php';
 require_once __DIR__ . '/../../app/core/layout.php';
 require_once __DIR__ . '/../../app/core/queries.php';
 $user = require_login('admin');
+perf_mark('auth_guard');
 $summary = admin_summary();
+perf_mark('summary');
 $users = db()->query('SELECT name, email, role, status FROM users ORDER BY created_at DESC LIMIT 5')->fetchAll();
 $lahan = db()->query('SELECT l.nama_lahan, l.komoditas, u.name AS petani FROM lahan l JOIN users u ON u.id = l.user_id WHERE l.deleted_at IS NULL ORDER BY l.created_at DESC LIMIT 5')->fetchAll();
+perf_mark('dashboard_lists');
 ?>
 <!doctype html>
 <html lang="id">

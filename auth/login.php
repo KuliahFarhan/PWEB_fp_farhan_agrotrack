@@ -4,8 +4,10 @@ declare(strict_types=1);
 require_once __DIR__ . '/../app/core/bootstrap.php';
 
 start_app_session();
-if (current_user()) {
-    $user = current_user();
+perf_mark('session_start');
+$user = current_user();
+perf_mark('current_user');
+if ($user) {
     redirect_to($user['role'] === 'admin' ? '../pages/admin/dashboard.php' : '../pages/petani/dashboard.php');
 }
 
@@ -22,21 +24,26 @@ $roleDescription = $roleHint === 'admin'
 if (request_method() === 'POST') {
     try {
         verify_csrf();
+        perf_mark('csrf');
         $email = strtolower(post_string('email', 190));
         $password = (string) ($_POST['password'] ?? '');
 
         $stmt = db()->prepare('SELECT id, email, role, password_hash FROM users WHERE email = ? AND status = "aktif" LIMIT 1');
         $stmt->execute([$email]);
         $user = $stmt->fetch();
+        perf_mark('user_query');
 
         if (!$user || !password_verify($password, $user['password_hash'])) {
             throw new RuntimeException('Email atau password salah.');
         }
+        perf_mark('password_verify');
 
         session_regenerate_id(true);
         $_SESSION['user_id'] = (int) $user['id'];
         $_SESSION['role'] = $user['role'];
+        perf_mark('session_regenerate');
         db()->prepare('UPDATE users SET last_login_at = NOW() WHERE id = ?')->execute([(int) $user['id']]);
+        perf_mark('last_login_update');
         redirect_to($user['role'] === 'admin' ? '../pages/admin/dashboard.php' : '../pages/petani/dashboard.php');
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
@@ -66,7 +73,7 @@ if (request_method() === 'POST') {
           <a class="auth-muted-link" href="../index.html"><span class="material-symbols-outlined">arrow_back</span><span>Kembali ke Landing Page</span></a>
         </div>
       </section>
-      <section class="auth-visual auth-visual-login" aria-hidden="true"></section>
+      <section class="auth-visual"><img src="../assets/image/tanaman/auth-illustration.png" alt="Petani di area tanaman" loading="eager" decoding="async" /></section>
     </main>
     <script src="../assets/js/app.js"></script>
   </body>

@@ -3,6 +3,61 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../../config/database.php';
 
+function perf_timing_enabled(): bool
+{
+    if ((string) ($_GET['agro_debug'] ?? '') === 'timing') {
+        start_app_session();
+        $_SESSION['agro_debug_timing_until'] = time() + 300;
+        return true;
+    }
+
+    if (filter_var(env_value('AGROTRACK_TIMING', '0'), FILTER_VALIDATE_BOOLEAN)) {
+        return true;
+    }
+
+    return !empty($_SESSION['agro_debug_timing_until']) && (int) $_SESSION['agro_debug_timing_until'] >= time();
+}
+
+function perf_mark(string $name): void
+{
+    if (!perf_timing_enabled()) {
+        return;
+    }
+
+    $now = microtime(true);
+    if (!isset($GLOBALS['agro_perf_start'])) {
+        $GLOBALS['agro_perf_start'] = $_SERVER['REQUEST_TIME_FLOAT'] ?? $now;
+        $GLOBALS['agro_perf_last'] = $GLOBALS['agro_perf_start'];
+        $GLOBALS['agro_perf_marks'] = [];
+    }
+
+    $last = (float) ($GLOBALS['agro_perf_last'] ?? $GLOBALS['agro_perf_start']);
+    $GLOBALS['agro_perf_marks'][] = [
+        'name' => preg_replace('/[^A-Za-z0-9_-]/', '_', $name) ?: 'mark',
+        'duration' => max(0, ($now - $last) * 1000),
+    ];
+    $GLOBALS['agro_perf_last'] = $now;
+}
+
+function perf_send_header(): void
+{
+    if (headers_sent() || !perf_timing_enabled()) {
+        return;
+    }
+
+    $now = microtime(true);
+    $start = (float) ($GLOBALS['agro_perf_start'] ?? ($_SERVER['REQUEST_TIME_FLOAT'] ?? $now));
+    $marks = $GLOBALS['agro_perf_marks'] ?? [];
+    $parts = [];
+    foreach ($marks as $mark) {
+        $parts[] = $mark['name'] . ';dur=' . number_format((float) $mark['duration'], 2, '.', '');
+    }
+    $parts[] = 'total;dur=' . number_format(max(0, ($now - $start) * 1000), 2, '.', '');
+    header('Server-Timing: ' . implode(', ', $parts));
+}
+
+register_shutdown_function('perf_send_header');
+
 function env_value(string $key, ?string $default = null): ?string
 {
     $value = getenv($key);

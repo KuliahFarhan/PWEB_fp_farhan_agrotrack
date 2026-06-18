@@ -23,15 +23,23 @@ function agrotrack_db(): PDO
     $pass = getenv('AGROTRACK_DB_PASS') ?: getenv('DB_PASSWORD') ?: '';
     $timeout = (int) (getenv('AGROTRACK_DB_TIMEOUT') ?: getenv('DB_TIMEOUT') ?: 3);
     $timeout = max(1, min(30, $timeout));
+    $persistent = filter_var(
+        getenv('AGROTRACK_DB_PERSISTENT') ?: getenv('DB_PERSISTENT') ?: 'true',
+        FILTER_VALIDATE_BOOLEAN
+    );
 
     $dsn = "mysql:host={$host};port={$port};dbname={$name};charset=utf8mb4";
     try {
-        $pdo = new PDO($dsn, $user, $pass, [
+        $options = [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES => false,
             PDO::ATTR_TIMEOUT => $timeout,
-        ]);
+        ];
+        if ($persistent) {
+            $options[PDO::ATTR_PERSISTENT] = true;
+        }
+        $pdo = new PDO($dsn, $user, $pass, $options);
     } catch (PDOException $exception) {
         throw new RuntimeException(
             "Koneksi database gagal ke {$host}:{$port}/{$name} sebagai {$user}. " .

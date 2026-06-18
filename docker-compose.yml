@@ -10,12 +10,14 @@ services:
       DB_USERNAME: ${DB_USERNAME:-agrotrack}
       DB_PASSWORD: ${DB_PASSWORD:-agrotrack_password}
       DB_TIMEOUT: ${DB_TIMEOUT:-3}
+      DB_PERSISTENT: ${DB_PERSISTENT:-true}
       AGROTRACK_DB_HOST: mysql
       AGROTRACK_DB_PORT: 3306
       AGROTRACK_DB_NAME: ${DB_DATABASE:-agrotrack}
       AGROTRACK_DB_USER: ${DB_USERNAME:-agrotrack}
       AGROTRACK_DB_PASS: ${DB_PASSWORD:-agrotrack_password}
       AGROTRACK_DB_TIMEOUT: ${AGROTRACK_DB_TIMEOUT:-3}
+      AGROTRACK_DB_PERSISTENT: ${AGROTRACK_DB_PERSISTENT:-true}
     depends_on:
       mysql:
         condition: service_healthy

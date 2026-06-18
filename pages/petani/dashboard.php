@@ -4,9 +4,12 @@ require_once __DIR__ . '/../../app/core/bootstrap.php';
 require_once __DIR__ . '/../../app/core/layout.php';
 require_once __DIR__ . '/../../app/core/queries.php';
 $user = require_login('petani');
+perf_mark('auth_guard');
 $summary = petani_summary((int) $user['id']);
+perf_mark('summary');
 $lahan = user_lahan((int) $user['id'], 5);
 $musim = user_musim((int) $user['id'], 5);
+perf_mark('dashboard_lists');
 ?>
 <!doctype html>
 <html lang="id">
