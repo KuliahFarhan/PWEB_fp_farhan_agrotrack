@@ -346,6 +346,16 @@ docker compose up --build
 
 Perintah `down -v` akan menghapus volume MySQL, jadi gunakan hanya untuk development.
 
+### Mode Docker Cepat untuk Uji Loading
+
+Untuk mengecek apakah loading lambat berasal dari bind mount Windows, jalankan mode cepat:
+
+```bash
+docker compose -f docker-compose.fast.yml up --build
+```
+
+Mode ini menjalankan kode dari image Docker hasil build, bukan dari mount folder Windows ke `/var/www/html`. Jika login jauh lebih cepat pada mode ini, penyebab utama loading lambat adalah I/O bind mount Docker Desktop di Windows. Setelah mengubah kode, jalankan ulang dengan `--build` agar perubahan masuk ke image.
+
 ## Cara Menjalankan tanpa Docker
 
 1. Pastikan PHP 8.2+, Apache/Nginx, dan MySQL sudah aktif.
