@@ -9,6 +9,8 @@ AgroTrack adalah aplikasi web manajemen pertanian berbasis PHP native dan MySQL.
 
 Project ini memakai arsitektur PHP native sederhana dengan pemisahan folder `auth`, `pages`, `app`, `api`, `config`, `database`, dan `assets`. Aplikasi sudah mendukung role `admin` dan `petani`, session authentication, prepared statement PDO, CSRF token untuk form penting, serta deployment menggunakan Docker Compose.
 
+![1781793071156](image/README/1781793071156.png)
+
 ## Daftar Isi
 
 - [Fitur Utama](#fitur-utama)
