@@ -330,6 +330,28 @@
     });
   }
 
+  function warmupServer() {
+    const url = document.body.dataset.warmupUrl;
+    if (!url || !window.fetch) return;
+
+    const run = () => {
+      fetch(url, {
+        method: "GET",
+        credentials: "same-origin",
+        cache: "no-store",
+        keepalive: true,
+        headers: { Accept: "application/json" },
+      }).catch(() => {});
+    };
+
+    if ("requestIdleCallback" in window) {
+      window.requestIdleCallback(run, { timeout: 1800 });
+      return;
+    }
+
+    window.setTimeout(run, 900);
+  }
+
   renderSidebar();
   bindSidebarToggle();
   bindAuthForms();
@@ -341,4 +363,5 @@
   bindProfileForms();
   bindAvatarPreview();
   stampDate();
+  warmupServer();
 })();
